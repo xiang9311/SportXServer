@@ -1,9 +1,9 @@
 from django.db import models
 
 # Create your models here.
-def RequestCommon(models.models):
-	userid
-	userkey
+def RequestCommon(models.Model):
+	userid = models.CharField(max_length = 30)
+	userkey = models.
 	cmdid
 	timestamp
 	version
