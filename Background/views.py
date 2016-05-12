@@ -5,3 +5,6 @@ from django.http.response import HttpResponse
 
 def test(request):
     return HttpResponse('ok')
+
+def index(request):
+    return HttpResponse('欢迎来到SportX')
