@@ -3,7 +3,7 @@ from enum import Enum
 # Create your models here.
 #request
 class RequestCommon(models.Model):
-    userid = models.IntegerField()
+    userid = models.IntegerField(primary_key=True)
     userkey = models.CharField(max_length = 30)
     cmdid = models.IntegerField()
     timestamp = models.IntegerField()#DATETIME
@@ -19,13 +19,13 @@ class ResponseCommon(models.Model):
     userid = models.IntegerField()
 #BrirfUser
 class BriefUser(models.Model):
-    userid = models.IntegerField()
+    userid = models.IntegerField(primary_key=True)
     userName = models.CharField(max_length = 30)
     userAvatar = models.CharField(max_length = 30)
 
 #Trend
 class Trend(models.Model):
-    Trendid = models.IntegerField
+    Trendid = models.IntegerField(primary_key=True)
     briefUser = models.ForeignKey(BriefUser)
     createTime = models.DateTimeField()
     gymid = models.IntegerField()
@@ -41,7 +41,7 @@ class Banner(models.Model):
     # URL = 0;     # 跳转url
     #TREND = 1;  # 跳转动态
     #USER = 2;    # 用户
-    banid = models.IntegerField()
+    banid = models.IntegerField(primary_key=True)
     coverUrl = models.CharField(max_length = 30)
     bantype = models.IntegerField()
     webUrl = models.CharField(max_length = 30)
@@ -51,7 +51,7 @@ class Banner(models.Model):
 
 
 class BriefGym(models.Model):
-    gymid = models.IntegerField()
+    gymid = models.IntegerField(primary_key=True)
     gymName = models.CharField(max_length = 30)
     gymCover = models.IntegerField()#imagin 
     place = models.CharField(max_length = 30)
@@ -63,7 +63,7 @@ class BriefGym(models.Model):
 
     
 class Equipment(models.Model):
-    name = models.CharField(max_length = 30)
+    name = models.CharField(max_length = 30,primary_key=True)
     count = models.IntegerField()
     equipmentType = models.IntegerField()
 
