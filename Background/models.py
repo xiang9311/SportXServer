@@ -3,85 +3,89 @@ from enum import Enum
 # Create your models here.
 #request
 class RequestCommon(models.Model):
-    userid = models.IntegerField
+    userid = models.IntegerField()
     userkey = models.CharField(max_length = 30)
-    cmdid = models.IntegerField
-    timestamp = models.DateField
+    cmdid = models.IntegerField()
+    timestamp = models.IntegerField()#DATETIME
     version =  models.CharField(max_length = 30)
-    platform = models.IntegerField
+    platform = models.IntegerField()
 
   #response
 class ResponseCommon(models.Model):
-    code = models.IntegerField
+    code = models.IntegerField()
     message = models.CharField(max_length = 30)
-    cmdid = models.IntegerField
-    timestamp = models.DateTimeField
-    userid = models.IntegerField
+    cmdid = models.IntegerField()
+    timestamp = models.IntegerField()#DATETIME
+    userid = models.IntegerField()
 #BrirfUser
 class BriefUser(models.Model):
-    userid = models.IntegerField
+    userid = models.IntegerField()
     userName = models.CharField(max_length = 30)
     userAvatar = models.CharField(max_length = 30)
 
 #Trend
 class Trend(models.Model):
-    id = models.IntegerField
+    Trendid = models.IntegerField()
     briefUser = models.ManyToManyField(BriefUser)
-    createTime = models.DateTimeField()
-    gymid = models.IntegerField
+    createTime = models.IntegerField()#DATETIME
+    gymid = models.IntegerField()
     gymName =  models.CharField(max_length = 30)
     content  =  models.CharField(max_length = 30)
-    imgs =  models.ImageField
-    likeCount = models.IntegerField
-    commentCount = models.IntegerField
-    isLiked = models.BooleanField
+    imgs =  models.IntegerField()#imagin 
+    likeCount = models.IntegerField()
+    commentCount = models.IntegerField()
+    isLiked = models.BooleanField()
 
 class Banner(models.Model):
     #??type 
     # URL = 0;     # 跳转url
     #TREND = 1;  # 跳转动态
     #USER = 2;    # 用户
-    id = models.IntegerField
+    banid = models.IntegerField()
     coverUrl = models.CharField(max_length = 30)
-    type = models.IntegerField
+    bantype = models.IntegerField()
     webUrl = models.CharField(max_length = 30)
-    trendId = models.IntegerField
-    userid = models.IntegerField
+    trendId = models.IntegerField()
+    userid = models.IntegerField()
 
 
 
 class BriefGym(models.Model):
-    id = models.IntegerField
+    gymid = models.IntegerField()
     gymName = models.CharField(max_length = 30)
-    gymCover = models.ImageField
-    place = models.CharField
+    gymCover = models.IntegerField()#imagin 
+    place = models.CharField(max_length = 30)
     gymAvatar = models.CharField(max_length = 30)
-    latitude = models.FloatField
-    longitude = models.FloatField
-    isCoop = models.BooleanField
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    isCoop = models.BooleanField()
 
 
     
 class Equipment(models.Model):
     name = models.CharField(max_length = 30)
-    count = models.IntegerField
-    equipmentType = models.IntegerField
+    count = models.IntegerField()
+    equipmentType = models.IntegerField()
 
 class CourseTime(models.Model):
-    fromHour = models.IntegerField
-    fromMinite = models.IntegerField
-    toHour = models.IntegerField
-    toMinite = models.IntegerField
+    fromHour = models.IntegerField()
+    fromMinite = models.IntegerField()
+    toHour = models.IntegerField()
+    toMinite = models.IntegerField()
 
 
 class Course(models.Model):
     name =models.CharField(max_length = 30)
-    week = models.IntegerField
+    week = models.IntegerField()
     courseTime = models.ManyToManyField(CourseTime)
+
+class GymCard(models.Model):
+    cardType = models.IntegerField() #卡类型
+    price = models.FloatField()
 
 class DetailGym(models.Model):
     briefGym = models.ManyToManyField(BriefGym)
-    equipments = models.ManyToManyField(quipment)
+    equipments = models.ManyToManyField(Equipment)
     courses = models.ManyToManyField(Course)#课程信息
     gymCard = models.ManyToManyField(GymCard)
 
@@ -91,9 +95,7 @@ class DetailGym(models.Model):
 #    Month = 1;    # 月卡
 #    Quarter = 2;  # 季度卡
 
-class GymCard(models.Model):
-    cardType = models.IntegerField #卡类型
-    price = models.FloatField
+
 
 
 # enum EquipmentType {
