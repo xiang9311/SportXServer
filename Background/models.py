@@ -26,7 +26,7 @@ class BriefUser(models.Model):
 #Trend
 class Trend(models.Model):
     id = models.IntegerField
-    briefUser = models.ManyToManyField(BriefUser)
+    briefUser = models.ForeignKey(BriefUser)
     createTime = models.DateTimeField()
     gymid = models.IntegerField
     gymName =  models.CharField(max_length = 30)
@@ -77,13 +77,13 @@ class CourseTime(models.Model):
 class Course(models.Model):
     name =models.CharField(max_length = 30)
     week = models.IntegerField
-    courseTime = models.ManyToManyField(CourseTime)
+    courseTime = models.ForeignKey(CourseTime)
 
 class DetailGym(models.Model):
-    briefGym = models.ManyToManyField(BriefGym)
-    equipments = models.ManyToManyField(quipment)
-    courses = models.ManyToManyField(Course)#课程信息
-    gymCard = models.ManyToManyField(GymCard)
+    briefGym = models.ForeignKey(BriefGym)
+    equipments = models.ForeignKey(quipment)
+    courses = models.ForeignKey(Course)#课程信息
+    gymCard = models.ForeignKey(GymCard)
 
 
 # class  CardType(Enum):
