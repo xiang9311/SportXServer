@@ -76,7 +76,7 @@ class CourseTime(models.Model):
 
 class Course(models.Model):
     name =models.CharField(max_length = 30)
-    week = models.IntegerField
+    week = models.IntegerField()
     courseTime = models.ForeignKey(CourseTime)
 
 class GymCard(models.Model):
