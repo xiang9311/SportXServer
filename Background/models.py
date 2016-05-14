@@ -25,17 +25,10 @@ class BriefUser(models.Model):
 
 #Trend
 class Trend(models.Model):
-<<<<<<< HEAD
-    Trendid = models.IntegerField()
-    briefUser = models.ManyToManyField(BriefUser)
-    createTime = models.IntegerField()#DATETIME
-    gymid = models.IntegerField()
-=======
-    id = models.IntegerField
+    Trendid = models.IntegerField
     briefUser = models.ForeignKey(BriefUser)
     createTime = models.DateTimeField()
     gymid = models.IntegerField()
->>>>>>> bf53dba6fc92885956ffb3fb6e64bf92e886dede
     gymName =  models.CharField(max_length = 30)
     content  =  models.CharField(max_length = 30)
     imgs =  models.IntegerField()#imagin 
@@ -92,7 +85,7 @@ class GymCard(models.Model):
 
 class DetailGym(models.Model):
     briefGym = models.ForeignKey(BriefGym)
-    equipments = models.ForeignKey(quipment)
+    equipments = models.ForeignKey(Equipment)
     courses = models.ForeignKey(Course)#课程信息
     gymCard = models.ForeignKey(GymCard)
 
