@@ -1,4 +1,6 @@
-import pymysql  
+#未使用
+import pymysql 
+
 USER = 'root'
 PASSWORD= ''
 DATABASE = 'test'
