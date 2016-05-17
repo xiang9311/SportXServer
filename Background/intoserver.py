@@ -1,5 +1,5 @@
 #解析器
-import Background.proto.common_pb2 as common
+import Background.dependency.common_pb2 as common
 
 #根据视图选择解析器？
 # (a object) = common.(a parser)#选择解析器
