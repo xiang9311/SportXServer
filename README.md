@@ -1,3 +1,3 @@
-# BckofSportx
-家里电脑主要解决protobuf的传输问题
-公司的电脑主要去做数据库和数据模型问题
+intoServer和outserver是我想解析protocol用的，还没想好
+models里面还有些外键问题没想好
+我把common-pd2.py放在了proto文件夹下面
