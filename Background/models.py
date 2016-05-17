@@ -8,6 +8,26 @@ from enum import Enum
 # 必填，数字长度
 # decimal_places
 # 必填，即有效位数
+#设备表
+class Equipment(models.Model):
+    name = models.CharField(max_length = 30,primary_key=True)
+    count = models.IntegerField()
+    equipmentType = models.IntegerField()
+
+#课程表
+class Course(models.Model):
+    name =models.CharField(max_length = 30)
+    week = models.IntegerField()
+    #courseTime = models.ForeignKey(CourseTime)
+    fromHour = models.IntegerField()
+    fromMinite = models.IntegerField()
+    toHour = models.IntegerField()
+    toMinite = models.IntegerField()
+
+#卡类型
+class GymCard(models.Model):
+    cardType = models.IntegerField() #卡类型
+    price = models.FloatField()
 
 #用户表 （用户名，手机号，密码，头像，性别，个性签名，X币数量，注册时间）
 class BriefUser(models.Model):
@@ -36,6 +56,13 @@ class BriefGym(models.Model):
     info = models.CharField(max_length = 300)
     signTime = models.DateTimeField()
 
+#评论表 （评论的文字内容，评论所在的动态id，发表评论的人的id，“所评论的评论”的人的id，所在场馆id，所在场馆名字， 发送时间）？？
+#关于外键反查问题的学习 我觉得这个设计有问题
+class Comment(models.Model):
+    Commentid = models.IntegerField(primary_key=True)
+    CommentUser = models.IntegerField()#外键
+    Comment = models.CharField(max_length = 300)
+    CommentTime = models.DateTimeField()
 
 #动态表 （动态文字内容，发动态人的id，所在场馆id，所在场馆名字，发送时间）
 class Trend(models.Model):
@@ -49,13 +76,7 @@ class Trend(models.Model):
     imgs =  models.URLField()#image 
     #likeCount = models.IntegerField()#用于简化查询
     #commentCount = models.IntergerField()#
-#评论表 （评论的文字内容，评论所在的动态id，发表评论的人的id，“所评论的评论”的人的id，所在场馆id，所在场馆名字， 发送时间）？？
-#关于外键反查问题的学习 我觉得这个设计有问题
-class Comment(models.Model):
-    Commentid = models.IntegerField(primary_key=True)
-    CommentUser = models.IntegerField()
-    Comment = models.CharField(max_length = 300)
-    CommentTime = models.DateTimeField()
+
 
 
 #点赞表 （动态id，点赞人的id，点赞时间）
@@ -66,18 +87,19 @@ class Like(models.Model):
 
 #关注表 （被关注的人的id，关注者的id，关注时间）
 class Follow(models.Model):
-    Followid = models.ForeignKey(BriefUser)
+    #Followid = models.ForeignKey(BriefUser)
+    Followid = models.IntegerField(primary_key = True)
     Follower = models.ForeignKey(BriefUser)
     FollowTime = models.DateTimeField()
 #曾经关注表 （被关注的人的id，关注者的id，关注时间）
-class Followrubin(models.Model):
-    Followid = models.ForeignKey(BriefUser)
-    Follower = models.ForeignKey(BriefUser)
-    FollowTime = models.DateTimeField()
+# class Followrubin(models.Model):
+#     Followid = models.ForeignKey(BriefUser)
+#     Follower = models.ForeignKey(BriefUser)
+#     FollowTime = models.DateTimeField()
 
-#场馆介绍图片表 （场馆id，图片url，添加时间）
+#场馆介绍图片表 （场馆id，图片url，添加时间）是不是上面的表东西多了
 class Gyminfo(models.Model):
-    gymid = models.ForeignKey(BriefUser)
+    gymid = models.ForeignKey(BriefGym)
 
 #动态图片表 （动态id，图片url，图片显示顺序）
 class image(models.Model):
@@ -92,28 +114,11 @@ class xbin(models.Model):
     reason = models.CharField(max_length = 30)
 
 
-#设备表
-class Equipment(models.Model):
-    name = models.CharField(max_length = 30,primary_key=True)
-    count = models.IntegerField()
-    equipmentType = models.IntegerField()
 
-#课程表
-class Course(models.Model):
-    name =models.CharField(max_length = 30)
-    week = models.IntegerField()
-    courseTime = models.ForeignKey(CourseTime)
-    fromHour = models.IntegerField()
-    fromMinite = models.IntegerField()
-    toHour = models.IntegerField()
-    toMinite = models.IntegerField()
 
-class GymCard(models.Model):
-    cardType = models.IntegerField() #卡类型
-    price = models.FloatField()
-
+#这个是我们想要的表？
 class DetailGym(models.Model):
-    briefGym = models.IntegerField()
+    Gymid = models.IntegerField()
     equipments = models.ForeignKey(Equipment)
     courses = models.ForeignKey(Course)#课程信息
     gymCard = models.ForeignKey(GymCard)
