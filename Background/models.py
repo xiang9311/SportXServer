@@ -27,6 +27,11 @@ class TblBriefUser(models.Model):
     follow = models.ManyToManyField("self", symmetrical=False)        # 这里存的是我关注的人
     signTime = models.DateTimeField()
 
+class TblUserKey(models.Model):
+    user = models.ForeignKey(TblBriefUser)
+    userKey = models.CharField(max_length = 30)
+    outOfDateTime = models.DateTimeField()
+
 """
 场馆表
 """
