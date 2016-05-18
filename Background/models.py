@@ -20,7 +20,7 @@ class TblBriefUser(models.Model):
     userName = models.CharField(max_length = 30)
     userPhone = models.CharField(max_length = 13)
     userPW = models.CharField(max_length = 36)
-    userCover = models.URLField()
+    userAvatar = models.URLField()
     userSex = models.BooleanField()
     userSign = models.CharField(max_length = 30)
     xMoney = models.IntegerField()
