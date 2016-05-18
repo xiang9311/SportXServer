@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='token.proto',
   package='com.xiang.proto.pilot',
   syntax='proto3',
-  serialized_pb=b'\n\x0btoken.proto\x12\x15\x63om.xiang.proto.pilot\x1a\x0c\x63ommon.proto\"\x84\x01\n\x0cRequest11001\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request11001.Params\x1a\x08\n\x06Params\"\x94\x01\n\rResponse11001\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response11001.Data\x1a\x1a\n\x04\x44\x61ta\x12\x12\n\nqiniuToken\x18\x01 \x01(\t\"\x9f\x01\n\x0cRequest11002\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request11002.Params\x1a#\n\x06Params\x12\x19\n\x11oldTokenCannotUse\x18\x01 \x01(\x08\"\x96\x01\n\rResponse11002\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response11002.Data\x1a\x1c\n\x04\x44\x61ta\x12\x14\n\x0crongyunToken\x18\x01 \x01(\tb\x06proto3'
+  serialized_pb=b'\n\x0btoken.proto\x12\x15\x63om.xiang.proto.pilot\x1a\x0c\x63ommon.proto\"\x84\x01\n\x0cRequest11001\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request11001.Params\x1a\x08\n\x06Params\"\x95\x01\n\rResponse11001\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response11001.Data\x1a\x1a\n\x04\x44\x61ta\x12\x12\n\nqiniuToken\x18\x01 \x01(\t\"\x9f\x01\n\x0cRequest11002\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request11002.Params\x1a#\n\x06Params\x12\x19\n\x11oldTokenCannotUse\x18\x01 \x01(\x08\"\x97\x01\n\rResponse11002\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response11002.Data\x1a\x1c\n\x04\x44\x61ta\x12\x14\n\x0crongyunToken\x18\x01 \x01(\tb\x06proto3'
   ,
   dependencies=[common__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -113,8 +113,8 @@ _RESPONSE11001_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=310,
-  serialized_end=336,
+  serialized_start=311,
+  serialized_end=337,
 )
 
 _RESPONSE11001 = _descriptor.Descriptor(
@@ -151,7 +151,7 @@ _RESPONSE11001 = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=188,
-  serialized_end=336,
+  serialized_end=337,
 )
 
 
@@ -181,8 +181,8 @@ _REQUEST11002_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=463,
-  serialized_end=498,
+  serialized_start=464,
+  serialized_end=499,
 )
 
 _REQUEST11002 = _descriptor.Descriptor(
@@ -218,8 +218,8 @@ _REQUEST11002 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=339,
-  serialized_end=498,
+  serialized_start=340,
+  serialized_end=499,
 )
 
 
@@ -249,8 +249,8 @@ _RESPONSE11002_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=623,
-  serialized_end=651,
+  serialized_start=625,
+  serialized_end=653,
 )
 
 _RESPONSE11002 = _descriptor.Descriptor(
@@ -286,21 +286,21 @@ _RESPONSE11002 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=501,
-  serialized_end=651,
+  serialized_start=502,
+  serialized_end=653,
 )
 
 _REQUEST11001_PARAMS.containing_type = _REQUEST11001
 _REQUEST11001.fields_by_name['common'].message_type = common__pb2._REQUESTCOMMON
 _REQUEST11001.fields_by_name['params'].message_type = _REQUEST11001_PARAMS
 _RESPONSE11001_DATA.containing_type = _RESPONSE11001
-_RESPONSE11001.fields_by_name['common'].message_type = common__pb2._REQUESTCOMMON
+_RESPONSE11001.fields_by_name['common'].message_type = common__pb2._RESPONSECOMMON
 _RESPONSE11001.fields_by_name['data'].message_type = _RESPONSE11001_DATA
 _REQUEST11002_PARAMS.containing_type = _REQUEST11002
 _REQUEST11002.fields_by_name['common'].message_type = common__pb2._REQUESTCOMMON
 _REQUEST11002.fields_by_name['params'].message_type = _REQUEST11002_PARAMS
 _RESPONSE11002_DATA.containing_type = _RESPONSE11002
-_RESPONSE11002.fields_by_name['common'].message_type = common__pb2._REQUESTCOMMON
+_RESPONSE11002.fields_by_name['common'].message_type = common__pb2._RESPONSECOMMON
 _RESPONSE11002.fields_by_name['data'].message_type = _RESPONSE11002_DATA
 DESCRIPTOR.message_types_by_name['Request11001'] = _REQUEST11001
 DESCRIPTOR.message_types_by_name['Response11001'] = _RESPONSE11001
