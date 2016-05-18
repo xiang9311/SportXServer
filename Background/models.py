@@ -19,7 +19,7 @@ from enum import Enum
 class TblBriefUser(models.Model):
     userName = models.CharField(max_length = 30)
     userPhone = models.CharField(max_length = 13)
-    userPW = models.CharField(max_length = 30)
+    userPW = models.CharField(max_length = 36)
     userCover = models.URLField()
     userSex = models.BooleanField()
     userSign = models.CharField(max_length = 30)
@@ -29,8 +29,12 @@ class TblBriefUser(models.Model):
 
 class TblUserKey(models.Model):
     user = models.ForeignKey(TblBriefUser)
-    userKey = models.CharField(max_length = 30)
+    userKey = models.CharField(max_length = 36)
     outOfDateTime = models.DateTimeField()
+
+class TblRongyunToken(models.Model):
+    user = models.ForeignKey(TblBriefUser)
+    token = models.CharField(max_length = 100)
 
 """
 场馆表
