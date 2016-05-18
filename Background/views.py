@@ -13,8 +13,6 @@ from SportXServer import qiniuUtil
 
 def test(request):
     return HttpResponse('ok')
-def index(request):
-    return HttpResponse('欢迎来到SportX')
 
 def initCommonResponse(code, message, cmdid, userid, common):
     """
