@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'SportXServer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'NAME' : 'test',
-        'HOST' : 'localhost'
+        'USER' : 'sportx',
+        'PASSWORD' : 'sportxpw',
+        'NAME' : 'sportx',
+        'HOST' : '101.200.170.84'
     }
 }
 
