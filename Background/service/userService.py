@@ -5,9 +5,9 @@ from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 def phoneExist(phone):
     users = TblBriefUser.objects.filter(userPhone=phone)
     if users:
-        log.debug('users is true')
+        log.info('users is true')
         return True
-    log.debug('users is false')
+    log.info('users is false')
     return False
 
 

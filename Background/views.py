@@ -199,7 +199,7 @@ def register(request):
             return HttpResponse(response10001.SerializeToString())
 
     except Exception as error:
-        log.error(error)
+        log.error(str(error))
         response_pro = pilot_pb2.Response10001()
         initCommonErrorResponse(cmdId, 101, response10001.common)
         return HttpResponse(response10001.SerializeToString())

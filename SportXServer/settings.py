@@ -158,7 +158,7 @@ LOGGING = {
         },
         'django': {
             'handlers': ['console', 'mail_admins', 'file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'filters': ['require_debug_true']
         }
     }
