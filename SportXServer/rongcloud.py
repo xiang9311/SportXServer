@@ -20,5 +20,5 @@ client = ApiClient()
 
 def get_token(userid,username,imageurl):
     result = client.user_get_token(userid,username,imageurl)
-    if result[u'code'] == 200 :
-        return result[u'token']
+    if result['code'] == 200 :
+        return result['token']
