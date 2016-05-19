@@ -144,6 +144,9 @@ class ApiClient(object):
     ACTION_CHATROOM_QUERY = "/chatroom/query"
     ACTION_CHATROOM_USER_QUERY = "/chatroom/user/query"
 
+    ACTION_WORDFILTER_ADD = "/wordfilter/add"
+    ACTION_WORDFILTER_DELETE = "/wordfilter/delete"
+
     def __init__(self, key=None, secret=None):
         self._app_key = key
         self._app_secret = secret
@@ -212,7 +215,7 @@ class ApiClient(object):
         )
 
         signature = hashlib.sha1(
-            self._app_secret + nonce + timestamp
+            (self._app_secret + nonce + timestamp).encode('utf-8')
         ).hexdigest()
 
         return {
@@ -565,5 +568,18 @@ class ApiClient(object):
         """
         return self.call_api(action=self.ACTION_CHATROOM_USER_QUERY, params={
             "chatroomId": chatroom_id
+        })
+
+
+    def wordfilter_add(self, word):
+
+        return self.call_api(action=self.ACTION_WORDFILTER_ADD, params={
+            "word": word
+        })
+
+    def wordfilter_delete(self, word):
+
+        return self.call_api(action=self.ACTION_WORDFILTER_DELETE, params={
+            "word": word
         })
 

@@ -5,9 +5,9 @@ from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 def phoneExist(phone):
     users = TblBriefUser.objects.filter(userPhone=phone)
     if users:
-        log.debug('users is true')
+        log.info('users is true')
         return True
-    log.debug('users is false')
+    log.info('users is false')
     return False
 
 
@@ -23,6 +23,7 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     try :
         tblBriefUser.save()
     except Exception as e:
+        log.error(str(e))
         print(e)
     # if not tblBriefUser.save():
     #     return False
@@ -33,6 +34,7 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     tblUserKey.save()
 
     #申请Rongtoken
+
     token = rongcloud.get_token(tblBriefUser.id,tblBriefUser.userName,tblBriefUser.userAvatar)
     #保存融云token
     Rong = TblRongyunToken()
@@ -40,14 +42,16 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     Rong.token = token
     Rong.save()
 
-
-
     response_data.userId = tblBriefUser.id
     response_data.userKey = tblUserKey.userKey
     return True
+
 #取得数据库的token
-def getOldToken(userid):
-    return TblRongyunToken.objects.get(user = userid).token
+def getOldToken(userId):
+    return TblRongyunToken.objects.get(user_id = userId).token
+
+def getUserKey(userId):
+    return TblUserKey.objects.get(user_id=userId).userKey
 
 def getRongToken(userid):
     userinfo = TblBriefUser.objects.get(id = userid)
@@ -57,6 +61,7 @@ def getRongToken(userid):
     Rong.token = token
     Rong.save()
     return token
+
 #登录
 def login(phone ,password, response_data) :
     userinfo =  TblBriefUser.objects.get(userPhone = phone)
@@ -65,15 +70,16 @@ def login(phone ,password, response_data) :
         print(userinfo.userName)
         print(userinfo.id)
         response_briefuser = response_data.briefUser
-        userKey = response_data.userKey
-        rongyunToken = response_data.rongyunToken
-        #DATA_BRIEFUSER
         response_briefuser.userId = userinfo.id
         response_briefuser.userName = userinfo.userName
         response_briefuser.userAvatar = userinfo.userAvatar
-        rongyunToken = getOldToken(userinfo.id)#获取已有Token
+
+        response_data.userKey = getUserKey(userinfo.id)
+        response_data.rongyunToken = getOldToken(userinfo.id)
+
         return True
-    return False 
+    return False
+
 def isRegister(id,key):
     return True
 

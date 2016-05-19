@@ -18,15 +18,15 @@ from enum import Enum
 """
 class TblBriefUser(models.Model):
     userName = models.CharField(max_length = 30)
-    userPhone = models.CharField(max_length = 13)
+    userPhone = models.CharField(max_length = 13, unique=True)
     userPW = models.CharField(max_length = 36)
     userAvatar = models.URLField()
     userSex = models.BooleanField()
     userSign = models.CharField(max_length = 30)
     xMoney = models.IntegerField()
     follow = models.ManyToManyField("self", symmetrical=False)        # 这里存的是我关注的人
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
     signTime = models.DateTimeField()
 
 class TblUserKey(models.Model):
