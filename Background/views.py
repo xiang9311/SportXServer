@@ -229,13 +229,15 @@ def login(request):
         response_common = response10002.common
         response_data = response10002.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        
-    except:
-        pass
-    user=userService.login(request_params.phone,request_params.password)
-    userKey = request_common.userkey
-    if  user:
+
+        if  userService.login(request_params.phone, request_params.password, response_data):
+            return HttpResponse(response10002.SerializeToString())
+        else :
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response10002.SerializeToString())
+    except Exception as error:
+        log.error(str(error))
+        response10002 = pilot_pb2.Response10002()
+        initCommonErrorResponse(cmdId, 101, response10002.common)
         return HttpResponse(response10002.SerializeToString())
-    else :
-        initCommonErrorResponse(cmdId, 1, response_common)
-        return HttpResponse(response10002.SerializeToString())
+
