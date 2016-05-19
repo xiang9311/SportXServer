@@ -227,8 +227,7 @@ def login(request):
         
     except:
         pass
-    #user=userService.login(request_params.phone,request_params.password)
-    user = userService.login('18810278575','password', response_data)
+    user=userService.login(request_params.phone,request_params.password)
     userKey = request_common.userkey
     if  user:
         return HttpResponse(response10002.SerializeToString())
