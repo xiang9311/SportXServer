@@ -6,9 +6,9 @@ def phoneExist(phone):
     users = TblBriefUser.objects.filter(userPhone=phone)
     if users:
         log.debug('users is true')
-        return False
+        return True
     log.debug('users is false')
-    return True
+    return False
 
 
 def register(phone, username, avatarKey, bucketName, password, sex, response_data):
