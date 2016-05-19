@@ -68,7 +68,7 @@ def getQiniuToken(request):
         initCommonErrorResponse(10001, 101, response11001.common)
         return HttpResponse(response11001.SerializeToString())
 
-<<<<<<< HEAD
+
 @csrf_exempt
 def getRongToken(request):
     """
@@ -76,9 +76,6 @@ def getRongToken(request):
     解析request
     构造response
     """
-    if DEBUGMODE==True:
-        cmdId = 11002
-        userid = 1
     request_pro = token_pb2.Request11002()
     try:
         if TRACEMODE == True:
@@ -114,10 +111,6 @@ def getRongToken(request):
             print(" failed")
         initCommonErrorResponse(cmdId, 101, response10001.common)
         return HttpResponse(response11001.SerializeToString())
-=======
-        data.qiniuToken = qiniuUtil.getQiniuTokenWithOutKey()
-        data.bucketName = qiniuUtil.getDefaultBucketName()
->>>>>>> 097737aa99a3596b7ea5406648b53e1c89a613e0
 
 
 """
@@ -185,21 +178,12 @@ def register(request):
         response_data = response10001.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         #不会写request那边的构造，
-        if DEBUGMODE == True:
-            phone = "18810278575"
-            username = 'yxx'
-            avatarKey = 'url'
-            bucketName = 'sportx'
-            password = 'password'
-            sex = True
-
-        else:
-            phone = request_params.phone
-            username = request_params.username
-            avatarKey = request_params.avatarKey
-            bucketName = request_params.bucketName
-            password = request_params.password
-            sex = request_params.sex
+        phone = request_params.phone
+        username = request_params.username
+        avatarKey = request_params.avatarKey
+        bucketName = request_params.bucketName
+        password = request_params.password
+        sex = request_params.sex
         if TRACEMODE == True:
             print("register read success")
 
@@ -247,8 +231,6 @@ def login(request):
     user = userService.login('18810278575','password', response_data)
     userKey = request_common.userkey
     if  user:
-        #DATA
-        print('in')
         return HttpResponse(response10002.SerializeToString())
     else :
         initCommonErrorResponse(cmdId, 1, response_common)
