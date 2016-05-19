@@ -72,6 +72,40 @@ def getQiniuToken(request):
 用户相关
 """
 @csrf_exempt
+def verifyPhoneCanUse(request):
+    cmdId = 10016
+    request_pro = pilot_pb2.Request10016()
+    try:
+        request_pro.MergeFromString(request.read())
+    except:
+
+        pass
+
+    request_common = request_pro.common       #注册不用检查requestcommon
+    request_params = request_pro.params
+
+    try:
+        response_pro = pilot_pb2.Response10016()
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        phone = request_params.phone
+
+        if userService.phoneExist(phone):
+            response_data.canUser = False
+            return HttpResponse(response_pro.SerializeToString())
+        else:
+            response_data.canUser = True
+            return HttpResponse(response_pro.SerializeToString())
+
+    except Exception as error:
+        response_pro = pilot_pb2.Response10016()
+        initCommonErrorResponse(cmdId, 102, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+@csrf_exempt
 def register(request):
     """
     注册
