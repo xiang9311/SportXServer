@@ -23,6 +23,7 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     try :
         tblBriefUser.save()
     except Exception as e:
+        log.error(str(e))
         print(e)
     # if not tblBriefUser.save():
     #     return False

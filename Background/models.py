@@ -25,8 +25,8 @@ class TblBriefUser(models.Model):
     userSign = models.CharField(max_length = 30)
     xMoney = models.IntegerField()
     follow = models.ManyToManyField("self", symmetrical=False)        # 这里存的是我关注的人
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
     signTime = models.DateTimeField()
 
 class TblUserKey(models.Model):
