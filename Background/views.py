@@ -61,14 +61,15 @@ def getQiniuToken(request):
         response_common = response11001.common
         data = response11001.data
         data.qiniuToken = qiniuUtil.getQiniuTokenWithOutKey()
-        initCommonResponse(0, 'success', 10001, 0, response_common)
+        data.bucketName = qiniuUtil.getDefaultBucketName()
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
         return HttpResponse(response11001.SerializeToString())
     except Exception as error:
         response11001 = token_pb2.Response11001()
-        initCommonErrorResponse(10001, 101, response11001.common)
+        initCommonErrorResponse(cmdId, 101, response11001.common)
         return HttpResponse(response11001.SerializeToString())
 
-<<<<<<< HEAD
+
 @csrf_exempt
 def getRongToken(request):
     """
@@ -93,7 +94,7 @@ def getRongToken(request):
     request_params = request_pro.params
         #检查common(userid userkey else)
     try:
-        suserService.login(request_common.userid,request_common.userkey)
+        userService.login(request_common.userid,request_common.userkey)
     except:
         #未注册用户
         #return HttpResponse("weizhuce")
@@ -102,23 +103,18 @@ def getRongToken(request):
 
     #response
     try:
-        respose11002 = token_pb2.Respose11002()
-        response_common = response_pro.common
-        response_data = response_pro.data
+        respose11002 = token_pb2.Response11002()
+        response_common = respose11002.common
+        response_data = respose11002.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        response_data.rongyunToken = Service.getRongToken(userid)
-        return HttpResponse(response11002.SerializeToString())
+        response_data.rongyunToken = userService.getRongToken(userid)
+        return HttpResponse(respose11002.SerializeToString())
         
     except:
         if TRACEMODE == True:
             print(" failed")
-        initCommonErrorResponse(cmdId, 101, response10001.common)
-        return HttpResponse(response11001.SerializeToString())
-=======
-        data.qiniuToken = qiniuUtil.getQiniuTokenWithOutKey()
-        data.bucketName = qiniuUtil.getDefaultBucketName()
->>>>>>> 097737aa99a3596b7ea5406648b53e1c89a613e0
-
+        initCommonErrorResponse(cmdId, 101, respose11002.common)
+        return HttpResponse(respose11002.SerializeToString())
 
 """
 用户相关
@@ -130,7 +126,6 @@ def verifyPhoneCanUse(request):
     try:
         request_pro.MergeFromString(request.read())
     except:
-
         pass
 
     request_common = request_pro.common       #注册不用检查requestcommon
@@ -223,9 +218,10 @@ def login(request):
     param : requset
     return : success/failes
     """
+    cmdId = 10002
     request10002 = pilot_pb2.Request10002()
     try:
-        request10002.MergeFromString(requset.read())
+        request10002.MergeFromString(request.read())
     except :
         #读取失败
         if TRACEMODE == True:
