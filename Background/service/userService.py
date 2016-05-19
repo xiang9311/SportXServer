@@ -34,6 +34,7 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     tblUserKey.save()
 
     #申请Rongtoken
+
     token = rongcloud.get_token(tblBriefUser.id,tblBriefUser.userName,tblBriefUser.userAvatar)
     #保存融云token
     Rong = TblRongyunToken()
@@ -41,11 +42,10 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     Rong.token = token
     Rong.save()
 
-
-
     response_data.userId = tblBriefUser.id
     response_data.userKey = tblUserKey.userKey
     return True
+
 #取得数据库的token
 def getOldToken(userid):
     return TblRongyunToken.objects.get(user = userid).token

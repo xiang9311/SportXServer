@@ -8,17 +8,17 @@ import logging
 
 from Background.dependency.rong import ApiClient
 
-#app_key = ""
-#app_secret = ""
+__APP_KEY__ = '25wehl3uwchew'
+__APP_SECRET__ = 'qZohwuSOsxNsu'
 
-#os.environ.setdefault('rongcloud_app_key', app_key)
-#os.environ.setdefault('rongcloud_app_secret', app_secret)
+os.environ.setdefault('rongcloud_app_key', __APP_KEY__)
+os.environ.setdefault('rongcloud_app_secret', __APP_SECRET__)
 
 logging.basicConfig(level=logging.INFO)
 
 client = ApiClient()
 
-def get_token(self,userid,username,imaginurl):
+def get_token(userid,username,imageurl):
     result = client.user_get_token(userid,username,imageurl)
     if result[u'code'] == 200 :
         return result[u'token']
