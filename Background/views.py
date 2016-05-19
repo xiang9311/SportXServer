@@ -77,6 +77,7 @@ def getRongToken(request):
     解析request
     构造response
     """
+    cmdId = 11002
     request_pro = token_pb2.Request11002()
     try:
         if TRACEMODE == True:
@@ -104,20 +105,15 @@ def getRongToken(request):
         response_common = respose11002.common
         response_data = respose11002.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        response_data.rongyunToken = userService.getRongToken(userid)
+        response_data.rongyunToken = userService.getRongToken(request_common.userid)
         return HttpResponse(respose11002.SerializeToString())
         
     except:
         if TRACEMODE == True:
             print(" failed")
-<<<<<<< HEAD
         initCommonErrorResponse(cmdId, 101, respose11002.common)
         return HttpResponse(respose11002.SerializeToString())
-=======
-        initCommonErrorResponse(cmdId, 101, response10001.common)
-        return HttpResponse(response11001.SerializeToString())
 
->>>>>>> 7852dc13886291c85e909827095758b46c667649
 
 """
 用户相关
