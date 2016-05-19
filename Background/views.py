@@ -204,7 +204,7 @@ def register(request):
         initCommonErrorResponse(cmdId, 101, response10001.common)
         return HttpResponse(response10001.SerializeToString())
 
-
+@csrf_exempt
 def login(request):
     """
     登录只检测com？
@@ -231,8 +231,10 @@ def login(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if  userService.login(request_params.phone, request_params.password, response_data):
+            log.info("登录成功")
             return HttpResponse(response10002.SerializeToString())
         else :
+            log.error("登录失败")
             initCommonErrorResponse(cmdId, 1, response_common)
             return HttpResponse(response10002.SerializeToString())
     except Exception as error:
