@@ -60,6 +60,7 @@ def getQiniuToken(request):
         initCommonResponse(0, 'success', 10001, 0, response_common)
 
         data.qiniuToken = qiniuUtil.getQiniuTokenWithOutKey()
+        data.bucketName = qiniuUtil.getDefaultBucketName()
 
         return HttpResponse(response10001.SerializeToString())
     except Exception as error:
