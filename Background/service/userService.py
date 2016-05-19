@@ -2,6 +2,13 @@ __author__ = '祥祥'
 from Background.models import TblBriefUser, TblUserKey ,TblRongyunToken
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud
 
+def phoneExist(phone):
+    users = TblBriefUser.objects.filter(userPhone=phone)
+    if users:
+        return False
+    return True
+
+
 def register(phone, username, avatarKey, bucketName, password, sex, response_data):
     tblBriefUser = TblBriefUser()
     tblBriefUser.userName = username

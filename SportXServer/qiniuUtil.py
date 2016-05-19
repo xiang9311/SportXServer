@@ -6,6 +6,9 @@ SK = "xwIP5ji4sSErJblNbAIgp47ctH7y8h11LS4kI8dD"
 
 BUCKET = "sportx"
 
+def getDefaultBucketName():
+    return BUCKET
+
 def getQiniuTokenWithOutKey():
     return qiniu.Auth(AK, SK).upload_token(BUCKET, expires=36000)
 

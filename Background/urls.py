@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^token/getRongToken$', views.getRongToken),
 
     # pilot
+    url(r'^pilot/verifyPhoneCanUse', views.verifyPhoneCanUse),
     url(r'^pilot/register$', views.register),
     url(r'^pilot/login$',views.login)
 

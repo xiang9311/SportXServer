@@ -25,6 +25,8 @@ class TblBriefUser(models.Model):
     userSign = models.CharField(max_length = 30)
     xMoney = models.IntegerField()
     follow = models.ManyToManyField("self", symmetrical=False)        # 这里存的是我关注的人
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     signTime = models.DateTimeField()
 
 class TblUserKey(models.Model):
@@ -75,6 +77,7 @@ class TblTrendComment(models.Model):
     comment = models.CharField(max_length = 300)
     createUser = models.ForeignKey(TblBriefUser)
     toUserId = models.IntegerField()
+    toCommentId = models.IntegerField()
     gym = models.ForeignKey(TblBriefGym)
     commentTime = models.DateTimeField()
 
