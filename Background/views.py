@@ -13,8 +13,10 @@ from SportXServer import qiniuUtil, log
 TRACEMODE = True
 DEBUGMODE = True
 
+
 def test(request):
     return HttpResponse('ok')
+
 
 def initCommonResponse(code, message, cmdid, userid, common):
     """
@@ -32,6 +34,7 @@ def initCommonResponse(code, message, cmdid, userid, common):
     common.timestamp = int(time.time() * 1000)
     common.userid = userid
 
+
 def initCommonErrorResponse(cmdid, userid, common):
     """
     根据字段构造返回的common
@@ -45,7 +48,6 @@ def initCommonErrorResponse(cmdid, userid, common):
     common.cmdid = cmdid
     common.timestamp = int(time.time() * 1000)
     common.userid = userid
-
 
 
 @csrf_exempt
@@ -98,26 +100,28 @@ def getRongToken(request):
         #return HttpResponse("weizhuce")
         pass
 
-
+    response11002 = token_pb2.Response11002()
     #response
     try:
-        respose11002 = token_pb2.Response11002()
-        response_common = respose11002.common
-        response_data = respose11002.data
+
+        response_common = response11002.common
+        response_data = response11002.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         response_data.rongyunToken = userService.getRongToken(request_common.userid)
-        return HttpResponse(respose11002.SerializeToString())
+        return HttpResponse(response11002.SerializeToString())
         
     except:
         if TRACEMODE == True:
             print(" failed")
-        initCommonErrorResponse(cmdId, 101, respose11002.common)
-        return HttpResponse(respose11002.SerializeToString())
+        initCommonErrorResponse(cmdId, 101, response11002.common)
+        return HttpResponse(response11002.SerializeToString())
 
 
 """
 用户相关
 """
+
+
 @csrf_exempt
 def verifyPhoneCanUse(request):
     cmdId = 10016
@@ -174,13 +178,11 @@ def register(request):
     request_common = request_pro.common       #注册不用检查requestcommon
     request_params = request_pro.params
 
-
+    response10001 = pilot_pb2.Response10001()
     try:
-        response10001 = pilot_pb2.Response10001()
         response_common = response10001.common
         response_data = response10001.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        #不会写request那边的构造，
         phone = request_params.phone
         username = request_params.username
         avatarKey = request_params.avatarKey
