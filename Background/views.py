@@ -77,9 +77,6 @@ def getRongToken(request):
     解析request
     构造response
     """
-    if DEBUGMODE==True:
-        cmdId = 11002
-        userid = 1
     request_pro = token_pb2.Request11002()
     try:
         if TRACEMODE == True:
@@ -113,8 +110,14 @@ def getRongToken(request):
     except:
         if TRACEMODE == True:
             print(" failed")
+<<<<<<< HEAD
         initCommonErrorResponse(cmdId, 101, respose11002.common)
         return HttpResponse(respose11002.SerializeToString())
+=======
+        initCommonErrorResponse(cmdId, 101, response10001.common)
+        return HttpResponse(response11001.SerializeToString())
+
+>>>>>>> 7852dc13886291c85e909827095758b46c667649
 
 """
 用户相关
@@ -180,21 +183,12 @@ def register(request):
         response_data = response10001.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         #不会写request那边的构造，
-        if DEBUGMODE == True:
-            phone = "18810278575"
-            username = 'yxx'
-            avatarKey = 'url'
-            bucketName = 'sportx'
-            password = 'password'
-            sex = True
-
-        else:
-            phone = request_params.phone
-            username = request_params.username
-            avatarKey = request_params.avatarKey
-            bucketName = request_params.bucketName
-            password = request_params.password
-            sex = request_params.sex
+        phone = request_params.phone
+        username = request_params.username
+        avatarKey = request_params.avatarKey
+        bucketName = request_params.bucketName
+        password = request_params.password
+        sex = request_params.sex
         if TRACEMODE == True:
             print("register read success")
 
@@ -239,12 +233,9 @@ def login(request):
         
     except:
         pass
-    #user=userService.login(request_params.phone,request_params.password)
-    user = userService.login('18810278575','password', response_data)
+    user=userService.login(request_params.phone,request_params.password)
     userKey = request_common.userkey
     if  user:
-        #DATA
-        print('in')
         return HttpResponse(response10002.SerializeToString())
     else :
         initCommonErrorResponse(cmdId, 1, response_common)
