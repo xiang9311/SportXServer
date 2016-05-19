@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^token/getQiniuToken$', views.getQiniuToken),
 
     # pilot
+    url(r'^pilot/verifyPhoneCanUse', views.verifyPhoneCanUse),
     url(r'^pilot/register$', views.register),
 
 ]
