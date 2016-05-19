@@ -41,7 +41,7 @@ def initCommonErrorResponse(cmdid, userid, common):
     :return:
     """
     common.code = 100
-    common.message = "You have found an ERROR.--message from background."
+    common.message = "ERROR.--message from background."
     common.cmdid = cmdid
     common.timestamp = int(time.time() * 1000)
     common.userid = userid
@@ -199,6 +199,7 @@ def register(request):
             return HttpResponse(response10001.SerializeToString())
 
     except Exception as error:
+        log.error(error)
         response_pro = pilot_pb2.Response10001()
         initCommonErrorResponse(cmdId, 101, response10001.common)
         return HttpResponse(response10001.SerializeToString())
