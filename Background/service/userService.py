@@ -1,11 +1,13 @@
 __author__ = '祥祥'
 from Background.models import TblBriefUser, TblUserKey ,TblRongyunToken
-from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud
+from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
 def phoneExist(phone):
     users = TblBriefUser.objects.filter(userPhone=phone)
     if users:
+        log.debug('users is true')
         return False
+    log.debug('users is false')
     return True
 
 

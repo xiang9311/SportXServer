@@ -8,7 +8,7 @@ from .service import userService
 
 import time
 
-from SportXServer import qiniuUtil
+from SportXServer import qiniuUtil, log
 # Create your views here.
 TRACEMODE = True
 DEBUGMODE = True
@@ -140,9 +140,11 @@ def verifyPhoneCanUse(request):
 
         if userService.phoneExist(phone):
             response_data.canUser = False
+            log.debug('phone can not use for %s' % phone)
             return HttpResponse(response_pro.SerializeToString())
         else:
             response_data.canUser = True
+            log.debug('phone can use for %s' % phone)
             return HttpResponse(response_pro.SerializeToString())
 
     except Exception as error:
