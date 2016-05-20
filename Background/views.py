@@ -10,9 +10,6 @@ import time
 
 from SportXServer import qiniuUtil, log
 # Create your views here.
-TRACEMODE = True
-DEBUGMODE = True
-
 
 def test(request):
     return HttpResponse('ok')
@@ -58,18 +55,17 @@ def getQiniuToken(request):
     :return:
     """
     cmdId = 11001
+    response_pro = token_pb2.Response11001()
     try:
-        response11001 = token_pb2.Response11001()
-        response_common = response11001.common
-        data = response11001.data
+        response_common = response_pro.common
+        data = response_pro.data
         data.qiniuToken = qiniuUtil.getQiniuTokenWithOutKey()
         data.bucketName = qiniuUtil.getDefaultBucketName()
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        return HttpResponse(response11001.SerializeToString())
+        return HttpResponse(response_pro.SerializeToString())
     except Exception as error:
-        response11001 = token_pb2.Response11001()
-        initCommonErrorResponse(cmdId, 101, response11001.common)
-        return HttpResponse(response11001.SerializeToString())
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
 
 @csrf_exempt
@@ -81,41 +77,40 @@ def getRongToken(request):
     """
     cmdId = 11002
     request_pro = token_pb2.Request11002()
+    response_pro = token_pb2.Response11002()
     try:
-        if TRACEMODE == True:
-            print(request_pro.MergeFromString(request.read()))
+        log.debug("read success")
         request_pro.MergeFromString(request.read())
     except:
-        if TRACEMODE == True:
-            print("read failed")
-        else:
-            pass
+        log.debug("read failed")
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
     request_common = request_pro.common
     request_params = request_pro.params
         #检查common(userid userkey else)
-    response11002 = token_pb2.Response11002()
+
     try:
         userService.userExist(request_common.userid)
     except:
         #未注册用户
-        initCommonErrorResponse(cmdId, 101, response11002.common)
-        return HttpResponse(response11002.SerializeToString())
+        initCommonErrorResponse(cmdId, 101, response__pro.common)
+        return HttpResponse(response__pro.SerializeToString())
 
 
     #response
     try:
 
-        response_common = response11002.common
-        response_data = response11002.data
+        response_common = response_pro.common
+        response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         response_data.rongyunToken = userService.getRongToken(request_common.userid)
-        return HttpResponse(response11002.SerializeToString())
+        return HttpResponse(response_pro.SerializeToString())
         
     except:
-        if TRACEMODE == True:
-            print(" failed")
-        initCommonErrorResponse(cmdId, 101, response11002.common)
-        return HttpResponse(response11002.SerializeToString())
+        log.debug("rongyunToken failed")
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
 
 """
@@ -127,14 +122,18 @@ def getRongToken(request):
 def verifyPhoneCanUse(request):
     cmdId = 10016
     request_pro = pilot_pb2.Request10016()
+    response_pro = pilot_pb2.Response10016()
     try:
         request_pro.MergeFromString(request.read())
     except:
-        pass
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
     request_common = request_pro.common       #注册不用检查requestcommon
     request_params = request_pro.params
-    response_pro = pilot_pb2.Response10016()
+
     try:
 
         response_common = response_pro.common
@@ -153,7 +152,6 @@ def verifyPhoneCanUse(request):
             return HttpResponse(response_pro.SerializeToString())
 
     except Exception as error:
-        response_pro = pilot_pb2.Response10016()
         initCommonErrorResponse(cmdId, 102, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
@@ -167,22 +165,24 @@ def register(request):
     """
     cmdId = 10001
     request_pro = pilot_pb2.Request10001()
+    response_pro = pilot_pb2.Response10001()
     try:
         request_pro.MergeFromString(request.read())
 
     except:
-        if TRACEMODE == True:
-            print("register read failed")
-        else:
-            pass
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
 
     request_common = request_pro.common       #注册不用检查requestcommon
     request_params = request_pro.params
 
-    response10001 = pilot_pb2.Response10001()
+
     try:
-        response_common = response10001.common
-        response_data = response10001.data
+        response_common = response_pro.common
+        response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         phone = request_params.phone
         username = request_params.username
@@ -190,22 +190,17 @@ def register(request):
         bucketName = request_params.bucketName
         password = request_params.password
         sex = request_params.sex
-        if TRACEMODE == True:
-            print("register read success")
 
         if userService.register(phone, username, avatarKey, bucketName, password, sex, response_data):
-            if TRACEMODE == True:
-                print("register save success")
-            return HttpResponse(response10001.SerializeToString())
+            return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
-            return HttpResponse(response10001.SerializeToString())
+            return HttpResponse(response_pro.SerializeToString())
 
     except Exception as error:
         log.error(str(error))
-        response_pro = pilot_pb2.Response10001()
-        initCommonErrorResponse(cmdId, 101, response10001.common)
-        return HttpResponse(response10001.SerializeToString())
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
 @csrf_exempt
 def login(request):
@@ -215,36 +210,36 @@ def login(request):
     return : success/failes
     """
     cmdId = 10002
-    request10002 = pilot_pb2.Request10002()
+    request_pro = pilot_pb2.Request10002()
+    response_pro = pilot_pb2.Response10002()
     try:
-        request10002.MergeFromString(request.read())
-    except :
-        #读取失败
-        if TRACEMODE == True:
-            print("register read failed")
-        else:
-            pass
-    request_common = request10002.common
-    request_params = request10002.params
+        request_pro.MergeFromString(request.read())
+    except:
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+    request_common = request_pro.common
+    request_params = request_pro.params
 
     #构造返回
-    response10002 = pilot_pb2.Response10002()
-    try:
 
-        response_common = response10002.common
-        response_data = response10002.data
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if  userService.login(request_params.phone, request_params.password, response_data):
             log.info("登录成功")
-            return HttpResponse(response10002.SerializeToString())
+            return HttpResponse(response_pro.SerializeToString())
         else :
             log.error("登录失败")
             initCommonErrorResponse(cmdId, 1, response_common)
-            return HttpResponse(response10002.SerializeToString())
+            return HttpResponse(response_pro.SerializeToString())
     except Exception as error:
         log.error(str(error))
-        response10002 = pilot_pb2.Response10002()
-        initCommonErrorResponse(cmdId, 101, response10002.common)
-        return HttpResponse(response10002.SerializeToString())
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
