@@ -129,7 +129,7 @@ def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, respon
         tblBriefUser.userPhone = phone
 
     try:
-        tblBriefUser.save()
+        tblBriefUser.update()
     except Exception as error:
         log.info(str(error))
         return False
