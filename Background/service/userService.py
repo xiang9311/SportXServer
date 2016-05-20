@@ -114,7 +114,8 @@ def searchUser(keyword, pageIndex, responseData):
     return True
 
 def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, response_data):
-    tblBriefUser = TblBriefUser.object.get(id = userId)
+    tblBriefUser = TblBriefUser()
+    tblBriefUser.id = userId
     if userName:
         tblBriefUser.userName = userName
     if avatarKey:

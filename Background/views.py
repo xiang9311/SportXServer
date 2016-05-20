@@ -268,8 +268,14 @@ def updateMyInfo(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if userService.updateUser(
-                request_common.userid, request_params.userName, request_params.avatarKey, request_params.bucketName
-                , request_params.sex, request_params.sign, request_params.phone, response_data):
+                request_common.userid
+                , request_params.userName
+                , request_params.avatarKey
+                , request_params.bucketName
+                , request_params.sex
+                , request_params.sign
+                , request_params.phone
+                , response_data):
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
