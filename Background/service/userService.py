@@ -132,3 +132,22 @@ def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, respon
         return False
 
     return True
+
+def guanzhuUser(fromUserId, toUserId, follow):
+    if follow:
+        tblBriefUser = TblBriefUser.objects.get(id=fromUserId)
+        tblBriefUser.follow.add(TblBriefUser.objects.get(id=toUserId))
+        try:
+            tblBriefUser.save()
+        except Exception as error:
+            log.info(str(error))
+            return False
+    else:
+        tblBriefUser = TblBriefUser.objects.get(id=fromUserId)
+        tblBriefUser.follow.remove(TblBriefUser.objects.get(id=toUserId))
+        try:
+            tblBriefUser.save()
+        except Exception as error:
+            log.info(str(error))
+            return False
+    return True
