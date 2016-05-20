@@ -64,7 +64,7 @@ class TblAllEquipment(models.Model):
 class TblTrend(models.Model):
     content  =  models.CharField(max_length = 30)
     createUser = models.ForeignKey(TblBriefUser)
-    gym = models.ForeignKey(TblBriefGym)
+    gym = models.ForeignKey(TblBriefGym, null=True)
     likeCount = models.IntegerField()
     commentCount = models.IntegerField()
     createTime = models.DateTimeField()

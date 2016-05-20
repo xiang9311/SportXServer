@@ -12,6 +12,7 @@ urlpatterns = [
     # pilot
     url(r'^pilot/verifyPhoneCanUse$', views.verifyPhoneCanUse),
     url(r'^pilot/register$', views.register),
+    url(r'^pilot/updateMyInfo$', views.updateMyInfo),
     url(r'^pilot/login$',views.login),
 
     # search
