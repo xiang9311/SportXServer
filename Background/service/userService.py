@@ -113,12 +113,13 @@ def searchUser(keyword, pageIndex, responseData):
             image = tblImage.url
     return True
 
-def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone):
+def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, response_data):
     tblBriefUser = TblBriefUser()
     tblBriefUser.id = userId
     if userName:
         tblBriefUser.userName = userName
     if avatarKey:
+        response_data.avatarUrl = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
         tblBriefUser.userAvatar = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
     if sex:
         tblBriefUser.userSex = sex
