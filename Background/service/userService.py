@@ -1,5 +1,5 @@
 __author__ = '祥祥'
-from Background.models import TblBriefUser, TblUserKey ,TblRongyunToken
+from Background.models import TblBriefUser, TblUserKey ,TblRongyunToken, TblTrendImage
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
 def phoneExist(phone):
@@ -96,5 +96,21 @@ def isRegister(id,key):
     return True
 
 
-
+def searchUser(keyword, pageIndex, responseData):
+    maxCountPerPage = 10
+    searchedUsers = responseData.searchedUsers
+    responseData.maxCountPerPage = maxCountPerPage
+    tblBriefUsers = TblBriefUser.objects.filter(userName__contains=keyword)[pageIndex*10:(pageIndex+1)*10]
+    for tblBriefUser in tblBriefUsers:
+        searchedUser = searchedUsers.add()
+        searchedUser.userId = tblBriefUser.id
+        searchedUser.userName = tblBriefUser.userName
+        searchedUser.userAvatar = tblBriefUser.userAvatar
+        searchedUser.sign = tblBriefUser.userSign
+        tblImages = TblTrendImage.objects.filter(createUser=tblBriefUser).order_by('createTime')[0:3]
+        images = searchedUser.images
+        for tblImage in tblImages:
+            image = images.add()
+            image = tblImage.url
+    return True
 

@@ -243,3 +243,50 @@ def login(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
+
+
+
+
+
+
+
+
+
+"""
+搜索相关
+"""
+
+@csrf_exempt
+def searchUser(request):
+    cmdId = 11013
+    request_pro = pilot_pb2.Request11013()
+    response_pro = pilot_pb2.Response11013()
+    try:
+        request_pro.MergeFromString(request.read())
+    except:
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+    #构造返回
+
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        if  userService.searchUser(request_params.keyword, request_params.pageIndex, response_data):
+            log.info("搜索成功")
+            return HttpResponse(response_pro.SerializeToString())
+        else :
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 103, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+    pass
