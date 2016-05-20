@@ -85,6 +85,9 @@ def login(phone ,password, response_data) :
 
         response_data.userKey = getUserKey(userinfo.id)
         response_data.rongyunToken = getOldToken(userinfo.id)
+        response_data.sex = userinfo.userSex
+        response_data.sign = userinfo.userSign
+        response_data.phone = userinfo.userPhone
 
         return True
     return False
