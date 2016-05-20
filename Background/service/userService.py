@@ -64,7 +64,7 @@ def getUserKey(userId):
 
 def getRongToken(userid):
     userinfo = TblBriefUser.objects.get(id = userid)
-    token = rongcloud.get_token(userid,userinfo.userName,userinfo.userAvatar)
+    token = rongcloud.get_token(userid, userinfo.userName, userinfo.userAvatar)
     #tokensave
     Rong = TblRongyunToken.objects.get(userid = userid)
     Rong.token = token
@@ -95,7 +95,6 @@ def login(phone ,password, response_data) :
 def isRegister(id,key):
     return True
 
-
 def searchUser(keyword, pageIndex, responseData):
     maxCountPerPage = 10
     searchedUsers = responseData.searchedUsers
@@ -114,3 +113,24 @@ def searchUser(keyword, pageIndex, responseData):
             image = tblImage.url
     return True
 
+def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone):
+    tblBriefUser = TblBriefUser()
+    tblBriefUser.id = userId
+    if userName:
+        tblBriefUser.userName = userName
+    if avatarKey:
+        tblBriefUser.userAvatar = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
+    if sex:
+        tblBriefUser.userSex = sex
+    if sign:
+        tblBriefUser.userSign = sign
+    if phone:
+        tblBriefUser.userPhone = phone
+
+    try:
+        tblBriefUser.save()
+    except Exception as error:
+        log.info(str(error))
+        return False
+
+    return True
