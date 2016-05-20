@@ -11,6 +11,15 @@ def phoneExist(phone):
     return False
 
 
+def userExist(id,key):
+    users = TblBriefUser.objects.filter(id = id)
+    if users:
+        log.info('users is true')
+        return True
+    log.info('users is false')
+    return False
+
+
 def register(phone, username, avatarKey, bucketName, password, sex, response_data):
     tblBriefUser = TblBriefUser()
     tblBriefUser.userName = username

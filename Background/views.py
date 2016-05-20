@@ -93,14 +93,15 @@ def getRongToken(request):
     request_common = request_pro.common
     request_params = request_pro.params
         #检查common(userid userkey else)
+    response11002 = token_pb2.Response11002()
     try:
-        userService.login(request_common.userid,request_common.userkey)
+        userService.userExist(request_common.userid)
     except:
         #未注册用户
-        #return HttpResponse("weizhuce")
-        pass
+        initCommonErrorResponse(cmdId, 101, response11002.common)
+        return HttpResponse(response11002.SerializeToString())
 
-    response11002 = token_pb2.Response11002()
+
     #response
     try:
 
@@ -133,9 +134,9 @@ def verifyPhoneCanUse(request):
 
     request_common = request_pro.common       #注册不用检查requestcommon
     request_params = request_pro.params
-
+    response_pro = pilot_pb2.Response10016()
     try:
-        response_pro = pilot_pb2.Response10016()
+
         response_common = response_pro.common
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
@@ -225,9 +226,11 @@ def login(request):
             pass
     request_common = request10002.common
     request_params = request10002.params
+
     #构造返回
+    response10002 = pilot_pb2.Response10002()
     try:
-        response10002 = pilot_pb2.Response10002()
+
         response_common = response10002.common
         response_data = response10002.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
