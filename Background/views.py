@@ -263,9 +263,10 @@ def searchUser(request):
     response_pro = pilot_pb2.Response11013()
     try:
         request_pro.MergeFromString(request.read())
-    except:
+    except Exception as error:
         #如果读取异常直接返回一个error
-        log.debug('comunications failed')
+        log.error('comunications failed')
+        log.error(str(error))
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
