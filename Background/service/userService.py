@@ -114,8 +114,7 @@ def searchUser(keyword, pageIndex, responseData):
     return True
 
 def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, response_data):
-    tblBriefUser = TblBriefUser()
-    tblBriefUser.id = userId
+    tblBriefUser = TblBriefUser.objects.get(id=userId)
     if userName:
         tblBriefUser.userName = userName
     if avatarKey:
@@ -129,7 +128,7 @@ def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, respon
         tblBriefUser.userPhone = phone
 
     try:
-        tblBriefUser.update()
+        tblBriefUser.save()
     except Exception as error:
         log.info(str(error))
         return False
