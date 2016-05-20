@@ -258,9 +258,9 @@ def login(request):
 
 @csrf_exempt
 def searchUser(request):
-    cmdId = 11013
-    request_pro = pilot_pb2.Request11013()
-    response_pro = pilot_pb2.Response11013()
+    cmdId = 10013
+    request_pro = pilot_pb2.Request10013()
+    response_pro = pilot_pb2.Response10013()
     try:
         request_pro.MergeFromString(request.read())
     except Exception as error:
