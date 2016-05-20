@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^pilot/register$', views.register),
     url(r'^pilot/updateMyInfo$', views.updateMyInfo),
     url(r'^pilot/login$',views.login),
+    url(r'^pilot/guanzhuUser$',views.guanzhuUser),
 
     # search
     url(r'^pilot/searchUser$',views.searchUser),
