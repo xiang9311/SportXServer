@@ -17,6 +17,6 @@ def getQiniuTokenWithOKey(key):
 
 def getBaseUrlByBucketName(bucketName):
     if bucketName == BUCKET:
-        return "http://www.o790nqviz.bkt.clouddn.com/"
+        return "http://o790nqviz.bkt.clouddn.com/"
     else:
         return ""
