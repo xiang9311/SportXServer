@@ -1,4 +1,4 @@
-from Background.models import TblBriefUser , TblTrend , TblBriefGym ,TblTrendImage ,TblLikeTrend
+from Background.models import TblBriefUser , TblTrend , TblBriefGym ,TblTrendImage ,TblLikeTrend ,TblTrendComment
 from SportXServer import qiniuUtil, timeUtil ,log
 
 def createTrend(content , userid ,gymid, bucketName , imageKeys):
@@ -51,3 +51,28 @@ def getTrend(trendId ,responseDate):
         response_trend.isLiked = True
     else:
         response_trend.isLiked = False
+
+
+
+def getTrendComment(trendId , pageIndex , responseData):
+    #未处理maxCountPerPage!
+    #没有return false
+    maxCountPerPage = 10
+    responseData.maxCountPerPage = maxCountPerPage
+    response_comments = responseData.comments
+    comments = TblTrendComment.objects.filter(trend_id = trendId)[pageIndex*10:(pageIndex+1)*10]
+    for comment in comments:
+        response_comment = response_comments.add()
+        briefUser = response_comment.briefUser
+        response_comment.commentId = comment.id
+        response_comment.trendId = comment.trend.id
+        response_comment.commentContent = comment.comment
+        response_comment.toUserid = comment.toUserId
+        response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
+        response_comment.createTime = comment.commentTime
+        response_comment.gymName = comment.gym.gymName
+        #createUser
+        briefUser.userId = comment.createUser.id
+        briefUser.userName = comment.createUser.userName
+        briefUser.userAvatar = comment.createUser.userAvatar
+    return True

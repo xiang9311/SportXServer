@@ -107,3 +107,38 @@ def getTrendById(request):
         log.error(str(error))
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
+
+
+def getTrendComment(request):
+    """
+    创建动态12004
+    :param request:
+    :return:
+    """
+    cmdId = 12004
+    request_pro = trend_pb2.Request12004()
+    response_pro = trend_pb2.Request12004()
+    try:
+        request_pro.MergeFromString(request.read())
+    except:
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+    request_common = request_pro.common
+    request_params = request_pro.params
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        if trendService.getTrendComment(request_params.trendId , request_params.pageIndex , response_data):
+            return HttpResponse(response_pro.SerializeToString())
+        else:
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())

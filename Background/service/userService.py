@@ -1,5 +1,5 @@
 __author__ = '祥祥'
-from Background.models import TblBriefUser, TblUserKey ,TblRongyunToken, TblTrendImage
+from Background.models import TblBriefUser, TblUserKey ,TblRongyunToken, TblTrendImage, TblTrend
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
 def phoneExist(phone):
@@ -20,7 +20,7 @@ def userExist(id,key):
     return False
 
 
-def register(phone, username, avatarKey, bucketName, password, sex, response_data):
+def register(phone, username, avatarKey, bucketName, password, sex, responseData):
     tblBriefUser = TblBriefUser()
     tblBriefUser.userName = username
     tblBriefUser.userAvatar = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
@@ -33,7 +33,7 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
         tblBriefUser.save()
     except Exception as e:
         log.error(str(e))
-        print(e)
+        return False
     # if not tblBriefUser.save():
     #     return False
     tblUserKey = TblUserKey()
@@ -41,9 +41,7 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     tblUserKey.userKey = userKeyUtil.getRandomUserKey()
     tblUserKey.outOfDateTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     tblUserKey.save()
-
     #申请Rongtoken
-
     token = rongcloud.get_token(tblBriefUser.id,tblBriefUser.userName,tblBriefUser.userAvatar)
     #保存融云token
     Rong = TblRongyunToken()
@@ -51,8 +49,8 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     Rong.token = token
     Rong.save()
 
-    response_data.userId = tblBriefUser.id
-    response_data.userKey = tblUserKey.userKey
+    responseData.userId = tblBriefUser.id
+    responseData.userKey = tblUserKey.userKey
     return True
 
 #取得数据库的token
@@ -72,31 +70,29 @@ def getRongToken(userid):
     return token
 
 #登录
-def login(phone ,password, response_data) :
+def login(phone ,password, responseData) :
     userinfo =  TblBriefUser.objects.get(userPhone = phone)
     #pw
     if userinfo.userPW == password:
         print(userinfo.userName)
         print(userinfo.id)
-        response_briefuser = response_data.briefUser
+        response_briefuser = responseData.briefUser
         response_briefuser.userId = userinfo.id
         response_briefuser.userName = userinfo.userName
         response_briefuser.userAvatar = userinfo.userAvatar
 
-        response_data.userKey = getUserKey(userinfo.id)
-        response_data.rongyunToken = getOldToken(userinfo.id)
-        response_data.sex = userinfo.userSex
-        response_data.sign = userinfo.userSign
-        response_data.phone = userinfo.userPhone
+        responseData.userKey = getUserKey(userinfo.id)
+        responseData.rongyunToken = getOldToken(userinfo.id)
+        responseData.sex = userinfo.userSex
+        responseData.sign = userinfo.userSign
+        responseData.phone = userinfo.userPhone
 
         return True
     return False
 
-def isRegister(id,key):
-    return True
-
-
 def searchUser(keyword, pageIndex, responseData):
+    #未处理maxCountPerPage!
+    #没有return false
     maxCountPerPage = 10
     searchedUsers = responseData.searchedUsers
     responseData.maxCountPerPage = maxCountPerPage
