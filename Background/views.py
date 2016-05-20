@@ -273,6 +273,8 @@ def searchUser(request):
     request_common = request_pro.common
     request_params = request_pro.params
 
+    log.info("搜索:数据解析成功" + str(request_params))
+
     #构造返回
 
     try:
