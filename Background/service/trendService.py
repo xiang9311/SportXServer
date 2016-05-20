@@ -76,3 +76,13 @@ def getTrendComment(trendId , pageIndex , responseData):
         briefUser.userName = comment.createUser.userName
         briefUser.userAvatar = comment.createUser.userAvatar
     return True
+
+
+def likeTrend(trendId, likeTrend):
+    #TODO unfinish
+    tblLikeTrend = TblLikeTrend()
+    tblLikeTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    tblTrend = TblTrend.objects.get(id = trendId)
+    tblLikeTrend.createUser = tblTrend.createUser#
+    tblLikeTrend.trend = tblTrend
+    tblLikeTrend.save()
