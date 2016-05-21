@@ -182,3 +182,84 @@ def likeTrend(request):
         log.error(str(error))
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
+
+def commentTrend(request):
+    """
+    创建动态12006
+    :param request:
+    :return:
+    """
+    cmdId = 12006
+    request_pro = trend_pb2.Request12006()
+    response_pro = trend_pb2.Request12006()
+    try:
+        request_pro.MergeFromString(request.read())
+    except:
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        if trendService.createComment(request_params.trendId,
+                                      request_common.userid,
+                                      request_params.toComment,
+                                      request_params.toUser,
+                                      request_params.content,
+                                      request_params.gymId):
+            return HttpResponse(response_pro.SerializeToString())
+        else:
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+def deleteComment(request):
+    """
+    创建动态12007
+    :param request:
+    :return:
+    """
+    cmdId = 12007
+    request_pro = trend_pb2.Request12007()
+    response_pro = trend_pb2.Request12007()
+    try:
+        request_pro.MergeFromString(request.read())
+    except:
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        if trendService.deleteComment(request_params.trendId):
+            return HttpResponse(response_pro.SerializeToString())
+        else:
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())

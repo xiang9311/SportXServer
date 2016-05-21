@@ -79,10 +79,36 @@ def getTrendComment(trendId , pageIndex , responseData):
 
 
 def likeTrend(trendId, likeTrend):
-    #TODO unfinish
     tblLikeTrend = TblLikeTrend()
     tblLikeTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     tblTrend = TblTrend.objects.get(id = trendId)
     tblLikeTrend.createUser = tblTrend.createUser#
     tblLikeTrend.trend = tblTrend
-    tblLikeTrend.save()
+    try:
+        tblLikeTrend.save()
+    except Exception as e:
+        log.error(str(e))
+        return False
+    return True
+
+
+def createComment(trendId,createUser,toComment,toUser,content,gymId):
+    tblTrendComment = TblTrendComment()
+    tblTrendComment.trend = TblTrend.objects.get(id = trendId)
+    tblTrendComment.comment = content
+    tblTrendComment.createUser = TblBriefUser.objects.get(id =createUser)
+    tblTrendComment.toUserId = toUser
+    tblTrendComment.toCommentId = toComment
+    tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
+    tblTrendComment.commentTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    try:
+        tblTrendComment.save()
+    except Exception as e:
+        log.error(str(e))
+        return False
+    return True
+
+
+def deleteComment(trendId):
+    #todo
+    TblTrend()
