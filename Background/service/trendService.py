@@ -93,6 +93,7 @@ def likeTrend(trendId, likeTrend):
 
 
 def createComment(trendId,createUser,toComment,toUser,content,gymId):
+    #TODO 评论消息表?
     tblTrendComment = TblTrendComment()
     tblTrendComment.trend = TblTrend.objects.get(id = trendId)
     tblTrendComment.comment = content
@@ -108,7 +109,28 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         return False
     return True
 
+def deleteComment(trendId,commentId):
+    #todo 评论消息表/是不是
+    try:
+        TblTrendComment.objects.filter(trend_id = trendId,id = commentId).delete()
 
-def deleteComment(trendId):
-    #todo
-    TblTrend()
+    except Exception as e:
+        log.error(str(e))
+        return False
+    return True
+
+
+def deleteTrend(trendId):
+    #todo 评论消息表/
+    try:
+        TblTrend.objects.get(id = trendId).delete()
+        TblTrendComment.objects.filter(trend_id = trendId).delete()
+        TblLikeTrend.objects.filter(trend_id = trendId ).delete()
+
+    except Exception as e:
+        log.error(str(e))
+        return False
+    return True
+
+
+

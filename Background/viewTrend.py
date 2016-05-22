@@ -253,7 +253,7 @@ def deleteComment(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
-        if trendService.deleteComment(request_params.trendId):
+        if trendService.deleteComment(request_params.trendId,request_params.commentId):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
