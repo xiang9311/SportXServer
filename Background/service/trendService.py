@@ -1,4 +1,4 @@
-from Background.models import TblBriefUser , TblTrend , TblBriefGym ,TblTrendImage ,TblLikeTrend ,TblTrendComment
+from Background.models import TblBriefUser , TblTrend , TblBriefGym ,TblTrendImage ,TblLikeTrend ,TblTrendComment,TblCommentMessage
 from SportXServer import qiniuUtil, timeUtil ,log
 
 def createTrend(content , userid ,gymid, bucketName , imageKeys):
@@ -20,7 +20,7 @@ def createTrend(content , userid ,gymid, bucketName , imageKeys):
         tblTrendImage = TblTrendImage()
         tblTrendImage.trend = tblTrend
         tblTrendImage.url = qiniuUtil.getBaseUrlByBucketName(bucketName) + imageKeys[i] #qiniukey?
-        tblTrendImage.createUser = tblTrend.createUser()
+        tblTrendImage.createUser = tblTrend.createUser
         tblTrendImage.priority = i# 次序
         tblTrendImage.createTime = tblTrend.createTime
         try:
@@ -30,6 +30,35 @@ def createTrend(content , userid ,gymid, bucketName , imageKeys):
             return False
     return True
 
+def getMyFollowTrends(userid,pageIndex,responseData):
+    #未处理maxCountPerPage!
+    #过程有问题
+    maxCountPerPage = 10
+    responseData.maxCountPerPage = maxCountPerPage
+    response_comments = responseData.comments
+    
+    followers = TblBriefUser.objects.get(id = userid).follow.all()
+    for follower in followers:
+        comments = TblTrend.objects.filter(createUser_id = follower.id)[pageIndex*10:(pageIndex+1)*10]
+        try:
+            for comment in comments:
+                response_comment = response_comments.add()
+                briefUser = response_comment.briefUser
+                response_comment.commentId = comment.id
+                response_comment.trendId = comment.trend.id
+                response_comment.commentContent = comment.comment
+                response_comment.toUserid = comment.toUserId
+                response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
+                response_comment.createTime = comment.commentTime
+                response_comment.gymName = comment.gym.gymName
+                #createUser
+                briefUser.userId = comment.createUser.id
+                briefUser.userName = comment.createUser.userName
+                briefUser.userAvatar = comment.createUser.userAvatar
+        except Exception as e:
+            log.error(str(e))
+            return False
+    return True
 
 def getTrend(trendId ,responseDate):
     trend = TblTrend.objects.get(id = trendId)
@@ -54,6 +83,7 @@ def getTrend(trendId ,responseDate):
 
 
 
+
 def getTrendComment(trendId , pageIndex , responseData):
     #未处理maxCountPerPage!
     #没有return false
@@ -61,20 +91,24 @@ def getTrendComment(trendId , pageIndex , responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.comments
     comments = TblTrendComment.objects.filter(trend_id = trendId)[pageIndex*10:(pageIndex+1)*10]
-    for comment in comments:
-        response_comment = response_comments.add()
-        briefUser = response_comment.briefUser
-        response_comment.commentId = comment.id
-        response_comment.trendId = comment.trend.id
-        response_comment.commentContent = comment.comment
-        response_comment.toUserid = comment.toUserId
-        response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
-        response_comment.createTime = comment.commentTime
-        response_comment.gymName = comment.gym.gymName
-        #createUser
-        briefUser.userId = comment.createUser.id
-        briefUser.userName = comment.createUser.userName
-        briefUser.userAvatar = comment.createUser.userAvatar
+    try:
+        for comment in comments:
+            response_comment = response_comments.add()
+            briefUser = response_comment.briefUser
+            response_comment.commentId = comment.id
+            response_comment.trendId = comment.trend.id
+            response_comment.commentContent = comment.comment
+            response_comment.toUserid = comment.toUserId
+            response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
+            response_comment.createTime = comment.commentTime
+            response_comment.gymName = comment.gym.gymName
+            #createUser
+            briefUser.userId = comment.createUser.id
+            briefUser.userName = comment.createUser.userName
+            briefUser.userAvatar = comment.createUser.userAvatar
+    except Exception as e:
+        log.error(str(e))
+        return False
     return True
 
 
@@ -93,7 +127,7 @@ def likeTrend(trendId, likeTrend):
 
 
 def createComment(trendId,createUser,toComment,toUser,content,gymId):
-    #TODO 评论消息表?
+    #评论表
     tblTrendComment = TblTrendComment()
     tblTrendComment.trend = TblTrend.objects.get(id = trendId)
     tblTrendComment.comment = content
@@ -102,18 +136,25 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     tblTrendComment.toCommentId = toComment
     tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
     tblTrendComment.commentTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    #消息表
+    tblTrendCommentMassage = TblCommentMessage()
+    tblTrendCommentMassage.content = content
+    tblTrendCommentMassage.toTrend = TblTrend.objects.get(id = trendId)
+    tblTrendCommentMassage.toUserId = toUser
+    tblTrendCommentMassage.createUser = TblBriefUser.objects.get(id =createUser)
+    tblTrendCommentMassage.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     try:
         tblTrendComment.save()
+        tblTrendCommentMassage.save()
     except Exception as e:
         log.error(str(e))
         return False
     return True
 
 def deleteComment(trendId,commentId):
-    #todo 评论消息表/是不是
     try:
         TblTrendComment.objects.filter(trend_id = trendId,id = commentId).delete()
-
+        TblCommentMessage.objects.filter(toTrend_id = trendId , id = commentId).delete()
     except Exception as e:
         log.error(str(e))
         return False
@@ -121,12 +162,11 @@ def deleteComment(trendId,commentId):
 
 
 def deleteTrend(trendId):
-    #todo 评论消息表/
     try:
         TblTrend.objects.get(id = trendId).delete()
         TblTrendComment.objects.filter(trend_id = trendId).delete()
         TblLikeTrend.objects.filter(trend_id = trendId ).delete()
-
+        TblCommentMessage.objects.filter(toTrend_id = trendId).delete()
     except Exception as e:
         log.error(str(e))
         return False

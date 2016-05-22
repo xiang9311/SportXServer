@@ -61,6 +61,37 @@ def getMyFollowTrends(request):
     :return:
     """
     #TODO
+    cmdId = 12002
+    request_pro = trend_pb2.Request12002()
+    response_pro = trend_pb2.Request12002()
+    try:
+        request_pro.MergeFromString(request.read())
+    except:
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        if trendService.getMyFollowTrends(request_common.userid,request_params.pageIndex,response_data):
+            return HttpResponse(response_pro.SerializeToString())
+        else:
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
 
 def getTrendById(request):
@@ -254,6 +285,44 @@ def deleteComment(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if trendService.deleteComment(request_params.trendId,request_params.commentId):
+            return HttpResponse(response_pro.SerializeToString())
+        else:
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+def deleteTrend(request):
+    """
+    创建动态12008
+    :param request:
+    :return:
+    """
+    cmdId = 12008
+    request_pro = trend_pb2.Request12008()
+    response_pro = trend_pb2.Request12008()
+    try:
+        request_pro.MergeFromString(request.read())
+    except:
+        #如果读取异常直接返回一个error
+        log.debug('comunications failed')
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        if trendService.deleteTrend(request_params.trendId):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
