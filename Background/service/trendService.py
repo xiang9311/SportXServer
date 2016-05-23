@@ -40,26 +40,26 @@ def getMyFollowTrends(userId,pageIndex,responseData):
     response_comments = responseData.comments
 
     followers = TblBriefUser.objects.get(id = userId).follow.all()
-    for follower in followers:
-        comments = TblTrend.objects.filter(createUser_id__range = follower.id)[pageIndex*10:(pageIndex+1)*10]
-        try:
-            for comment in comments:
-                response_comment = response_comments.add()
-                briefUser = response_comment.briefUser
-                response_comment.commentId = comment.id
-                response_comment.trendId = comment.trend.id
-                response_comment.commentContent = comment.comment
-                response_comment.toUserid = comment.toUserId
-                response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
-                response_comment.createTime = comment.commentTime
-                response_comment.gymName = comment.gym.gymName
-                #createUser
-                briefUser.userId = comment.createUser.id
-                briefUser.userName = comment.createUser.userName
-                briefUser.userAvatar = comment.createUser.userAvatar
-        except Exception as e:
-            log.error(str(e))
-            return False
+    #用in
+    comments = TblTrend.objects.filter(createUser__in = followers)[pageIndex*10:(pageIndex+1)*10]
+    try:
+        for comment in comments:
+            response_comment = response_comments.add()
+            briefUser = response_comment.briefUser
+            response_comment.commentId = comment.id
+            response_comment.trendId = comment.trend.id
+            response_comment.commentContent = comment.comment
+            response_comment.toUserid = comment.toUserId
+            response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
+            response_comment.createTime = comment.commentTime
+            response_comment.gymName = comment.gym.gymName
+            #createUser
+            briefUser.userId = comment.createUser.id
+            briefUser.userName = comment.createUser.userName
+            briefUser.userAvatar = comment.createUser.userAvatar
+    except Exception as e:
+        log.error(str(e))
+        return False
     return True
 
 
