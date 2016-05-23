@@ -104,7 +104,7 @@ def searchUser(keyword, pageIndex, responseData):
         searchedUser.userName = tblBriefUser.userName
         searchedUser.userAvatar = tblBriefUser.userAvatar
         searchedUser.sign = tblBriefUser.userSign
-        tblImages = TblTrendImage.objects.filter(createUser=tblBriefUser).order_by('createTime')[0:3]
+        tblImages = TblTrendImage.objects.filter(createUser=tblBriefUser).order_by('-createTime', 'priority')[0:3]
         images = searchedUser.images
         for tblImage in tblImages:
             images.append(tblImage.url)
