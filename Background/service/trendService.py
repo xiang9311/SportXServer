@@ -92,7 +92,7 @@ def getTrend(trendId ,responseDate, userId):
     response_trend = responseDate.trends
     response_trend.id = trendId
     trend_user = response_trend.briefUser
-    response_trend.createTime = trend.createTime
+    response_trend.createTime = timeUtil.dataBaseTime_toTimestemp(trend.createTime)
     #gym名字需要查询
     response_trend.gymId = trend.gym.id
     response_trend.gymName = trend.gym.gymName
@@ -107,8 +107,6 @@ def getTrend(trendId ,responseDate, userId):
         response_trend.isLiked = True
     else:
         response_trend.isLiked = False
-
-
 
 
 def getTrendComment(trendId , pageIndex , responseData):
@@ -172,14 +170,14 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         tblTrendComment.toCommentId = toComment
     if gymId:
         tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
-    tblTrendComment.commentTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    tblTrendComment.commentTime = timeUtil.getDatabaseTimeNow()
     #消息表
     tblTrendCommentMassage = TblCommentMessage()
     tblTrendCommentMassage.content = content
     tblTrendCommentMassage.toTrend = TblTrend.objects.get(id = trendId)
     tblTrendCommentMassage.toUserId = toUser
     tblTrendCommentMassage.createUser = TblBriefUser.objects.get(id =createUser)
-    tblTrendCommentMassage.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    tblTrendCommentMassage.createTime = timeUtil.getDatabaseTimeNow()
     try:
         tblTrendComment.save()
         tblTrendCommentMassage.save()
