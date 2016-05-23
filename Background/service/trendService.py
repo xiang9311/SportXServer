@@ -4,14 +4,13 @@ from SportXServer import qiniuUtil, timeUtil ,log
 
 def createTrend(content , userId ,gymId, bucketName , imageKeys):
     tblTrend = TblTrend()
-    if content:
-        tblTrend.content = content
+    tblTrend.content = content
     tblTrend.createUser = TblBriefUser.objects.get(id = userId)
     tblTrend.likeCount = 0
     tblTrend.commentCount = 0
     if gymId:
         tblTrend.gym = TblBriefGym.objects.get(id = gymId)
-    tblTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    tblTrend.createTime = timeUtil.getDatabaseTimeNow()
     try:
         tblTrend.save()
     except Exception as e:
@@ -42,33 +41,46 @@ def getMyFollowTrends(userId,pageIndex,responseData):
 
     user = TblBriefUser.objects.get(id = userId)
 
-    followers = user.follow.all()
-    followers.add(user)
-    for follower in followers:
-        trends = TblTrend.objects.filter(createUser_id__range = follower.id).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
-        try:
-            for trend in trends:
-                response_trend = response_trends.add()
-                response_trend.id = trendId
-                trend_user = response_trend.briefUser
-                response_trend.createTime = trend.createTime
-                #gym名字需要查询
+    # followers = user.follow.all()
+    # followers.add(user)
+    followers = user.follow.all().values("id")
+    # followers.add(user)
+    qList = list(followers)
+    sList = set([s['id'] for s in qList])
+    sList.add(userId)
+    trends = TblTrend.objects.filter(createUser_id__in = sList).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
+
+    try:
+        for trend in trends:
+            response_trend = response_trends.add()
+            response_trend.id = trend.id
+            trend_user = response_trend.briefUser
+            response_trend.createTime = int(timeUtil.dataBaseTime_toTimestemp(trend.createTime) * 1000)
+            #gym名字需要查询
+            try:
+                # 有可能没有加gym
                 response_trend.gymId = trend.gym.id
                 response_trend.gymName = trend.gym.gymName
-                response_trend.content = trend.content
-                response_trend.likeCount = trend.likeCount
-                response_trend.commentCount = trend.commentCount
-                #createuser
-                trend_user.userId = trend.createUser.id
-                trend_user.userName = trend.createUser.userName
-                trend_user.userAvatar = trend.createUser.userAvatar
-                if TblLikeTrend.objects.get(trend=trend, likeUser=user):
+            except Exception as e:
+                pass
+            response_trend.content = trend.content
+            response_trend.likeCount = trend.likeCount
+            response_trend.commentCount = trend.commentCount
+            #createuser
+            trend_user.userId = trend.createUser.id
+            trend_user.userName = trend.createUser.userName
+            trend_user.userAvatar = trend.createUser.userAvatar
+            try:
+                # 查询不到会报异常
+                if  TblLikeTrend.objects.get(trend=trend, likeUser=user):
                     response_trend.isLiked = True
-                else:
+                else :
                     response_trend.isLiked = False
-        except Exception as e:
-            log.error(str(e))
-            return False
+            except Exception as e:
+                response_trend.isLiked = False
+    except Exception as e:
+        log.error(str(e))
+        return False
     return True
 
 
