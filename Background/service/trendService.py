@@ -123,7 +123,7 @@ def getTrendComment(trendId , pageIndex , responseData):
             response_comment.commentId = comment.id
             response_comment.trendId = comment.trend.id
             response_comment.commentContent = comment.comment
-            response_comment.createTime = comment.commentTime
+            response_comment.createTime = timeUtil.dataBaseTime_toTimestemp(comment.commentTime)
             try:
                 response_comment.toUserid = comment.toUserId
                 response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName

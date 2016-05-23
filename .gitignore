@@ -61,3 +61,4 @@ target/
 *.pyc
 *.pyc
 *.pyc
+*.xml
