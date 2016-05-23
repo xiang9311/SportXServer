@@ -105,7 +105,7 @@ class TblXMoneyLog(models.Model):
 """
 class TblLikeTrend(models.Model):
     trend = models.ForeignKey(TblTrend)
-    createUser = models.ForeignKey(TblBriefUser)
+    likeUser = models.ForeignKey(TblBriefUser)
     createTime = models.DateTimeField()
 
 """

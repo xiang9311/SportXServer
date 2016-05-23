@@ -126,7 +126,7 @@ def getTrendById(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
-        if trendService.getTrend(request_params.trendId,response_data):
+        if trendService.getTrend(request_params.trendId,response_data, request_common.userid):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -201,7 +201,7 @@ def likeTrend(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if trendService.likeTrend(request_params.trendId,
-                             request_params.likeTrend):
+                             request_params.likeTrend, request_common.userid):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)

@@ -38,40 +38,45 @@ def getMyFollowTrends(userId,pageIndex,responseData):
     #过程有问题
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
-    response_comments = responseData.comments
+    response_trends = responseData.trends
 
     user = TblBriefUser.objects.get(id = userId)
 
     followers = user.follow.all()
     followers.add(user)
     for follower in followers:
-        comments = TblTrend.objects.filter(createUser_id__range = follower.id).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
+        trends = TblTrend.objects.filter(createUser_id__range = follower.id).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         try:
-            for comment in comments:
-                response_comment = response_comments.add()
-                briefUser = response_comment.briefUser
-                response_comment.commentId = comment.id
-                response_comment.trendId = comment.trend.id
-                response_comment.commentContent = comment.comment
-                response_comment.toUserid = comment.toUserId
-                response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
-                response_comment.createTime = comment.commentTime
-                response_comment.gymName = comment.gym.gymName
-                #createUser
-                briefUser.userId = comment.createUser.id
-                briefUser.userName = comment.createUser.userName
-                briefUser.userAvatar = comment.createUser.userAvatar
+            for trend in trends:
+                response_trend = response_trends.add()
+                response_trend.id = trendId
+                trend_user = response_trend.briefUser
+                response_trend.createTime = trend.createTime
+                #gym名字需要查询
+                response_trend.gymId = trend.gym.id
+                response_trend.gymName = trend.gym.gymName
+                response_trend.content = trend.content
+                response_trend.likeCount = trend.likeCount
+                response_trend.commentCount = trend.commentCount
+                #createuser
+                trend_user.userId = trend.createUser.id
+                trend_user.userName = trend.createUser.userName
+                trend_user.userAvatar = trend.createUser.userAvatar
+                if TblLikeTrend.objects.get(trend=trend, likeUser=user):
+                    response_trend.isLiked = True
+                else:
+                    response_trend.isLiked = False
         except Exception as e:
             log.error(str(e))
             return False
     return True
 
 
-def getTrend(trendId ,responseDate):
+def getTrend(trendId ,responseDate, userId):
     trend = TblTrend.objects.get(id = trendId)
     response_trend = responseDate.trends
     response_trend.id = trendId
-    trend_user = response_trend.briedUser
+    trend_user = response_trend.briefUser
     response_trend.createTime = trend.createTime
     #gym名字需要查询
     response_trend.gymId = trend.gym.id
@@ -83,7 +88,7 @@ def getTrend(trendId ,responseDate):
     trend_user.userId = trend.createUser.id
     trend_user.userName = trend.createUser.userName
     trend_user.userAvatar = trend.createUser.userAvatar
-    if TblLikeTrend.objects.get(trend_id= trendId):
+    if TblLikeTrend.objects.get(trend=trend, likeUser_id=userId):
         response_trend.isLiked = True
     else:
         response_trend.isLiked = False
@@ -119,11 +124,12 @@ def getTrendComment(trendId , pageIndex , responseData):
     return True
 
 
-def likeTrend(trendId, likeTrend):
+def likeTrend(trendId, likeTrend, userId):
     tblLikeTrend = TblLikeTrend()
     tblLikeTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     tblTrend = TblTrend.objects.get(id = trendId)
-    tblLikeTrend.createUser = tblTrend.createUser#
+    tblUser = TblBriefUser.objects.get(id = userId)
+    tblLikeTrend.createUser = tblUser#
     tblLikeTrend.trend = tblTrend
     try:
         tblLikeTrend.save()
