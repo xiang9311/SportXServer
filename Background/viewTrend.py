@@ -80,9 +80,8 @@ def getMyFollowTrends(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
-        # if trendService.getMyFollowTrends(request_common.userid,request_params.pageIndex,response_data):
-        if trendService.getMyFollowTrends(7,0,response_data):
-            print ("ok==")
+        if trendService.getMyFollowTrends(request_common.userid,request_params.pageIndex,response_data):
+            log.info(str(response_pro))
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)

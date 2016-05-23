@@ -41,10 +41,7 @@ def getMyFollowTrends(userId,pageIndex,responseData):
 
     user = TblBriefUser.objects.get(id = userId)
 
-    # followers = user.follow.all()
-    # followers.add(user)
     followers = user.follow.all().values("id")
-    # followers.add(user)
     qList = list(followers)
     sList = set([s['id'] for s in qList])
     sList.add(userId)
