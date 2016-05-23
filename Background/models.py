@@ -62,7 +62,7 @@ class TblAllEquipment(models.Model):
 用户动态表
 """
 class TblTrend(models.Model):
-    content  =  models.CharField(max_length = 30)
+    content  =  models.CharField(max_length = 30, null=True)
     createUser = models.ForeignKey(TblBriefUser)
     gym = models.ForeignKey(TblBriefGym, null=True)
     likeCount = models.IntegerField()
@@ -76,9 +76,9 @@ class TblTrendComment(models.Model):
     trend = models.ForeignKey(TblTrend)
     comment = models.CharField(max_length = 300)
     createUser = models.ForeignKey(TblBriefUser)
-    toUserId = models.IntegerField()
-    toCommentId = models.IntegerField()
-    gym = models.ForeignKey(TblBriefGym)
+    toUserId = models.IntegerField(null=True)
+    toCommentId = models.IntegerField(null=True)
+    gym = models.ForeignKey(TblBriefGym,  null=True)
     commentTime = models.DateTimeField()
 
 """

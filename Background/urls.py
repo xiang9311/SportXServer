@@ -1,6 +1,6 @@
 __author__ = '祥祥'
 from django.conf.urls import url
-from . import views
+from . import views, viewTrend
 
 urlpatterns = [
     url(r'^test/$', views.test),
@@ -18,5 +18,8 @@ urlpatterns = [
 
     # search
     url(r'^pilot/searchUser$',views.searchUser),
+
+    # trend
+    url(r'^trend/createTrend$',viewTrend.createTrend),
 
 ]

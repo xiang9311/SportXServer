@@ -4,11 +4,12 @@ from SportXServer import qiniuUtil, timeUtil ,log
 
 def createTrend(content , userId ,gymId, bucketName , imageKeys):
     tblTrend = TblTrend()
-    tblTrend.content = content
+    if content:
+        tblTrend.content = content
     tblTrend.createUser = TblBriefUser.objects.get(id = userId)
     tblTrend.likeCount = 0
     tblTrend.commentCount = 0
-    if gymId != None:
+    if gymId:
         tblTrend.gym = TblBriefGym.objects.get(id = gymId)
     tblTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     try:

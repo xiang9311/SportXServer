@@ -19,7 +19,7 @@ def createTrend(request):
     """
     cmdId = 12001
     request_pro = trend_pb2.Request12001()
-    response_pro = trend_pb2.Request12001()
+    response_pro = trend_pb2.Response12001()
     try:
         request_pro.MergeFromString(request.read())
     except:
@@ -28,10 +28,8 @@ def createTrend(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
-
     request_common = request_pro.common
     request_params = request_pro.params
-
 
     try:
         response_common = response_pro.common
@@ -63,7 +61,7 @@ def getMyFollowTrends(request):
     #TODO
     cmdId = 12002
     request_pro = trend_pb2.Request12002()
-    response_pro = trend_pb2.Request12002()
+    response_pro = trend_pb2.Response12002()
     try:
         request_pro.MergeFromString(request.read())
     except:
@@ -109,7 +107,7 @@ def getTrendById(request):
     """
     cmdId = 12003
     request_pro = trend_pb2.Request12003()
-    response_pro = trend_pb2.Request12003()
+    response_pro = trend_pb2.Response12003()
     try:
         request_pro.MergeFromString(request.read())
     except:
@@ -148,7 +146,7 @@ def getTrendComment(request):
     """
     cmdId = 12004
     request_pro = trend_pb2.Request12004()
-    response_pro = trend_pb2.Request12004()
+    response_pro = trend_pb2.Response12004()
     try:
         request_pro.MergeFromString(request.read())
     except:
@@ -183,7 +181,7 @@ def likeTrend(request):
     """
     cmdId = 12005
     request_pro = trend_pb2.Request12005()
-    response_pro = trend_pb2.Request12005()
+    response_pro = trend_pb2.Response12005()
     try:
         request_pro.MergeFromString(request.read())
     except:
@@ -222,7 +220,7 @@ def commentTrend(request):
     """
     cmdId = 12006
     request_pro = trend_pb2.Request12006()
-    response_pro = trend_pb2.Request12006()
+    response_pro = trend_pb2.Response12006()
     try:
         request_pro.MergeFromString(request.read())
     except:
@@ -265,7 +263,7 @@ def deleteComment(request):
     """
     cmdId = 12007
     request_pro = trend_pb2.Request12007()
-    response_pro = trend_pb2.Request12007()
+    response_pro = trend_pb2.Response12007()
     try:
         request_pro.MergeFromString(request.read())
     except:
@@ -303,7 +301,7 @@ def deleteTrend(request):
     """
     cmdId = 12008
     request_pro = trend_pb2.Request12008()
-    response_pro = trend_pb2.Request12008()
+    response_pro = trend_pb2.Response12008()
     try:
         request_pro.MergeFromString(request.read())
     except:

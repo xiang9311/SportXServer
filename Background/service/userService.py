@@ -107,8 +107,7 @@ def searchUser(keyword, pageIndex, responseData):
         tblImages = TblTrendImage.objects.filter(createUser=tblBriefUser).order_by('createTime')[0:3]
         images = searchedUser.images
         for tblImage in tblImages:
-            image = images.add()
-            image = tblImage.url
+            images.append(tblImage.url)
     return True
 
 def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, response_data):
