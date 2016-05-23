@@ -152,6 +152,7 @@ def likeTrend(trendId, likeTrend, userId):
     tblLikeTrend.trend = tblTrend
     try:
         tblLikeTrend.save()
+        addTrendLikeCount(tblTrend)
     except Exception as e:
         log.error(str(e))
         return False
@@ -181,6 +182,7 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     try:
         tblTrendComment.save()
         tblTrendCommentMassage.save()
+        addTrendCommentCount(tblTrendComment.trend)
     except Exception as e:
         log.error(str(e))
         return False
@@ -209,4 +211,19 @@ def deleteTrend(trendId):
     return True
 
 
+def addTrendCommentCount(trend):
+    trend.commentCount = trend.commentCount + 1
+    trend.save()
+
+def menusTrendCommentCount(trend):
+    trend.commentCount = trend.commentCount - 1
+    trend.save()
+
+def addTrendLikeCount(trend):
+    trend.likeCount = trend.likeCount + 1
+    trend.save()
+
+def menusTrendLikeCount(trend):
+    trend.likeCount = trend.likeCount - 1
+    trend.save()
 
