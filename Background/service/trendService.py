@@ -2,14 +2,14 @@ from Background.models import TblBriefUser , TblTrend , TblBriefGym ,TblTrendIma
 from SportXServer import qiniuUtil, timeUtil ,log
 
 
-def createTrend(content , userid ,gymid, bucketName , imageKeys):
+def createTrend(content , userId ,gymId, bucketName , imageKeys):
     tblTrend = TblTrend()
     tblTrend.content = content
-    tblTrend.createUser = TblBriefUser.objects.get(id = userid)
+    tblTrend.createUser = TblBriefUser.objects.get(id = userId)
     tblTrend.likeCount = 0
     tblTrend.commentCount = 0
-    if gymid != None:
-        tblTrend.gym = TblBriefGym.objects.get(id = gymid)
+    if gymId != None:
+        tblTrend.gym = TblBriefGym.objects.get(id = gymId)
     tblTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     try:
         tblTrend.save()
@@ -32,14 +32,14 @@ def createTrend(content , userid ,gymid, bucketName , imageKeys):
     return True
 
 
-def getMyFollowTrends(userid,pageIndex,responseData):
+def getMyFollowTrends(userId,pageIndex,responseData):
     #未处理maxCountPerPage!
     #过程有问题
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.comments
 
-    followers = TblBriefUser.objects.get(id = userid).follow.all()
+    followers = TblBriefUser.objects.get(id = userId).follow.all()
     for follower in followers:
         comments = TblTrend.objects.filter(createUser_id__range = follower.id)[pageIndex*10:(pageIndex+1)*10]
         try:
