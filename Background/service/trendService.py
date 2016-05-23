@@ -41,7 +41,7 @@ def getMyFollowTrends(userId,pageIndex,responseData):
     response_comments = responseData.comments
 
     followers = TblBriefUser.objects.get(id = userId).follow.all()
-    #用in
+    #用in,shell中测试完成
     comments = TblTrend.objects.filter(createUser__in = followers)[pageIndex*10:(pageIndex+1)*10]
     try:
         for comment in comments:
@@ -134,10 +134,13 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     #评论表
     tblTrendComment = TblTrendComment()
     tblTrendComment.trend = TblTrend.objects.get(id = trendId)
-    tblTrendComment.comment = content
+    if content:
+        tblTrendComment.comment = content
     tblTrendComment.createUser = TblBriefUser.objects.get(id =createUser)
-    tblTrendComment.toUserId = toUser
-    tblTrendComment.toCommentId = toComment
+    if toUser:
+        tblTrendComment.toUserId = toUser
+    if toComment:
+        tblTrendComment.toCommentId = toComment
     tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
     tblTrendComment.commentTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     #消息表
