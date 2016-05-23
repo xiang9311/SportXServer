@@ -117,7 +117,7 @@ def getTrendComment(trendId , pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.comments
-    comments = TblTrendComment.objects.filter(trend_id = trendId)[pageIndex*10:(pageIndex+1)*10]
+    comments = TblTrendComment.objects.filter(trend_id = trendId).order_by('commentTime')[pageIndex*10:(pageIndex+1)*10]
     try:
         for comment in comments:
             response_comment = response_comments.add()
@@ -125,10 +125,16 @@ def getTrendComment(trendId , pageIndex , responseData):
             response_comment.commentId = comment.id
             response_comment.trendId = comment.trend.id
             response_comment.commentContent = comment.comment
-            response_comment.toUserid = comment.toUserId
-            response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
             response_comment.createTime = comment.commentTime
-            response_comment.gymName = comment.gym.gymName
+            try:
+                response_comment.toUserid = comment.toUserId
+                response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
+            except Exception as e:
+                pass
+            try:
+                response_comment.gymName = comment.gym.gymName
+            except Exception as e:
+                pass
             #createUser
             briefUser.userId = comment.createUser.id
             briefUser.userName = comment.createUser.userName
@@ -160,9 +166,12 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     tblTrendComment.trend = TblTrend.objects.get(id = trendId)
     tblTrendComment.comment = content
     tblTrendComment.createUser = TblBriefUser.objects.get(id =createUser)
-    tblTrendComment.toUserId = toUser
-    tblTrendComment.toCommentId = toComment
-    tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
+    if toUser:
+        tblTrendComment.toUserId = toUser
+    if toComment:
+        tblTrendComment.toCommentId = toComment
+    if gymId:
+        tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
     tblTrendComment.commentTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     #消息表
     tblTrendCommentMassage = TblCommentMessage()
