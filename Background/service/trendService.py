@@ -1,6 +1,7 @@
 from Background.models import TblBriefUser , TblTrend , TblBriefGym ,TblTrendImage ,TblLikeTrend ,TblTrendComment,TblCommentMessage
 from SportXServer import qiniuUtil, timeUtil ,log
 
+
 def createTrend(content , userid ,gymid, bucketName , imageKeys):
     tblTrend = TblTrend()
     tblTrend.content = content
@@ -30,16 +31,17 @@ def createTrend(content , userid ,gymid, bucketName , imageKeys):
             return False
     return True
 
+
 def getMyFollowTrends(userid,pageIndex,responseData):
     #未处理maxCountPerPage!
     #过程有问题
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.comments
-    
+
     followers = TblBriefUser.objects.get(id = userid).follow.all()
     for follower in followers:
-        comments = TblTrend.objects.filter(createUser_id = follower.id)[pageIndex*10:(pageIndex+1)*10]
+        comments = TblTrend.objects.filter(createUser_id__range = follower.id)[pageIndex*10:(pageIndex+1)*10]
         try:
             for comment in comments:
                 response_comment = response_comments.add()
@@ -59,6 +61,7 @@ def getMyFollowTrends(userid,pageIndex,responseData):
             log.error(str(e))
             return False
     return True
+
 
 def getTrend(trendId ,responseDate):
     trend = TblTrend.objects.get(id = trendId)
@@ -150,6 +153,7 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         log.error(str(e))
         return False
     return True
+
 
 def deleteComment(trendId,commentId):
     try:
