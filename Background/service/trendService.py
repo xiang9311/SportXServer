@@ -67,6 +67,12 @@ def getMyFollowTrends(userId,pageIndex,responseData):
             trend_user.userId = trend.createUser.id
             trend_user.userName = trend.createUser.userName
             trend_user.userAvatar = trend.createUser.userAvatar
+
+            #images
+            images = response_trend.imgs
+            tblImages = TblTrendImage.objects.filter(trend=trend).order_by('priority')
+            for tblImage in tblImages:
+                images.append(tblImage.url)
             try:
                 # 查询不到会报异常
                 if  TblLikeTrend.objects.get(trend=trend, likeUser=user):
