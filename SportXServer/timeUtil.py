@@ -13,4 +13,11 @@ def getDatabaseTimeNow():
     return time.strftime(SERVER_TIME_FORMAT, time.localtime(time.time()))
 
 def getDatabaseTimeKeyOutOfDate():
+    """
+    返回时间：当前时间+一个月
+    :return:
+    """
     return time.strftime(SERVER_TIME_FORMAT, time.localtime(time.time() + MONTH))
+
+def dataBaseTime_toTimestemp(datetime):
+    return time.mktime(datetime.timetuple())

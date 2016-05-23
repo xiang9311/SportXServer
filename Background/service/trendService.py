@@ -4,14 +4,13 @@ from SportXServer import qiniuUtil, timeUtil ,log
 
 def createTrend(content , userId ,gymId, bucketName , imageKeys):
     tblTrend = TblTrend()
-    if content:
-        tblTrend.content = content
+    tblTrend.content = content
     tblTrend.createUser = TblBriefUser.objects.get(id = userId)
     tblTrend.likeCount = 0
     tblTrend.commentCount = 0
     if gymId:
         tblTrend.gym = TblBriefGym.objects.get(id = gymId)
-    tblTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    tblTrend.createTime = timeUtil.getDatabaseTimeNow()
     try:
         tblTrend.save()
     except Exception as e:
@@ -42,33 +41,49 @@ def getMyFollowTrends(userId,pageIndex,responseData):
 
     user = TblBriefUser.objects.get(id = userId)
 
-    followers = user.follow.all()
-    followers.add(user)
-    for follower in followers:
-        trends = TblTrend.objects.filter(createUser_id__range = follower.id).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
-        try:
-            for trend in trends:
-                response_trend = response_trends.add()
-                response_trend.id = trendId
-                trend_user = response_trend.briefUser
-                response_trend.createTime = trend.createTime
-                #gym名字需要查询
+    followers = user.follow.all().values("id")
+    qList = list(followers)
+    sList = set([s['id'] for s in qList])
+    sList.add(userId)
+    trends = TblTrend.objects.filter(createUser_id__in = sList).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
+
+    try:
+        for trend in trends:
+            response_trend = response_trends.add()
+            response_trend.id = trend.id
+            trend_user = response_trend.briefUser
+            response_trend.createTime = int(timeUtil.dataBaseTime_toTimestemp(trend.createTime) * 1000)
+            #gym名字需要查询
+            try:
+                # 有可能没有加gym
                 response_trend.gymId = trend.gym.id
                 response_trend.gymName = trend.gym.gymName
-                response_trend.content = trend.content
-                response_trend.likeCount = trend.likeCount
-                response_trend.commentCount = trend.commentCount
-                #createuser
-                trend_user.userId = trend.createUser.id
-                trend_user.userName = trend.createUser.userName
-                trend_user.userAvatar = trend.createUser.userAvatar
-                if TblLikeTrend.objects.get(trend=trend, likeUser=user):
+            except Exception as e:
+                pass
+            response_trend.content = trend.content
+            response_trend.likeCount = trend.likeCount
+            response_trend.commentCount = trend.commentCount
+            #createuser
+            trend_user.userId = trend.createUser.id
+            trend_user.userName = trend.createUser.userName
+            trend_user.userAvatar = trend.createUser.userAvatar
+
+            #images
+            images = response_trend.imgs
+            tblImages = TblTrendImage.objects.filter(trend=trend).order_by('priority')
+            for tblImage in tblImages:
+                images.append(tblImage.url)
+            try:
+                # 查询不到会报异常
+                if  TblLikeTrend.objects.get(trend=trend, likeUser=user):
                     response_trend.isLiked = True
-                else:
+                else :
                     response_trend.isLiked = False
-        except Exception as e:
-            log.error(str(e))
-            return False
+            except Exception as e:
+                response_trend.isLiked = False
+    except Exception as e:
+        log.error(str(e))
+        return False
     return True
 
 
@@ -102,7 +117,7 @@ def getTrendComment(trendId , pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.comments
-    comments = TblTrendComment.objects.filter(trend_id = trendId)[pageIndex*10:(pageIndex+1)*10]
+    comments = TblTrendComment.objects.filter(trend_id = trendId).order_by('id')[pageIndex*10:(pageIndex+1)*10]
     try:
         for comment in comments:
             response_comment = response_comments.add()
@@ -110,10 +125,16 @@ def getTrendComment(trendId , pageIndex , responseData):
             response_comment.commentId = comment.id
             response_comment.trendId = comment.trend.id
             response_comment.commentContent = comment.comment
-            response_comment.toUserid = comment.toUserId
-            response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
             response_comment.createTime = comment.commentTime
-            response_comment.gymName = comment.gym.gymName
+            try:
+                response_comment.toUserid = comment.toUserId
+                response_comment.toUserName = TblBriefUser.objects.get(id = comment.toUserId).userName
+            except Exception as e:
+                pass
+            try:
+                response_comment.gymName = comment.gym.gymName
+            except Exception as e:
+                pass
             #createUser
             briefUser.userId = comment.createUser.id
             briefUser.userName = comment.createUser.userName
@@ -145,9 +166,12 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     tblTrendComment.trend = TblTrend.objects.get(id = trendId)
     tblTrendComment.comment = content
     tblTrendComment.createUser = TblBriefUser.objects.get(id =createUser)
-    tblTrendComment.toUserId = toUser
-    tblTrendComment.toCommentId = toComment
-    tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
+    if toUser:
+        tblTrendComment.toUserId = toUser
+    if toComment:
+        tblTrendComment.toCommentId = toComment
+    if gymId:
+        tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
     tblTrendComment.commentTime = timeUtil.getDatabaseTimeKeyOutOfDate()
     #消息表
     tblTrendCommentMassage = TblCommentMessage()

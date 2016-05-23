@@ -22,5 +22,7 @@ urlpatterns = [
     # trend
     url(r'^trend/createTrend$',viewTrend.createTrend),
     url(r'^trend/getMyFollowTrends$',viewTrend.getMyFollowTrends),
+    url(r'^trend/getTrendComment$',viewTrend.getTrendComment),
+    url(r'^trend/commentTrend$',viewTrend.commentTrend),
 
 ]
