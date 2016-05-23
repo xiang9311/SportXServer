@@ -20,4 +20,4 @@ def getDatabaseTimeKeyOutOfDate():
     return time.strftime(SERVER_TIME_FORMAT, time.localtime(time.time() + MONTH))
 
 def dataBaseTime_toTimestemp(datetime):
-    return time.mktime(datetime.timetuple())
+    return int(time.mktime(datetime.timetuple()) * 1000)
