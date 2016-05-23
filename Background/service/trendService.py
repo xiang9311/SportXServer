@@ -52,7 +52,7 @@ def getMyFollowTrends(userId,pageIndex,responseData):
             response_trend = response_trends.add()
             response_trend.id = trend.id
             trend_user = response_trend.briefUser
-            response_trend.createTime = int(timeUtil.dataBaseTime_toTimestemp(trend.createTime) * 1000)
+            response_trend.createTime = timeUtil.dataBaseTime_toTimestemp(trend.createTime)
             #gym名字需要查询
             try:
                 # 有可能没有加gym
