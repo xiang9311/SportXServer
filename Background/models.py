@@ -62,7 +62,7 @@ class TblAllEquipment(models.Model):
 用户动态表
 """
 class TblTrend(models.Model):
-    content  =  models.CharField(max_length = 30)
+    content  =  models.CharField(max_length = 30, null=True)
     createUser = models.ForeignKey(TblBriefUser)
     gym = models.ForeignKey(TblBriefGym, null=True)
     likeCount = models.IntegerField()

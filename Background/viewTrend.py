@@ -28,10 +28,8 @@ def createTrend(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
-
     request_common = request_pro.common
     request_params = request_pro.params
-
 
     try:
         response_common = response_pro.common
