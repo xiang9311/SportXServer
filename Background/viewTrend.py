@@ -51,7 +51,7 @@ def createTrend(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
-
+@csrf_exempt
 def getMyFollowTrends(request):
     """
     创建动态12002
@@ -91,7 +91,7 @@ def getMyFollowTrends(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
-
+@csrf_exempt
 def getTrendById(request):
     """
     创建动态12003
@@ -126,7 +126,7 @@ def getTrendById(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
-        if trendService.getTrend(request_params.trendId,response_data):
+        if trendService.getTrend(request_params.trendId,response_data, request_common.userid):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -137,7 +137,7 @@ def getTrendById(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
-
+@csrf_exempt
 def getTrendComment(request):
     """
     创建动态12004
@@ -201,7 +201,7 @@ def likeTrend(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if trendService.likeTrend(request_params.trendId,
-                             request_params.likeTrend):
+                             request_params.likeTrend, request_common.userid):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -212,6 +212,7 @@ def likeTrend(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
+@csrf_exempt
 def commentTrend(request):
     """
     创建动态12006
@@ -254,7 +255,7 @@ def commentTrend(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
-
+@csrf_exempt
 def deleteComment(request):
     """
     创建动态12007
@@ -293,6 +294,7 @@ def deleteComment(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
+@csrf_exempt
 def deleteTrend(request):
     """
     创建动态12008
