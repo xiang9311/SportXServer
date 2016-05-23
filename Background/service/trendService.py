@@ -40,9 +40,12 @@ def getMyFollowTrends(userId,pageIndex,responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.comments
 
-    followers = TblBriefUser.objects.get(id = userId).follow.all()
+    user = TblBriefUser.objects.get(id = userId)
+
+    followers = user.follow.all()
+    followers.add(user)
     for follower in followers:
-        comments = TblTrend.objects.filter(createUser_id__range = follower.id)[pageIndex*10:(pageIndex+1)*10]
+        comments = TblTrend.objects.filter(createUser_id__range = follower.id).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         try:
             for comment in comments:
                 response_comment = response_comments.add()
