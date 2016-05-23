@@ -242,8 +242,8 @@ def commentTrend(request):
 
         if trendService.createComment(request_params.trendId,
                                       request_common.userid,
-                                      request_params.toComment,
-                                      request_params.toUser,
+                                      request_params.toCommentId,
+                                      request_params.toUserId,
                                       request_params.content,
                                       request_params.gymId):
             return HttpResponse(response_pro.SerializeToString())

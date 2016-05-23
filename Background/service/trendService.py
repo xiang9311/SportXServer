@@ -117,7 +117,7 @@ def getTrendComment(trendId , pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.comments
-    comments = TblTrendComment.objects.filter(trend_id = trendId).order_by('commentTime')[pageIndex*10:(pageIndex+1)*10]
+    comments = TblTrendComment.objects.filter(trend_id = trendId).order_by('id')[pageIndex*10:(pageIndex+1)*10]
     try:
         for comment in comments:
             response_comment = response_comments.add()
