@@ -76,9 +76,9 @@ class TblTrendComment(models.Model):
     trend = models.ForeignKey(TblTrend)
     comment = models.CharField(max_length = 300)
     createUser = models.ForeignKey(TblBriefUser)
-    toUserId = models.IntegerField()
-    toCommentId = models.IntegerField()
-    gym = models.ForeignKey(TblBriefGym)
+    toUserId = models.IntegerField(null=True)
+    toCommentId = models.IntegerField(null=True)
+    gym = models.ForeignKey(TblBriefGym,  null=True)
     commentTime = models.DateTimeField()
 
 """
