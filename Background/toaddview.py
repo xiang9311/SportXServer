@@ -163,6 +163,7 @@ def getMyXMoney(request):
         initCommonErrorResponse(cmdId, 103, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
+#10009
 def getOnesUserFollow(request):
     cmdId = 10009
     request_pro = pilot_pb2.Request10009()
@@ -188,10 +189,10 @@ def getOnesUserFollow(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if request_params.userId:
-            if  userService.getOnesUserFollow(request_params.pageIndex, request_params.userId,  response_data):
+            if  userService.getOnesUserFollow(request_params.userId,  response_data):
                 log.info(cmdId+request_params.userId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
-        elif userService.getOnesUserFollow(request_params.pageIndex, request_common.userid, response_data):
+        elif userService.getOnesUserFollow(request_common.userid, response_data):
                 log.info(cmdId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         else :
@@ -229,10 +230,10 @@ def getOnesUserFollowers(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if request_params.userId:
-            if  userService.getOnesUserFollowers(request_params.pageIndex, request_params.userId,  response_data):
+            if  userService.getOnesUserFollowers( request_params.userId,  response_data):
                 log.info(cmdId+request_params.userId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
-        elif userService.getOnesUserFollowers(request_params.pageIndex, request_common.userid, response_data):
+        elif userService.getOnesUserFollowers(request_common.userid, response_data):
                 log.info(cmdId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         else :
@@ -244,4 +245,42 @@ def getOnesUserFollowers(request):
         return HttpResponse(response_pro.SerializeToString())
 
 
-#10010
+#10012
+def getUserDetail(request):
+    cmdId = 10012
+    request_pro = pilot_pb2.Request10010()
+    response_pro = pilot_pb2.Response10010()
+    try:
+        request_pro.MergeFromString(request.read())
+    except Exception as error:
+        #如果读取异常直接返回一个error
+        log.error('comunications failed')
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+    log.info("搜索:数据解析成功" + str(request_params))
+
+    #构造返回
+
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+        if request_params.userId:
+            if  userService.getUserDetail(request_params.userId,  response_data):
+                log.info(cmdId+request_params.userId+"成功")
+                return HttpResponse(response_pro.SerializeToString())
+        elif userService.getUserDetail(request_common.userid, response_data):
+                log.info(cmdId+"成功")
+                return HttpResponse(response_pro.SerializeToString())
+        else :
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 103, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())

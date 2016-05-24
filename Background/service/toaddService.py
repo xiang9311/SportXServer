@@ -86,7 +86,7 @@ def getMyXMoney(userId , responseData):
 
 
 #1009
-def getOnesUserFollow(pageIndex, userId, responseData):
+def getOnesUserFollow(userId, responseData):
     try :
         followers = TblBriefUser.objects.get(id = userId).follow.all()
     except Exception as e:
@@ -104,7 +104,7 @@ def getOnesUserFollow(pageIndex, userId, responseData):
 
 
 #10010
-def getOnesUserFollowers(pageIndex, userId, responseData):
+def getOnesUserFollowers(userId, responseData):
     #反查只有两个人，好难检测，但是方法是对的
     try :
         followers = TblBriefUser.objects.get(id = userId).tblbriefuser_set.all()
@@ -120,3 +120,21 @@ def getOnesUserFollowers(pageIndex, userId, responseData):
         user.userAvatar = follower.userAvatar
 
     return True
+
+
+#10012
+
+def getUserDetail(userId, responseData):
+    try :
+        user = TblBriefUser.objects.get(id = userId)
+    except Exception as e:
+        log.error(str(e))
+        return False
+
+    response_user = responseData.detailUsers
+    response_user.userId = user.id
+    response_user.userName = user.userName
+    response_user.userAvatar = user.userAvatar
+    response_user.sex = user.userSex
+    response_user.sign = user.userSign
+    response_user.trend = #
