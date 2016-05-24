@@ -144,20 +144,31 @@ def getTrendComment(trendId , pageIndex , responseData):
 
 
 def likeTrend(trendId, likeTrend, userId):
-    tblLikeTrend = TblLikeTrend()
-    tblLikeTrend.createTime = timeUtil.getDatabaseTimeKeyOutOfDate()
-    tblTrend = TblTrend.objects.get(id = trendId)
-    tblUser = TblBriefUser.objects.get(id = userId)
-    tblLikeTrend.createUser = tblUser#
-    tblLikeTrend.trend = tblTrend
-    try:
-        tblLikeTrend.save()
-        addTrendLikeCount(tblTrend)
-    except Exception as e:
-        log.error(str(e))
-        return False
-    return True
-
+    if likeTrend:
+        tblLikeTrend = TblLikeTrend()
+        tblLikeTrend.createTime = timeUtil.getDatabaseTimeNow()
+        tblTrend = TblTrend.objects.get(id = trendId)
+        tblUser = TblBriefUser.objects.get(id = userId)
+        tblLikeTrend.likeUser = tblUser#
+        tblLikeTrend.trend = tblTrend
+        try:
+            tblLikeTrend.save()
+            addTrendLikeCount(tblTrend)
+        except Exception as e:
+            log.error(str(e))
+            return False
+        return True
+    else:
+        tblTrend = TblTrend.objects.get(id = trendId)
+        tblUser = TblBriefUser.objects.get(id = userId)
+        tblLikeTrend = TblLikeTrend.objects.filter(likeUser=tblUser, trend=tblTrend)
+        try:
+            tblLikeTrend.delete()
+            menusTrendLikeCount(tblTrend)
+        except Exception as e:
+            log.error(str(e))
+            return False
+        return True
 
 def createComment(trendId,createUser,toComment,toUser,content,gymId):
     #评论表
