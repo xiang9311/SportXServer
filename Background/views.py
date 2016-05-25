@@ -571,6 +571,7 @@ def getUserDetail(request):
     request_params = request_pro.params
 
     #构造返回
+    log.info(str(request_params))
 
     try:
         response_common = response_pro.common
