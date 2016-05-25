@@ -182,8 +182,6 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     tblTrendComment.createUser = tblCreateUser
     if toUser:
         tblTrendComment.toUserId = toUser
-    else:
-        tblTrendComment.toUserId = tblTrend.createUser.id
     if toComment:
         tblTrendComment.toCommentId = toComment
     if gymId:
