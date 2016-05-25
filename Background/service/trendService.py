@@ -172,10 +172,13 @@ def likeTrend(trendId, likeTrend, userId):
 
 def createComment(trendId,createUser,toComment,toUser,content,gymId):
     #评论表
+    tblTrend = TblTrend.objects.get(id = trendId)
+    tblCreateUser = TblBriefUser.objects.get(id =createUser)
+
     tblTrendComment = TblTrendComment()
-    tblTrendComment.trend = TblTrend.objects.get(id = trendId)
+    tblTrendComment.trend = tblTrend
     tblTrendComment.comment = content
-    tblTrendComment.createUser = TblBriefUser.objects.get(id =createUser)
+    tblTrendComment.createUser = tblCreateUser
     if toUser:
         tblTrendComment.toUserId = toUser
     if toComment:
@@ -186,9 +189,12 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     #消息表
     tblTrendCommentMassage = TblCommentMessage()
     tblTrendCommentMassage.content = content
-    tblTrendCommentMassage.toTrend = TblTrend.objects.get(id = trendId)
-    tblTrendCommentMassage.toUserId = toUser
-    tblTrendCommentMassage.createUser = TblBriefUser.objects.get(id =createUser)
+    tblTrendCommentMassage.toTrend = tblTrend
+    if toUser:
+        tblTrendCommentMassage.toUserId = toUser
+    else:
+        tblTrendCommentMassage.toUserId = tblTrend.createUser.id
+    tblTrendCommentMassage.createUser = tblCreateUser
     tblTrendCommentMassage.createTime = timeUtil.getDatabaseTimeNow()
     try:
         tblTrendComment.save()
