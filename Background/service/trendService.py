@@ -183,7 +183,7 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     if toUser:
         tblTrendComment.toUserId = toUser
     else:
-        tblTrendComment.toUserId = createUser
+        tblTrendComment.toUserId = tblTrend.createUser.id
     if toComment:
         tblTrendComment.toCommentId = toComment
     if gymId:
@@ -206,8 +206,11 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         tblTrendComment.save()
         tblTrendCommentMassage.save()
         addTrendCommentCount(tblTrendComment.trend)
-        if toUser:
-            pushToUser(toUser,tblTrendComment.createUser.userName,tblTrend.id)
+        if toUser!=createUser:
+            if toUser:
+                pushToUser(toUser,tblTrendComment.createUser.userName,tblTrend.id)
+            else:
+                pushToUser(tblTrend.createUser.id,tblTrendComment.createUser.userName,tblTrend.id)
     except Exception as e:
         log.error(str(e))
         return False
