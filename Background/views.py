@@ -256,6 +256,7 @@ def updateMyInfo(request):
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
+    log.info(str(request_pro))
 
     request_common = request_pro.common
     request_params = request_pro.params

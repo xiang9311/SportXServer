@@ -116,6 +116,8 @@ def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, respon
         tblBriefUser.userAvatar = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
     if sex:
         tblBriefUser.userSex = sex
+    else:
+        tblBriefUser.userSex = 0
     if sign:
         tblBriefUser.userSign = sign
     if phone:
