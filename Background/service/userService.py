@@ -156,16 +156,12 @@ def getOneTrend(pageIndex, userId, operationUser ,responseData):
 def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_maxCountPerPage ):
     maxCountPerPage = 10
     responseData_maxCountPerPage = maxCountPerPage
-    response_trends = responseData_trends
-
 
     try:
-        followers = TblBriefUser.objects.get(id = userId).follow.all()
-        #用in,shell中测试完成
-        trends = TblTrend.objects.filter(createUser__in = followers).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
+        trends = TblTrend.objects.filter(createUse_id=userId).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         for trend in trends:
-            response_trend = response_trends.add()
-            briefUser = response_trends.briefUser
+            response_trend = responseData_trends.add()
+            briefUser = response_trend.briefUser
             response_trend.createTime = trend.createTime
             response_trend.gymId = trend.gym.id
             response_trend.gymName = trend.gym.gymName
@@ -180,7 +176,6 @@ def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_
                 response_trend.isLiked = True
             else:
                 response_trend.isLiked = False
-
 
     except Exception as e:
         log.error(str(e))
