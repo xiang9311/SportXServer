@@ -158,13 +158,17 @@ def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_
     responseData_maxCountPerPage = maxCountPerPage
 
     try:
-        trends = TblTrend.objects.filter(createUse_id=userId).order_by('-createTime')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
+        trends = TblTrend.objects.filter(createUser_id=userId).order_by('-createTime')[pageIndex*maxCountPerPage : (pageIndex+1)*maxCountPerPage]
+        log.info("trends length %d userId :%d pageIndex: %d" % (len(trends), userId, pageIndex))
         for trend in trends:
             response_trend = responseData_trends.add()
             briefUser = response_trend.briefUser
-            response_trend.createTime = trend.createTime
-            response_trend.gymId = trend.gym.id
-            response_trend.gymName = trend.gym.gymName
+            response_trend.createTime = timeUtil.dataBaseTime_toTimestemp(trend.createTime)
+            try:
+                response_trend.gymId = trend.gym.id
+                response_trend.gymName = trend.gym.gymName
+            except Exception as e:
+                pass
             response_trend.content = trend.content
             response_trend.likeCount = trend.likeCount
             response_trend.commentCount = trend.commentCount
@@ -172,9 +176,12 @@ def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_
             briefUser.userId = trend.createUser.id
             briefUser.userName = trend.createUser.userName
             briefUser.userAvatar = trend.createUser.userAvatar
-            if TblLikeTrend.objects.get(trend_id= trend.id ,likeUser_id = operationUser):
-                response_trend.isLiked = True
-            else:
+            try:
+                if TblLikeTrend.objects.get(trend_id= trend.id ,likeUser_id = operationUser):
+                    response_trend.isLiked = True
+                else:
+                    response_trend.isLiked = False
+            except Exception as e:
                 response_trend.isLiked = False
 
     except Exception as e:
@@ -283,7 +290,7 @@ def getUserDetail(userId, operateUser ,responseData):
     except Exception as e:
         #
         pass
-    getTrend(1, userId, operateUser ,response_user.trends,response_user.trendMaxCountPerPage)#调用？
+    getTrend(0, userId, operateUser ,response_user.trends,response_user.trendMaxCountPerPage)#调用？
     response_user.trendMaxCountPerPage = 10  # 你之前那样调用不行呀
     if TblBriefUser.objects.get(id = operateUser).follow.get(id = userId):#这句话试试哈
         response_user.isFollowed = True

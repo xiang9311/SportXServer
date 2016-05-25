@@ -579,8 +579,6 @@ def getUserDetail(request):
     request_common = request_pro.common
     request_params = request_pro.params
 
-    log.info("搜索:数据解析成功" + str(request_params))
-
     #构造返回
 
     try:
@@ -592,8 +590,6 @@ def getUserDetail(request):
                 log.info("%d %d %s" % (cmdId, request_params.userId, "成功"))
                 return HttpResponse(response_pro.SerializeToString())
         elif userService.getUserDetail(request_common.userid,request_common.userid, response_data):
-        # elif userService.getUserDetail(7,7, response_data):
-                log.info(str(response_data))
                 return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
