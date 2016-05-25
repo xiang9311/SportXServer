@@ -301,10 +301,14 @@ def getUserDetail(userId, operateUser ,responseData):
         pass
     getTrend(0, userId, operateUser ,response_user.trends,response_user.trendMaxCountPerPage)#调用？
     response_user.trendMaxCountPerPage = 10  # 你之前那样调用不行呀
-    if TblBriefUser.objects.get(id = operateUser).follow.get(id = userId):#这句话试试哈
-        response_user.isFollowed = True
-    else:
+    try:
+        if TblBriefUser.objects.get(id = operateUser).follow.get(id = userId):#这句话试试哈
+            response_user.isFollowed = True
+        else:
+            response_user.isFollowed = False
+    except Exception as e:
         response_user.isFollowed = False
+        pass
     response_user.guanzhuCount = user.follow.count()
     response_user.fensiCount = user.tblbriefuser_set.count()
     response_user.trendCount = TblTrend.objects.filter(createUser_id= userId).count()
