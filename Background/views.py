@@ -358,10 +358,8 @@ def getOneTrend(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if request_params.userId:
             if  userService.getOneTrend(request_params.pageIndex, request_params.userId, request_common.userid, response_data):
-                log.info(cmdId+request_params.userId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         elif userService.getOneTrend(request_params.pageIndex, request_common.userid, request_common.userid, response_data):
-                log.info(cmdId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -397,7 +395,6 @@ def getMyCommentMessage(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if  userService.getMyCommentMessage(request_params.pageIndex,request_common.userid,response_data):
-            log.info(cmdId+request_params.userId+"成功")
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -433,7 +430,6 @@ def deleteCommentMassage(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if  userService.deleteCommentMassage(request_params.cleanAll,request_params.messageids,request_common.userid):
-            log.info(cmdId+request_params.userId+"成功")
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -469,7 +465,6 @@ def getMyXMoney(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if  userService.getMyXMoney(request_common.userid,response_data):
-            log.info(cmdId+request_params.userId+"成功")
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -507,10 +502,8 @@ def getOnesUserFollow(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if request_params.userId:
             if  userService.getOnesUserFollow(request_params.userId,  response_data):
-                log.info(cmdId+request_params.userId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         elif userService.getOnesUserFollow(request_common.userid, response_data):
-                log.info(cmdId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
@@ -548,10 +541,8 @@ def getOnesUserFollowers(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if request_params.userId:
             if  userService.getOnesUserFollowers( request_params.userId,  response_data):
-                log.info(cmdId+request_params.userId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         elif userService.getOnesUserFollowers(request_common.userid, response_data):
-                log.info(cmdId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
