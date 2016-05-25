@@ -278,19 +278,24 @@ def getUserDetail(userId, operateUser ,responseData):
         log.error(str(e))
         return False
 
-    response_user = responseData.detailUsers
+    response_user = responseData.detailUser
     response_user.userId = user.id
     response_user.userName = user.userName
     response_user.userAvatar = user.userAvatar
     response_user.sex = user.userSex
-    response_user.sign = user.userSign
-    response_user.trend = getTrend(1, userId, operateUser ,response_user.trend,response_user.trendMaxCountPerPage)#调用？
+    try:
+        response_user.sign = user.userSign
+    except Exception as e:
+        #
+        pass
+    response_user.trend = getTrend(1, userId, operateUser ,response_user.trends,response_user.trendMaxCountPerPage)#调用？
+    response_user.trendMaxCountPerPage = 10  # 你之前那样调用不行呀
     if TblBriefUser.objects.get(id = operateUser).follow.get(id = userId):#这句话试试哈
         response_user.isFollowed = True
     else:
         response_user.isFollowed = False
-    response_user.guanzhuCount = TblBriefUser.objects.get(id = userId).follow.count()
-    response_user.fensiCount = TblBriefUser.objects.get(id = userId).tblbriefuser_set.count()
+    response_user.guanzhuCount = user.follow.count()
+    response_user.fensiCount = user.tblbriefuser_set.count()
     response_user.trendCount = TblTrend.objects.filter(createUser_id= userId).count()
 
     return True
