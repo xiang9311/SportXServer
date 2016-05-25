@@ -172,6 +172,13 @@ def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_
             response_trend.content = trend.content
             response_trend.likeCount = trend.likeCount
             response_trend.commentCount = trend.commentCount
+
+            #images
+            images = response_trend.imgs
+            tblImages = TblTrendImage.objects.filter(trend=trend).order_by('priority')
+            for tblImage in tblImages:
+                images.append(tblImage.url)
+
             #createUser
             briefUser.userId = trend.createUser.id
             briefUser.userName = trend.createUser.userName
