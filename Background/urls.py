@@ -15,6 +15,13 @@ urlpatterns = [
     url(r'^pilot/updateMyInfo$', views.updateMyInfo),
     url(r'^pilot/login$',views.login),
     url(r'^pilot/guanzhuUser$',views.guanzhuUser),
+    url(r'^pilot/getMyTrend$',views.getOneTrend),
+    url(r'^pilot/getMyCommentMessage$',views.getMyCommentMessage),
+    url(r'^pilot/deleteCommentMessage$',views.deleteCommentMassage),
+    url(r'^pilot/getMyXMoney$',views.getMyXMoney),
+    url(r'^pilot/getUserGuanzhu$',views.getOnesUserFollow),
+    url(r'^pilot/getUserFensi$',views.getOnesUserFollowers),
+    url(r'^pilot/getUserDetail$',views.getUserDetail),
 
     # search
     url(r'^pilot/searchUser$',views.searchUser),
