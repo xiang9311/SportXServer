@@ -565,8 +565,8 @@ def getOnesUserFollowers(request):
 @csrf_exempt
 def getUserDetail(request):
     cmdId = 10012
-    request_pro = pilot_pb2.Request10010()
-    response_pro = pilot_pb2.Response10010()
+    request_pro = pilot_pb2.Request10012()
+    response_pro = pilot_pb2.Response10012()
     try:
         request_pro.MergeFromString(request.read())
     except Exception as error:
