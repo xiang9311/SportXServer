@@ -288,7 +288,7 @@ def getUserDetail(userId, operateUser ,responseData):
     except Exception as e:
         #
         pass
-    response_user.trend = getTrend(1, userId, operateUser ,response_user.trends,response_user.trendMaxCountPerPage)#调用？
+    getTrend(1, userId, operateUser ,response_user.trends,response_user.trendMaxCountPerPage)#调用？
     response_user.trendMaxCountPerPage = 10  # 你之前那样调用不行呀
     if TblBriefUser.objects.get(id = operateUser).follow.get(id = userId):#这句话试试哈
         response_user.isFollowed = True
