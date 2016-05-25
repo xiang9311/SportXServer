@@ -1,5 +1,6 @@
 from Background.models import TblBriefUser , TblTrend , TblBriefGym ,TblTrendImage ,TblLikeTrend ,TblTrendComment,TblCommentMessage
 from SportXServer import qiniuUtil, timeUtil ,log
+from Background.dependency.jpushService import pushToUser
 
 
 def createTrend(content , userId ,gymId, bucketName , imageKeys):
@@ -194,6 +195,7 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         tblTrendComment.save()
         tblTrendCommentMassage.save()
         addTrendCommentCount(tblTrendComment.trend)
+        pushToUser(toUser,tblTrendComment.createUser.userName)
     except Exception as e:
         log.error(str(e))
         return False
