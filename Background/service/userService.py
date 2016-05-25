@@ -164,6 +164,7 @@ def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_
         for trend in trends:
             response_trend = responseData_trends.add()
             briefUser = response_trend.briefUser
+            response_trend.id = trend.id
             response_trend.createTime = timeUtil.dataBaseTime_toTimestemp(trend.createTime)
             try:
                 response_trend.gymId = trend.gym.id
