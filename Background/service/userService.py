@@ -149,7 +149,8 @@ def guanzhuUser(fromUserId, toUserId, follow):
     return True
 
 def getOneTrend(pageIndex, userId, operationUser ,responseData):
-    if getTrend(pageIndex, userId, operationUser ,responseData.trends,responseData.maxCountPerpage ):
+    if getTrend(pageIndex, userId, operationUser ,responseData.trends,responseData.maxCountPerPage ):
+        responseData.maxCountPerPage = 10
         return True
     return False
 
