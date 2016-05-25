@@ -188,7 +188,8 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     tblTrendComment.commentTime = timeUtil.getDatabaseTimeNow()
     #消息表
     tblTrendCommentMassage = TblCommentMessage()
-    tblTrendCommentMassage.content = content
+    if toUser:
+    else:
     tblTrendCommentMassage.toTrend = tblTrend
     if toUser:
         tblTrendCommentMassage.toUserId = toUser
