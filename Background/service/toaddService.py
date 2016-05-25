@@ -47,7 +47,7 @@ def getMyCommentMessage(pageIndex , userId ,  responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.commentMessages
     try:
-        Comments = TblCommentMessage.objects.filter(createUser_id = userId).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
+        Comments = TblCommentMessage.objects.filter(toUser_id = userId).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
         for comment in Comments:
             response_comment = response_comments.add()
             response_comment.messageId = comment.id
@@ -69,7 +69,7 @@ def getMyCommentMessage(pageIndex , userId ,  responseData):
 def deleteCommentMassage(cleanAll,messageIds, userId):
     try :
         if cleanAll:
-            TblCommentMessage.objects.filter(toUser_id = userId).delete()
+            TblCommentMessage.objects.filter(toUserId = userId).delete()
         else :
             TblCommentMessage.objects.filter(id__in = messageIds,toUserId=userId).delete()
 
@@ -149,3 +149,15 @@ def getUserDetail(userId, operateUser ,responseData):
     response_user.guanzhuCount = TblBriefUser.objects.get(id = userId).follow.count()
     response_user.fensiCount = TblBriefUser.objects.get(id = userId).tblbriefuser_set.count()
     response_user.trendCount = TblTrend.objects.filter(createUser_id= userId).count()
+
+
+def getTrendBriefMessage(userId, responseData):
+    try :
+        tm = TblCommentMessage.objects.filter(toUserId = userId).order_by('-createTime')
+        responseData.lastAvatar =  tm[0].createUser.userAvatar
+        responseData.count  = tm.count()
+        return True
+
+    except Exception as e:
+        log.error(str(e))
+        return False
