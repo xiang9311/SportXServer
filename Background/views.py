@@ -351,7 +351,6 @@ def getOneTrend(request):
     log.info("搜索:数据解析成功" + str(request_params))
 
     #构造返回
-
     try:
         response_common = response_pro.common
         response_data = response_pro.data
@@ -389,7 +388,6 @@ def getMyCommentMessage(request):
     log.info("搜索:数据解析成功" + str(request_params))
 
     #构造返回
-
     try:
         response_common = response_pro.common
         response_data = response_pro.data
@@ -424,12 +422,12 @@ def deleteCommentMassage(request):
     log.info("搜索:数据解析成功" + str(request_params))
 
     #构造返回
-
     try:
         response_common = response_pro.common
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        if  userService.deleteCommentMassage(request_params.cleanAll,request_params.messageids,request_common.userid):
+
+        if  userService.deleteCommentMassage(request_params.clearAll,request_params.messageIds,request_common.userid):
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)

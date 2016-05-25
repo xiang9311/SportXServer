@@ -200,36 +200,43 @@ def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_
 
 #10006
 def getMyCommentMessage(pageIndex , userId ,  responseData):
-
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.commentMessages
     try:
         Comments = TblCommentMessage.objects.filter(createUser_id = userId).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
-        for comment in Comments:
+    except Exception as e:
+        log.error(str(e))
+        return False
+    for comment in Comments:
             response_comment = response_comments.add()
             response_comment.messageId = comment.id
-            response_comment.messageContent = comment.content #消息的内容
+            try :
+                response_comment.messageContent = comment.content #消息的内容
+            except:
+
+                pass
             #这句话不懂啊
             if comment.createUser.userAvatar != "sportx": ## 消息所使用的头像 如果是"sportx"则是官方头像
                 response_comment.avatar = comment.createUser.userAvatar
             else:
                 response_comment.avatar = "sportx"
-            response_comment.createTime = comment.createTime #创建时间 毫秒时间戳
+            response_comment.createTime = timeUtil.dataBaseTime_toTimestemp(comment.createTime) #创建时间 毫秒时间戳
             response_comment.trendId = comment.toTrend.id
 
-    except Exception as e:
-        log.error(str(e))
-        return False
     return True
 
 #10007
 def deleteCommentMassage(cleanAll,messageIds, userId):
+    log.info(userId)
     try :
         if cleanAll:
-            TblCommentMessage.objects.filter(toUser_id = userId).delete()
+            TblCommentMessage.objects.filter(toUserId = userId).delete()
         else :
-            TblCommentMessage.objects.filter(id__in = messageIds,toUserId=userId).delete()
+            if TblCommentMessage.objects.filter(id__in = messageIds,toUserId=userId).delete():
+                return True
+            else:
+                return False
 
     except Exception as e:
         log.error(str(e))
