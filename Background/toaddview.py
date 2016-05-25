@@ -5,5 +5,3 @@ from .dependency import pilot_pb2
 from .service import  toaddService as userService
 from .views import initCommonErrorResponse, initCommonResponse
 from SportXServer import qiniuUtil, timeUtil ,log
-
-
