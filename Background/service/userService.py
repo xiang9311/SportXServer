@@ -205,7 +205,7 @@ def getMyCommentMessage(pageIndex , userId ,  responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.commentMessages
     try:
-        Comments = TblCommentMessage.objects.filter(createUser_id = userId).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
+        Comments = TblCommentMessage.objects.filter(toUserId = userId).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
     except Exception as e:
         log.error(str(e))
         return False
