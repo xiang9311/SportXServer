@@ -204,7 +204,7 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         tblTrendComment.save()
         tblTrendCommentMassage.save()
         addTrendCommentCount(tblTrendComment.trend)
-        pushToUser(toUser,tblTrendComment.createUser.userName)
+        pushToUser(toUser,tblTrendComment.createUser.userName,tblTrend.id)
     except Exception as e:
         log.error(str(e))
         return False
