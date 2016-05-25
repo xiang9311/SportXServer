@@ -2,9 +2,13 @@ from Background.models import TblBriefUser,TblTrend ,TblLikeTrend ,TblCommentMes
 from SportXServer import qiniuUtil, timeUtil ,log
 #10005
 def getOneTrend(pageIndex, userId, operationUser ,responseData):
+    if getTrend(pageIndex, userId, operationUser ,responseData.trends,responseData.maxCountPerpage ):
+        return True
+    return False
+def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_maxCountPerPage ):
     maxCountPerPage = 10
-    responseData.maxCountPerPage = maxCountPerPage
-    response_trends = responseData.trends
+    responseData_maxCountPerPage = maxCountPerPage
+    response_trends = responseData_trends
 
 
     try:
@@ -124,7 +128,7 @@ def getOnesUserFollowers(userId, responseData):
 
 #10012
 
-def getUserDetail(userId, responseData):
+def getUserDetail(userId, operateUser ,responseData):
     try :
         user = TblBriefUser.objects.get(id = userId)
     except Exception as e:
@@ -137,4 +141,11 @@ def getUserDetail(userId, responseData):
     response_user.userAvatar = user.userAvatar
     response_user.sex = user.userSex
     response_user.sign = user.userSign
-    response_user.trend = #
+    response_user.trend = getTrend(1, userId, operateUser ,response_user.trend,response_user.trendMaxCountPerPage)#调用？
+    if TblBriefUser.objects.get(id = operateUser).follow.get(id = userId):#这句话试试哈
+        response_user.isFollowed = True
+    else:
+        response_user.isFollowed = False
+    response_user.guanzhuCount = TblBriefUser.objects.get(id = userId).follow.count()
+    response_user.fensiCount = TblBriefUser.objects.get(id = userId).tblbriefuser_set.count()
+    response_user.trendCount = TblTrend.objects.filter(createUser_id= userId).count()

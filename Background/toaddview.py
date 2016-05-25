@@ -271,10 +271,10 @@ def getUserDetail(request):
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         if request_params.userId:
-            if  userService.getUserDetail(request_params.userId,  response_data):
+            if  userService.getUserDetail(request_params.userId, request_common.userid, response_data):
                 log.info(cmdId+request_params.userId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
-        elif userService.getUserDetail(request_common.userid, response_data):
+        elif userService.getUserDetail(request_common.userid,request_common.userid, response_data):
                 log.info(cmdId+"成功")
                 return HttpResponse(response_pro.SerializeToString())
         else :
