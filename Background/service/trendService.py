@@ -189,7 +189,9 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
     #消息表
     tblTrendCommentMassage = TblCommentMessage()
     if toUser:
+        tblTrendCommentMassage.content = tblCreateUser.userName + " 评论了你的动态：" + content
     else:
+        tblTrendCommentMassage.content = tblCreateUser.userName + " 评论了你的回复：" + content
     tblTrendCommentMassage.toTrend = tblTrend
     if toUser:
         tblTrendCommentMassage.toUserId = toUser
