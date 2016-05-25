@@ -151,14 +151,13 @@ def guanzhuUser(fromUserId, toUserId, follow):
     return True
 
 def getOneTrend(pageIndex, userId, operationUser ,responseData):
-    if getTrend(pageIndex, userId, operationUser ,responseData.trends,responseData.maxCountPerPage ):
+    if getTrend(pageIndex, userId, operationUser ,responseData.trends):
         responseData.maxCountPerPage = 10
         return True
     return False
 
-def getTrend(pageIndex, userId, operationUser ,responseData_trends,responseData_maxCountPerPage ):
+def getTrend(pageIndex, userId, operationUser ,responseData_trends):
     maxCountPerPage = 10
-    responseData_maxCountPerPage = maxCountPerPage
 
     try:
         trends = TblTrend.objects.filter(createUser_id=userId).order_by('-createTime')[pageIndex*maxCountPerPage : (pageIndex+1)*maxCountPerPage]
@@ -308,8 +307,8 @@ def getUserDetail(userId, operateUser ,responseData):
     except Exception as e:
         #
         pass
-    getTrend(0, userId, operateUser ,response_user.trends,response_user.trendMaxCountPerPage)#调用？
-    response_user.trendMaxCountPerPage = 10  # 你之前那样调用不行呀
+    getTrend(0, userId, operateUser ,response_user.trends)#调用？
+    response_user.trendMaxCountPerPage = 10  # 这个傻逼参数不传
     try:
         if TblBriefUser.objects.get(id = operateUser).follow.get(id = userId):#这句话试试哈
             response_user.isFollowed = True
