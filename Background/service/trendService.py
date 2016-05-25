@@ -204,7 +204,7 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         tblTrendComment.save()
         tblTrendCommentMassage.save()
         addTrendCommentCount(tblTrendComment.trend)
-        if toUser!=createUser:
+        if toUser!=createUser and createUser!=tblTrend.createUser.id:#推送条件：不是给自己评论的评论，不是给自己动态的评论
             if toUser:
                 pushToUser(toUser,tblTrendComment.createUser.userName,tblTrend.id)
             else:
