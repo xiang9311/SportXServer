@@ -27,6 +27,7 @@ def register(phone, username, avatarKey, bucketName, password, sex, response_dat
     tblBriefUser.userSex = sex
     tblBriefUser.xMoney = 100
     tblBriefUser.signTime = timeUtil.getDatabaseTimeKeyOutOfDate()
+    tblBriefUser.hadReadMessage = 0
     try :
         tblBriefUser.save()
     except Exception as e:
@@ -205,7 +206,8 @@ def getMyCommentMessage(pageIndex , userId ,  responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.commentMessages
     try:
-        Comments = TblCommentMessage.objects.filter(toUserId = userId).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
+        hadRead = TblBriefUser.objects.get(id = userId).hadReadMessage
+        Comments = TblCommentMessage.objects.filter(toUserId = userId,id__exact = hadRead).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
     except Exception as e:
         log.error(str(e))
         return False

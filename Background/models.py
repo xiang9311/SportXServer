@@ -28,6 +28,7 @@ class TblBriefUser(models.Model):
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
     signTime = models.DateTimeField()
+    hadReadMessage = models.IntegerField()
 
 class TblUserKey(models.Model):
     user = models.ForeignKey(TblBriefUser)
