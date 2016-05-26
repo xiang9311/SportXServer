@@ -1,4 +1,4 @@
-from Background.models import TblBriefUser,TblTrend ,TblLikeTrend ,TblCommentMessage
+from Background.models import TblBriefUser,TblTrend ,TblLikeTrend ,TblCommentMessage,TblBriefGym
 from SportXServer import qiniuUtil, timeUtil ,log
 #10017
 def getTrendBriefMessage(userId ,  responseData):

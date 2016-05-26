@@ -159,7 +159,7 @@ def getTrendComment(trendId , pageIndex , responseData):
 
 def likeTrend(trendId, likeTrend, userId):
     if likeTrend:
-        if TblLikeTrend.objects.get(likeUser_id = userId , trend_id=trendId):
+        if TblLikeTrend.objects.filter(likeUser_id = userId , trend_id=trendId):
             return False
         tblLikeTrend = TblLikeTrend()
         tblLikeTrend.createTime = timeUtil.getDatabaseTimeNow()
@@ -175,7 +175,7 @@ def likeTrend(trendId, likeTrend, userId):
             return False
         return True
     else:
-        if not TblLikeTrend.objects.get(likeUser_id = userId , trend_id=trendId):
+        if not TblLikeTrend.objects.filter(likeUser_id = userId , trend_id=trendId):
             return False
         tblTrend = TblTrend.objects.get(id = trendId)
         tblUser = TblBriefUser.objects.get(id = userId)
