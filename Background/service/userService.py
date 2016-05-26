@@ -206,18 +206,20 @@ def getMyCommentMessage(pageIndex , userId ,  responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_comments = responseData.commentMessages
     try:
-        Comments = TblCommentMessage.objects.filter(toUserId = userId).order_by('-createTime')[pageIndex*10:(pageIndex+1)*10]
+        Comments = TblCommentMessage.objects.filter(toUserId = userId).order_by('-id')[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
 
     except Exception as e:
         log.error(str(e))
         return False
 
     try:
-        tblUser = TblBriefUser.objects.get(id=userId)
-        tblUser.hadReadMessage = Comments.get(0).id
-        tblUser.save()
+        for comment in Comments:
+            tblUser = TblBriefUser.objects.get(id=userId)
+            tblUser.hadReadMessage = comment.id
+            tblUser.save()
+            break
     except Exception as e:
-        log.info("保存已读消息id error：%s" % str(e))
+        log.info("id error：%s" % str(e))
 
 
     for comment in Comments:
