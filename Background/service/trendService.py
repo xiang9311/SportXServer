@@ -76,7 +76,7 @@ def getMyFollowTrends(userId,pageIndex,responseData):
                 images.append(tblImage.url)
             try:
                 # 查询不到会报异常
-                if  TblLikeTrend.objects.get(trend=trend, likeUser=user):
+                if  TblLikeTrend.objects.filter(trend=trend, likeUser=user):
                     response_trend.isLiked = True
                 else :
                     response_trend.isLiked = False
@@ -113,7 +113,7 @@ def getTrend(trendId ,responseDate, userId):
     trend_user.userName = trend.createUser.userName
     trend_user.userAvatar = trend.createUser.userAvatar
     try:
-        if TblLikeTrend.objects.get(trend=trend, likeUser_id=userId):
+        if TblLikeTrend.objects.filter(trend=trend, likeUser_id=userId):
             response_trend.isLiked = True
         else:
             response_trend.isLiked = False
