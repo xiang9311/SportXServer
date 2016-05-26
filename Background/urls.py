@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^pilot/getUserGuanzhu$',views.getOnesUserFollow),
     url(r'^pilot/getUserFensi$',views.getOnesUserFollowers),
     url(r'^pilot/getUserDetail$',views.getUserDetail),
+    url(r'^pilot/getTrendBriefMessage$',views.getTrendBriefMessage),
 
     # search
     url(r'^pilot/searchUser$',views.searchUser),
