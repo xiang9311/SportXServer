@@ -107,7 +107,7 @@ def getTrend(trendId ,responseDate, userId):
     trend_user.userId = trend.createUser.id
     trend_user.userName = trend.createUser.userName
     trend_user.userAvatar = trend.createUser.userAvatar
-    try
+    try:
         if TblLikeTrend.objects.get(trend=trend, likeUser_id=userId):
             response_trend.isLiked = True
         else:
