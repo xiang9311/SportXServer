@@ -10,7 +10,7 @@ def pushToUser(userId,userName,trendid):
     push.audience = jpush.audience(
                 jpush.alias(userId_str)
             )
-    andriod_msg = jpush.android(alert="新消息",title = userName+"评论了你的动态" ,extras = {'trendId':str(trendid)})
+    andriod_msg = jpush.android(alert=userName+"评论了你的动态",title = "新消息" , extras = {'trendId':str(trendid)})
     push.notification = jpush.notification(alert="新消息",android=andriod_msg)
     push.platform = jpush.all_
     print (push.payload)
