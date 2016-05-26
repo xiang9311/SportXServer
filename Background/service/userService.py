@@ -335,3 +335,16 @@ def getUserDetail(userId, operateUser ,responseData):
     response_user.trendCount = TblTrend.objects.filter(createUser_id= userId).count()
 
     return True
+
+def getTrendBriefMessage(userId ,  responseData):
+    try:
+        hadRead = TblBriefUser.objects.get(id = userId).hadReadMessage
+        comments = TblCommentMessage.objects.filter(toUserId=userId , id__gt=hadRead).order_by('-id')
+    except Exception as e:
+        log.error(str(e))
+        return False
+    briefMessage = responseData.trendBriefMessage
+    briefMessage.lastAvatar = TblBriefUser.objects.get(id = comments[0].createUser.id).userAvatar
+    briefMessage.count = comments.count()
+    return True
+
