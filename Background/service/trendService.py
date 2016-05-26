@@ -90,7 +90,7 @@ def getMyFollowTrends(userId,pageIndex,responseData):
 
 def getTrend(trendId ,responseDate, userId):
     trend = TblTrend.objects.get(id = trendId)
-    response_trend = responseDate.trends
+    response_trend = responseDate.trend
     response_trend.id = trendId
     trend_user = response_trend.briefUser
     response_trend.createTime = timeUtil.dataBaseTime_toTimestemp(trend.createTime)

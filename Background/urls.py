@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^trend/getTrendComment$',viewTrend.getTrendComment),
     url(r'^trend/commentTrend$',viewTrend.commentTrend),
     url(r'^trend/likeTrend$',viewTrend.likeTrend),
+    url(r'^trend/getTrendById$',viewTrend.getTrendById),
 
 
 ]
