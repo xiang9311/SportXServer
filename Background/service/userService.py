@@ -217,7 +217,7 @@ def getMyCommentMessage(pageIndex , userId ,  responseData):
         tblUser.hadReadMessage = Comments.get(0).id
         tblUser.save()
     except Exception as e:
-        pass
+        log.info("保存已读消息id error：%s" % str(e))
 
 
     for comment in Comments:

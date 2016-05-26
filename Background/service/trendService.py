@@ -95,8 +95,11 @@ def getTrend(trendId ,responseDate, userId):
     trend_user = response_trend.briefUser
     response_trend.createTime = timeUtil.dataBaseTime_toTimestemp(trend.createTime)
     #gym名字需要查询
-    response_trend.gymId = trend.gym.id
-    response_trend.gymName = trend.gym.gymName
+    try:
+        response_trend.gymId = trend.gym.id
+        response_trend.gymName = trend.gym.gymName
+    except Exception as e:
+        pass
     response_trend.content = trend.content
     response_trend.likeCount = trend.likeCount
     response_trend.commentCount = trend.commentCount
@@ -104,10 +107,15 @@ def getTrend(trendId ,responseDate, userId):
     trend_user.userId = trend.createUser.id
     trend_user.userName = trend.createUser.userName
     trend_user.userAvatar = trend.createUser.userAvatar
-    if TblLikeTrend.objects.get(trend=trend, likeUser_id=userId):
-        response_trend.isLiked = True
-    else:
+    try
+        if TblLikeTrend.objects.get(trend=trend, likeUser_id=userId):
+            response_trend.isLiked = True
+        else:
+            response_trend.isLiked = False
+    except Exception as e:
         response_trend.isLiked = False
+        pass
+    return True
 
 
 def getTrendComment(trendId , pageIndex , responseData):
