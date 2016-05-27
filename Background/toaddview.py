@@ -60,9 +60,9 @@ def searchGym(request):
 # 	}
 # }
 def getBriefUser(request):
-    cmdId = 10017
-    request_pro = pilot_pb2.Request10017()
-    response_pro = pilot_pb2.Response10017()
+    cmdId = 10018
+    request_pro = pilot_pb2.Request10018()
+    response_pro = pilot_pb2.Response10018()
     try:
         request_pro.MergeFromString(request.read())
     except Exception as error:
