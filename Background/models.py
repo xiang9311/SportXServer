@@ -17,12 +17,12 @@ from enum import Enum
 用户表
 """
 class TblBriefUser(models.Model):
-    userName = models.CharField(max_length = 30)
+    userName = models.CharField(max_length = 15)
     userPhone = models.CharField(max_length = 13, unique=True)
     userPW = models.CharField(max_length = 36)
     userAvatar = models.URLField()
     userSex = models.BooleanField()
-    userSign = models.CharField(max_length = 30)
+    userSign = models.CharField(max_length = 50)
     xMoney = models.IntegerField()
     follow = models.ManyToManyField("self", symmetrical=False)        # 这里存的是我关注的人
     latitude = models.FloatField(null=True)
@@ -63,7 +63,7 @@ class TblAllEquipment(models.Model):
 用户动态表
 """
 class TblTrend(models.Model):
-    content  =  models.CharField(max_length = 30)
+    content  =  models.CharField(max_length = 140)
     createUser = models.ForeignKey(TblBriefUser)
     gym = models.ForeignKey(TblBriefGym, null=True)
     likeCount = models.IntegerField()
@@ -75,7 +75,7 @@ class TblTrend(models.Model):
 """
 class TblTrendComment(models.Model):
     trend = models.ForeignKey(TblTrend)
-    comment = models.CharField(max_length = 300)
+    comment = models.CharField(max_length = 100)
     createUser = models.ForeignKey(TblBriefUser)
     toUserId = models.IntegerField(null=True)
     toCommentId = models.IntegerField(null=True)
@@ -121,7 +121,7 @@ class TblEverFollow(models.Model):
 评论消息表
 """
 class TblCommentMessage(models.Model):
-    content = models.CharField(max_length=200)
+    content = models.CharField(max_length=100)
     toTrend = models.ForeignKey(TblTrend)
     toUserId = models.IntegerField()
     createUser = models.ForeignKey(TblBriefUser)

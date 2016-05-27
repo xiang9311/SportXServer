@@ -91,7 +91,7 @@ def getRongToken(request):
         #检查common(userid userkey else)
 
     try:
-        userService.userExist(request_common.userid)
+        userService.userExist(request_common.userid,request_common.userkey)
     except:
         #未注册用户
         initCommonErrorResponse(cmdId, 101, response_pro.common)
