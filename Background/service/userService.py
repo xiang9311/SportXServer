@@ -348,3 +348,17 @@ def getTrendBriefMessage(userId ,  responseData):
     briefMessage.count = comments.count()
     return True
 
+#10017
+def getBriefUser(userId , operateUser, responseData):
+    response_user = responseData.briefUser
+    try:
+        user = TblBriefUser.objects.get(id = userId)
+    except Exception as e:
+        log.error(str(e))
+        return False
+    response_user.userId = user.id
+    response_user.userName = user.userName
+    response_user.userAvatar = user.userAvatar
+    return True
+
+
