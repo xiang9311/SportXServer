@@ -34,3 +34,19 @@ def searchGym(keyword,pageIndex,responseData):
         eqm = response_gym.equipments
         # for tblImage in tblImages:
         #     images.append(tblImage.url)
+
+
+
+#10017
+def getBriefUser(userId , operateUser, responseData):
+    response_user = responseData.briefUser
+    try:
+        user = TblBriefUser.objects.get(id = userId)
+    except Exception as e:
+        log.error(str(e))
+        return False
+    response_user.userId = user.id
+    response_user.userName = user.userName
+    response_user.userAvatar = user.userAvatar
+    return True
+
