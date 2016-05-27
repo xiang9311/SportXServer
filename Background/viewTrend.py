@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .dependency import common_pb2,trend_pb2
-from .service import  trendService
+from .service import  trendService , userService
 from .views import initCommonErrorResponse, initCommonResponse
 from SportXServer import qiniuUtil, timeUtil ,log
 
@@ -30,7 +30,13 @@ def createTrend(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
     try:
         response_common = response_pro.common
         response_data = response_pro.data
@@ -71,9 +77,16 @@ def getMyFollowTrends(request):
         return HttpResponse(response_pro.SerializeToString())
 
 
+
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
     try:
         response_common = response_pro.common
@@ -193,7 +206,13 @@ def likeTrend(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
     try:
         response_common = response_pro.common
@@ -233,7 +252,13 @@ def commentTrend(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
     try:
         response_common = response_pro.common
@@ -276,7 +301,13 @@ def deleteComment(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
     try:
         response_common = response_pro.common
@@ -315,7 +346,13 @@ def deleteTrend(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
 
     try:
         response_common = response_pro.common

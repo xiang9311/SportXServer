@@ -260,7 +260,13 @@ def updateMyInfo(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
     #构造返回
 
     try:
@@ -302,7 +308,13 @@ def guanzhuUser(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+     #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
     #构造返回
 
     try:
@@ -326,14 +338,6 @@ def guanzhuUser(request):
 
 @csrf_exempt
 def getOneTrend(request):
-    # message Response10005 {
-    # 	ResponseCommon common = 1;
-    # 	Data data = 2;
-    # 	message Data {
-    # 		repeated Trend trends = 1;
-    # 		int32 maxCountPerPage = 2;                   // 每页的最大数量，如果trends小于该数量，则没有加载更多
-    # 	}
-    # }
     cmdId = 10005
     request_pro = pilot_pb2.Request10005()
     response_pro = pilot_pb2.Response10005()
@@ -387,7 +391,13 @@ def getMyCommentMessage(request):
     request_params = request_pro.params
 
     log.info("搜索:数据解析成功" + str(request_params))
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
     #构造返回
     try:
         response_common = response_pro.common
@@ -421,7 +431,13 @@ def deleteCommentMassage(request):
     request_params = request_pro.params
 
     log.info("搜索:数据解析成功" + str(request_params))
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
     #构造返回
     try:
         response_common = response_pro.common
@@ -454,7 +470,13 @@ def getMyXMoney(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    #用户检验
+    try:
+        userService.userExist(request_common.userid,request_common.userkey)
+    except:
+        #未注册用户
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
     log.info("搜索:数据解析成功" + str(request_params))
 
     #构造返回
