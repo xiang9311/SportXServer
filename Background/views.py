@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .dependency import common_pb2, token_pb2, pilot_pb2
 from .service import userService
+from .gyms import read_club
 
 import time
 
@@ -13,6 +14,41 @@ from SportXServer import qiniuUtil, log
 
 def test(request):
     return HttpResponse('ok')
+
+def createGyms(request):
+    clubs = read_club.read_club_from_file()
+    from .models import TblBriefGym, TblGyminfo
+    from SportXServer import timeUtil
+    index = 0
+    for club in clubs:
+        tblBriefGym = TblBriefGym()
+        tblBriefGym.gymAvatar = club.cover
+        tblBriefGym.createTime = timeUtil.getDatabaseTimeNow()
+        tblBriefGym.gymIntro = club.club_intro
+        tblBriefGym.gymName = club.name
+        tblBriefGym.latitude = club.latitude
+        tblBriefGym.longitude = club.longitude
+        tblBriefGym.meituan_price = club.price * club.discount
+        tblBriefGym.place = club.location
+        tblBriefGym.price = club.price
+        tblBriefGym.save()
+
+        i = 0
+        for image in club.images:
+            i += 1
+            tblGyminfo = TblGyminfo()
+            tblGyminfo.gym = tblBriefGym
+            tblGyminfo.createTime = timeUtil.getDatabaseTimeNow()
+            tblGyminfo.image = image
+            tblGyminfo.imageOrder = i
+            tblGyminfo.save()
+
+        print('已经存储 %d 个gym' % index)
+        index += 1
+        pass
+
+    return HttpResponse("ok")
+    pass
 
 
 def initCommonResponse(code, message, cmdid, userid, common):

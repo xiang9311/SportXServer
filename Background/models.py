@@ -49,6 +49,8 @@ class TblBriefGym(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     gymIntro = models.CharField(max_length = 500)
+    price = models.FloatField()
+    meituan_price = models.FloatField()
     createTime = models.DateTimeField()
 
 """
@@ -169,7 +171,7 @@ class TblGymCard(models.Model):
 """
 class TblGyminfo(models.Model):
     image = models.URLField()
-    gym = models.ForeignKey(TblGymCard)
+    gym = models.ForeignKey(TblBriefGym)
     imageOrder = models.IntegerField()
     createTime = models.DateTimeField()
 

@@ -244,10 +244,10 @@ def deleteComment(trendId,commentId):
 
 def deleteTrend(trendId):
     try:
-        TblTrend.objects.get(id = trendId).delete()
         TblTrendComment.objects.filter(trend_id = trendId).delete()
         TblLikeTrend.objects.filter(trend_id = trendId ).delete()
         TblCommentMessage.objects.filter(toTrend_id = trendId).delete()
+        TblTrend.objects.get(id = trendId).delete()
     except Exception as e:
         log.error(str(e))
         return False
