@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views, viewTrend
 
 urlpatterns = [
-    url(r'^createGym/$', views.createGyms),
+    # url(r'^createGym/$', views.createGyms),
     url(r'^test/$', views.test),
 
     # token
