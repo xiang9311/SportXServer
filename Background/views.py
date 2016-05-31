@@ -731,12 +731,14 @@ def getBriefUser(request):
     request_pro = pilot_pb2.Request10018()
     response_pro = pilot_pb2.Response10018()
     try:
-        request_pro.MergeFromString(request.read())
+        protodata = request.read()
+        log.info(protodata)
+        request_pro.MergeFromString(protodata)
     except Exception as error:
         #如果读取异常直接返回一个error
         log.error('comunications failed')
         log.error(str(error))
-        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        initCommonErrorResponse(cmdId, 0, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
     request_common = request_pro.common
