@@ -1,4 +1,4 @@
-from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCourse ,TblGymCard
+from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCourse ,TblGymCard ,TblTrend ,TblTrendImage
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
 
@@ -36,7 +36,7 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
     return True
 
 
-def getGym(gymId,responseData):
+def getGymDetail(gymId,responseData):
     response_gym = responseData.detailGym.briefGym
     response_courses = responseData.detailGym.courses
     response_gymCards = responseData.detailGym.gymCards
@@ -91,4 +91,25 @@ def getGym(gymId,responseData):
     response_user = responseData.briefUsers
 
 
+def getRecommendGym(gymId, pageIndex , responseData):
+    maxCountPerPage = 10
+    responseData.maxCountPerPage = maxCountPerPage
+    trends = responseData.trends
+    tblTrends  = TblTrend.objects.filter(gym_id = gymId)
+    for tblTrend in tblTrends:
+        response_trend = trends.add()
+        response_trend.id = tblTrend.id
+        briefUser = response_trend.briefUser
+        response_trend.createTime = tblTrend.createTime
+        response_trend.gymId = gymId
+        response_trend.gymName = tblTrend.gym.gymName
+        response_trend.content = tblTrend.content
+        images = response_trend.imgs
+        tblImages = TblTrendImage.objects.filter(trend=tblTrend.id).order_by('priority')
+        for tblImage in tblImages:
+            images.append(tblImage.url)
 
+            #createUser
+        briefUser.userId = tblTrend.createUser.id
+        briefUser.userName = tblTrend.createUser.userName
+        briefUser.userAvatar = tblTrend.createUser.userAvatar
