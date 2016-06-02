@@ -29,6 +29,7 @@ class TblBriefUser(models.Model):
     longitude = models.FloatField(null=True)
     signTime = models.DateTimeField()
     hadReadMessage = models.IntegerField()
+    lastShow = models.ForeignKey(TblBriefGym,null=True) #最后一次出现的体育馆
 
 class TblUserKey(models.Model):
     user = models.ForeignKey(TblBriefUser)
@@ -49,6 +50,8 @@ class TblBriefGym(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     gymIntro = models.CharField(max_length = 500)
+    courseBrief = models.CharField(max_length= 30,null=True)
+    equipmentBrief = models.CharField(max_length= 30,null=True)
     price = models.FloatField()
     meituan_price = models.FloatField()
     createTime = models.DateTimeField()
@@ -176,6 +179,7 @@ class TblGyminfo(models.Model):
     createTime = models.DateTimeField()
 
 
+
 """
 搜索相关
 """
@@ -184,6 +188,25 @@ class TblSearchKeywords(models.Model):
     keyword = models.CharField(max_length = 100)
     usedTimes = models.IntegerField()
 
+
+"""
+关系表
+"""
+"""
+教练表场馆教练关系
+"""
+class TblCoach(models.Model):
+    coach = models.OneToOneField(TblBriefUser)
+    workId = models.IntegerField(null=True)
+    gym = models.ForeignKey(TblBriefGym)
+
+class Coach_Course(models.Model):
+    coach = models.ForeignKey(TblCoach)
+    course = models.ForeignKey(TblCourse)
+
+class User_Course(models.Model):
+    user = models.ForeignKey(TblBriefUser)
+    course = models.ForeignKey(TblCourse)
 # class  CardType(Enum):
 #    Once = 0;  # 一次 体验卡
 #    Month = 1;    # 月卡
