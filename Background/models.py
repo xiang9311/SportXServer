@@ -10,6 +10,23 @@ from enum import Enum
 # 必填，即有效位数
 
 """
+场馆表
+"""
+class TblBriefGym(models.Model):
+    gymName = models.CharField(max_length = 30)
+    gymAvatar = models.URLField()#image
+    place = models.CharField(max_length = 100)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    gymIntro = models.CharField(max_length = 500)
+    courseBrief = models.CharField(max_length= 30,null=True)
+    equipmentBrief = models.CharField(max_length= 30,null=True)
+    price = models.FloatField()
+    meituan_price = models.FloatField()
+    createTime = models.DateTimeField()
+
+
+"""
 用户相关表
 """
 
@@ -40,21 +57,6 @@ class TblRongyunToken(models.Model):
     user = models.ForeignKey(TblBriefUser)
     token = models.CharField(max_length = 100)
 
-"""
-场馆表
-"""
-class TblBriefGym(models.Model):
-    gymName = models.CharField(max_length = 30)
-    gymAvatar = models.URLField()#image
-    place = models.CharField(max_length = 100)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    gymIntro = models.CharField(max_length = 500)
-    courseBrief = models.CharField(max_length= 30,null=True)
-    equipmentBrief = models.CharField(max_length= 30,null=True)
-    price = models.FloatField()
-    meituan_price = models.FloatField()
-    createTime = models.DateTimeField()
 
 """
 平台定义的所有设置
