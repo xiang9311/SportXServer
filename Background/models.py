@@ -1,13 +1,6 @@
 from django.db import models
 from enum import Enum
 # Create your models here.
-#BrirfUser
-# TODO:
-# 关于Float设置：  
-# max_digits
-# 必填，数字长度
-# decimal_places
-# 必填，即有效位数
 
 """
 场馆表

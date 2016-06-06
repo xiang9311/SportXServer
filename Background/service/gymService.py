@@ -9,7 +9,6 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
     sql = "SELECT * FROM Background_tblbriefgym " \
           "WHERE ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " \
           "ORDER BY (-(latitude -"+str(latitude)+")^2 -(longitude - "+str(longitude)+")^2)"
-    #todo test
     try:
         briefGyms = TblBriefGym.objects.raw(sql)[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         for briefGym in briefGyms:
@@ -72,7 +71,6 @@ def getGymDetail(gymId,responseData):
 
 
 def getRecommendGym(userId , longitude , latitude  , responseData):
-    #todo:all
     """
     没有合作标记位置，先用userId获取上次去过的体育馆
     :param longitude:
@@ -82,6 +80,8 @@ def getRecommendGym(userId , longitude , latitude  , responseData):
     """
     try:
         briefGym = TblBriefUser.objects.get(id = userId).lastShow
+        if briefGym == None:
+            return False
         response_gym = responseData.briefGym
         response_gym.id = briefGym.id
         response_gym.gymName = briefGym.gymName
