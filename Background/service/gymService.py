@@ -15,6 +15,7 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
             response_gym = response_gyms.add()
             response_gym.id = briefGym.id
             response_gym.gymName = briefGym.gymName
+            response_gym.gymCover = TblGyminfo.objects.get(gym=briefGym,imageOrder__exact=1)
             response_gym.place = briefGym.place
             response_gym.gymAvatar = briefGym.gymAvatar
             response_gym.latitude = briefGym.latitude
@@ -39,6 +40,7 @@ def getGymDetail(gymId,responseData):
     response_gym.gymName = briefGym.gymName
     response_gym.place = briefGym.place
     response_gym.gymAvatar = briefGym.gymAvatar
+    response_gym.gymCover = TblGyminfo.objects.get(gym=briefGym,imageOrder__exact=1)
     response_gym.latitude = briefGym.latitude
     response_gym.longitude = briefGym.longitude
     response_gym.eqm = briefGym.equipmentBrief
@@ -87,6 +89,7 @@ def getRecommendGym(userId , longitude , latitude  , responseData):
         response_gym.gymName = briefGym.gymName
         response_gym.place = briefGym.place
         response_gym.gymAvatar = briefGym.gymAvatar
+        response_gym.gymCover = TblGyminfo.objects.get(gym=briefGym,imageOrder__exact=1)
         response_gym.latitude = briefGym.latitude
         response_gym.longitude = briefGym.longitude
         response_gym.eqm = briefGym.equipmentBrief
