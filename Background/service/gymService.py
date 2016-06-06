@@ -1,4 +1,4 @@
-from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCourse ,TblGymCard ,TblTrend ,TblTrendImage
+from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCourse ,TblGymCard ,TblTrend ,TblTrendImage ,TblBriefUser
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
 
@@ -14,22 +14,12 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
             response_gym = response_gyms.add()
             response_gym.id = briefGym.id
             response_gym.gymName = briefGym.gymName
-            response_cover = response_gym.gymCover
             response_gym.place = briefGym.place
             response_gym.gymAvatar = briefGym.gymAvatar
             response_gym.latitude = briefGym.latitude
             response_gym.longitude = briefGym.longitude
-            response_eqm = response_gym.equipments
-            #cover
-            imgs = TblGyminfo.objects.filter(gym_id = briefGym.id)
-            for img in imgs:
-                response_cover.append(img)
-            #eqm
-            eqms = TblGymEquipment.objects.filter(gym_id = briefGym.id)
-            for eqm in eqms:
-                if eqm:
-                    response_eqm.name = eqm.name
-                    response_eqm.count  = 1
+            response_gym.gymInfo = briefGym.gymIntro
+
     except Exception as e:
             return False
 
@@ -38,60 +28,98 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
 
 def getGymDetail(gymId,responseData):
     response_gym = responseData.detailGym.briefGym
+    response_eqm = responseData.detailGym.eqm
     response_courses = responseData.detailGym.courses
     response_gymCards = responseData.detailGym.gymCards
+    response_users = responseData.briefUsers
+    response_cover = responseData.gymCover
     #gym
     briefGym = TblBriefGym.objects.get(id = gymId)
     response_gym.id = briefGym.id
     response_gym.gymName = briefGym.gymName
-    response_cover = response_gym.gymCover
     response_gym.place = briefGym.place
     response_gym.gymAvatar = briefGym.gymAvatar
     response_gym.latitude = briefGym.latitude
     response_gym.longitude = briefGym.longitude
-    response_eqm = response_gym.equipments
+    response_gym.gymIntro = briefGym.gymIntro
+    try:
+        response_eqm = briefGym.equipmentBrief
+    except:
+        pass
+    try:
+        response_courses = briefGym.courseBrief
+    except:
+        pass
+    #todo 卡没存，先用美团价格，需要改协议
+    response_gymCards = str(briefGym.meituan_price)
+
     #cover
     imgs = TblGyminfo.objects.filter(gym_id = briefGym.id)
     for img in imgs:
         response_cover.append(img)
-    #eqm
-    eqms = TblGymEquipment.objects.filter(gym_id = briefGym.id)
-    for eqm in eqms:
-        if eqm:
-            response_eqm.name = eqm.name
-            response_eqm.count  = 1
-
-    #course
-    Courses = TblCourse.objects.filter(gym_id = briefGym.id)
-    for Course in Courses:
-        response_course = response_courses.add()
-        response_course.name = Course.name
-        response_course.week = Course.week
-        response_course.courseTime.fromHour  = Course.fromHour
-        response_course.courseTime.fromMinite = Course.fromMinite
-        response_course.courseTime.toHour = Course.toHour
-        response_course.courseTime.toMinite = Course.toMinite
-
-    #card
-    Cards = TblGymCard.objects.filter(gym_id = briefGym.id)
-    for Card in Cards:
-        response_gymCard = response_gymCards.add()
-        response_gymCard.cardType = Card.cardType
-        response_gymCard.price = Card.price
 
     #briefUsers
-    """
-    message BriefUser {
-      int32 userId = 1;            // userid
-      string userName = 2;          // 用户名
-      string userAvatar = 3;       // 用户头像
-    }
-    """
-    #todo 数据库结构
-    response_user = responseData.briefUsers
+
+    #使用位置查询usql =（用raw，自己写sql）
+    try:
+        users = TblBriefUser.objects.filter(lastShow_id = gymId)
+        response_user = responseData.briefUsers
+        for user in users:
+            response_user = response_users.add()
+            response_user.userId = user.id
+            response_user.userName = user.userName
+            response_user.userAvatar = user.userAvatar
+    except Exception as e:
+        pass#没有user
+    return True
 
 
-def getRecommendGym(gymId, pageIndex , responseData):
+def getRecommendGym(userId , longitude , latitude  , responseData):
+    #todo:all
+    """
+    没有合作标记位置，先用userId获取上次去过的体育馆
+    :param longitude:
+    :param latitude:
+    :param responseData:
+    :return:
+    """
+    try:
+        briefGym = TblBriefUser.objects.get(id = userId).lastShow
+        response_gym = responseData.detailGym.briefGym
+        response_eqm = responseData.detailGym.eqm
+        response_courses = responseData.detailGym.courses
+        response_gymCards = responseData.detailGym.gymCards
+        response_gym.id = briefGym.id
+        response_gym.gymName = briefGym.gymName
+        response_gym.place = briefGym.place
+        response_gym.gymAvatar = briefGym.gymAvatar
+        response_gym.latitude = briefGym.latitude
+        response_gym.longitude = briefGym.longitude
+        response_gym.gymIntro = briefGym.gymIntro
+        try:
+            response_eqm = briefGym.equipmentBrief
+        except:
+            pass
+        try:
+            response_courses = briefGym.courseBrief
+        except:
+            pass
+        #todo 卡没存，先用美团价格，需要改协议
+        response_gymCards = str(briefGym.meituan_price)
+        responseData.userNum = TblBriefUser.objects.filter(lastShow_id = briefGym.id).count()
+        responseData.trendNum = TblTrend.objects.filter(gym_id = briefGym.id).count()
+
+    except Exception as e:
+        return False
+    return True
+
+
+
+
+
+
+
+def getGymTrend(gymId, pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     trends = responseData.trends
