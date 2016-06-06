@@ -20,10 +20,14 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
             response_gym.gymAvatar = briefGym.gymAvatar
             response_gym.latitude = briefGym.latitude
             response_gym.longitude = briefGym.longitude
-            response_gym.eqm = briefGym.equipmentBrief
-
+            try:
+                response_gym.eqm = briefGym.equipmentBrief
+            except Exception as e:
+                log.info('fixed exception %s' % str(e))
+                response_gym.eqm = ''
     except Exception as e:
-            return False
+        log.info(str(e))
+        return False
 
     return True
 
