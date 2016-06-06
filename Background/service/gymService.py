@@ -3,13 +3,15 @@ from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
 
 def getGymList(longitude , latitude ,pageIndex , responseData):
+    maxCountPerPage = 10
+    responseData.maxCountPerPage = maxCountPerPage
     response_gyms = responseData.briefGyms
     sql = "SELECT * FROM Background_tblbriefgym " \
-          "WHERE ABS(latitude - "+str(latitude)+")<1/111 AND ABS(longitude - "+str(longitude)+")<1/111 " \
+          "WHERE ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " \
           "ORDER BY (-(latitude -"+str(latitude)+")^2 -(longitude - "+str(longitude)+")^2)"
     #todo test
     try:
-        briefGyms = TblBriefGym.objects.raw(sql)#[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
+        briefGyms = TblBriefGym.objects.raw(sql)[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         for briefGym in briefGyms:
             response_gym = response_gyms.add()
             response_gym.id = briefGym.id
@@ -18,7 +20,7 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
             response_gym.gymAvatar = briefGym.gymAvatar
             response_gym.latitude = briefGym.latitude
             response_gym.longitude = briefGym.longitude
-            response_gym.gymInfo = briefGym.gymIntro
+            response_gym.eqm = briefGym.equipmentBrief
 
     except Exception as e:
             return False
@@ -28,11 +30,10 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
 
 def getGymDetail(gymId,responseData):
     response_gym = responseData.detailGym.briefGym
-    response_eqm = responseData.detailGym.eqm
     response_courses = responseData.detailGym.courses
     response_gymCards = responseData.detailGym.gymCards
+    response_cover = responseData.detailGym.gymCover
     response_users = responseData.briefUsers
-    response_cover = responseData.gymCover
     #gym
     briefGym = TblBriefGym.objects.get(id = gymId)
     response_gym.id = briefGym.id
@@ -41,18 +42,13 @@ def getGymDetail(gymId,responseData):
     response_gym.gymAvatar = briefGym.gymAvatar
     response_gym.latitude = briefGym.latitude
     response_gym.longitude = briefGym.longitude
-    response_gym.gymIntro = briefGym.gymIntro
-    try:
-        response_eqm = briefGym.equipmentBrief
-    except:
-        pass
+    response_gym.eqm = briefGym.equipmentBrief
     try:
         response_courses = briefGym.courseBrief
     except:
         pass
     #todo 卡没存，先用美团价格，需要改协议
-    response_gymCards = str(briefGym.meituan_price)
-
+    response_gymCards = "价格："+str(briefGym.price) +" ,某团价："+str(briefGym.meituan_price)
     #cover
     imgs = TblGyminfo.objects.filter(gym_id = briefGym.id)
     for img in imgs:
@@ -74,6 +70,7 @@ def getGymDetail(gymId,responseData):
     return True
 
 
+
 def getRecommendGym(userId , longitude , latitude  , responseData):
     #todo:all
     """
@@ -85,29 +82,23 @@ def getRecommendGym(userId , longitude , latitude  , responseData):
     """
     try:
         briefGym = TblBriefUser.objects.get(id = userId).lastShow
-        response_gym = responseData.detailGym.briefGym
-        response_eqm = responseData.detailGym.eqm
-        response_courses = responseData.detailGym.courses
-        response_gymCards = responseData.detailGym.gymCards
+        response_gym = responseData.briefGym
         response_gym.id = briefGym.id
         response_gym.gymName = briefGym.gymName
         response_gym.place = briefGym.place
         response_gym.gymAvatar = briefGym.gymAvatar
         response_gym.latitude = briefGym.latitude
         response_gym.longitude = briefGym.longitude
-        response_gym.gymIntro = briefGym.gymIntro
-        try:
-            response_eqm = briefGym.equipmentBrief
-        except:
-            pass
-        try:
-            response_courses = briefGym.courseBrief
-        except:
-            pass
-        #todo 卡没存，先用美团价格，需要改协议
-        response_gymCards = str(briefGym.meituan_price)
-        responseData.userNum = TblBriefUser.objects.filter(lastShow_id = briefGym.id).count()
+        response_gym.eqm = briefGym.equipmentBrief
+        users = TblBriefUser.objects.filter(lastShow_id = briefGym.id)
+        responseData.userNum = users.count()
         responseData.trendNum = TblTrend.objects.filter(gym_id = briefGym.id).count()
+        response_users = responseData.briefUsers
+        for user in users:
+            response_user = response_users.add()
+            response_user.userId = user.id
+            response_user.userName = user.userName
+            response_user.userAvatar = user.userAvatar
 
     except Exception as e:
         return False

@@ -5,10 +5,9 @@ from Background.dependency.geohash import encode
 def geoadd():
     bgym = TblBriefGym.objects.all()
     for gym in bgym:
-        hash = encode(gym.latitude,gym.longitude)
-        gym.geohash = hash
+        gym.equipmentBrief = "大力，四角受，洗浴"
         gym.save()
 
-geoadd()
+
 
 
