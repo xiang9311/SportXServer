@@ -18,6 +18,7 @@ class TblBriefGym(models.Model):
     place = models.CharField(max_length = 100)
     latitude = models.FloatField()
     longitude = models.FloatField()
+    geohash = models.CharField(max_length=13,null=True)
     gymIntro = models.CharField(max_length = 500)
     courseBrief = models.CharField(max_length= 30,null=True)
     equipmentBrief = models.CharField(max_length= 30,null=True)
@@ -224,7 +225,7 @@ class User_Course(models.Model):
 #   FEMALE = 1;    # 女性
 # }
 # class Banner(models.Model):
-#     #??type 
+#     #??type
 #     # URL = 0;     # 跳转url
 #     #TREND = 1;  # 跳转动态
 #     #USER = 2;    # 用户
