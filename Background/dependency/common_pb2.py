@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='common.proto',
   package='com.xiang.proto',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x63ommon.proto\x12\x0f\x63om.xiang.proto\"u\n\rRequestCommon\x12\x0e\n\x06userid\x18\x01 \x01(\x05\x12\x0f\n\x07userkey\x18\x02 \x01(\t\x12\r\n\x05\x63mdid\x18\x03 \x01(\x05\x12\x11\n\ttimestamp\x18\x04 \x01(\x03\x12\x0f\n\x07version\x18\x05 \x01(\t\x12\x10\n\x08platform\x18\x06 \x01(\x05\"a\n\x0eResponseCommon\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\r\n\x05\x63mdid\x18\x03 \x01(\x05\x12\x11\n\ttimestamp\x18\x04 \x01(\x03\x12\x0e\n\x06userid\x18\x05 \x01(\x05\"\xcf\x01\n\x05Trend\x12\n\n\x02id\x18\x01 \x01(\x05\x12-\n\tbriefUser\x18\x02 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUser\x12\x12\n\ncreateTime\x18\x03 \x01(\x03\x12\r\n\x05gymId\x18\x04 \x01(\x05\x12\x0f\n\x07gymName\x18\x05 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x0c\n\x04imgs\x18\x07 \x03(\t\x12\x11\n\tlikeCount\x18\x08 \x01(\x05\x12\x14\n\x0c\x63ommentCount\x18\t \x01(\x05\x12\x0f\n\x07isLiked\x18\n \x01(\x08\"\xb5\x01\n\x06\x42\x61nner\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08\x63overUrl\x18\x02 \x01(\t\x12\x30\n\x04type\x18\x03 \x01(\x0e\x32\".com.xiang.proto.Banner.BannerType\x12\x0e\n\x06webUrl\x18\x04 \x01(\t\x12\x0f\n\x07trendId\x18\x05 \x01(\x05\x12\x0e\n\x06userId\x18\x06 \x01(\x05\"*\n\nBannerType\x12\x07\n\x03URL\x10\x00\x12\t\n\x05TREND\x10\x01\x12\x08\n\x04USER\x10\x02\"A\n\tBriefUser\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\x12\n\nuserAvatar\x18\x03 \x01(\t\"\xc0\x01\n\x08\x42riefGym\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07gymName\x18\x02 \x01(\t\x12\x10\n\x08gymCover\x18\x03 \x03(\t\x12\r\n\x05place\x18\x04 \x01(\t\x12\x11\n\tgymAvatar\x18\x08 \x01(\t\x12\x10\n\x08latitude\x18\x05 \x01(\x02\x12\x11\n\tlongitude\x18\x06 \x01(\x02\x12\x0e\n\x06isCoop\x18\x07 \x01(\x08\x12.\n\nequipments\x18\t \x03(\x0b\x32\x1a.com.xiang.proto.Equipment\"\x8e\x01\n\tDetailGym\x12+\n\x08\x62riefGym\x18\x01 \x01(\x0b\x32\x19.com.xiang.proto.BriefGym\x12(\n\x07\x63ourses\x18\x03 \x03(\x0b\x32\x17.com.xiang.proto.Course\x12*\n\x08gymCards\x18\x04 \x03(\x0b\x32\x18.com.xiang.proto.GymCard\"_\n\tEquipment\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x35\n\requipmentType\x18\x03 \x01(\x0e\x32\x1e.com.xiang.proto.EquipmentType\"U\n\x06\x43ourse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04week\x18\x02 \x01(\x05\x12/\n\ncourseTime\x18\x03 \x01(\x0b\x32\x1b.com.xiang.proto.CourseTime\"T\n\nCourseTime\x12\x10\n\x08\x66romHour\x18\x01 \x01(\x05\x12\x12\n\nfromMinite\x18\x02 \x01(\x05\x12\x0e\n\x06toHour\x18\x03 \x01(\x05\x12\x10\n\x08toMinite\x18\x04 \x01(\x05\"E\n\x07GymCard\x12+\n\x08\x63\x61rdType\x18\x01 \x01(\x0e\x32\x19.com.xiang.proto.CardType\x12\r\n\x05price\x18\x02 \x01(\x02\"p\n\x0e\x43ommentMessage\x12\x11\n\tmessageId\x18\x01 \x01(\x05\x12\x16\n\x0emessageContent\x18\x02 \x01(\t\x12\x0e\n\x06\x61vatar\x18\x03 \x01(\t\x12\x12\n\ncreateTime\x18\x04 \x01(\x03\x12\x0f\n\x07trendId\x18\x05 \x01(\x05\"\xbf\x01\n\x07\x43omment\x12-\n\tbriefUser\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUser\x12\x11\n\tcommentId\x18\x02 \x01(\x05\x12\x16\n\x0e\x63ommentContent\x18\x03 \x01(\t\x12\x0f\n\x07trendId\x18\x04 \x01(\x05\x12\x10\n\x08toUserid\x18\x05 \x01(\x05\x12\x12\n\ntoUserName\x18\x06 \x01(\t\x12\x12\n\ncreateTime\x18\x07 \x01(\x03\x12\x0f\n\x07gymName\x18\x08 \x01(\t\"6\n\x11TrendBriefMessage\x12\x12\n\nlastAvatar\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\x8b\x02\n\nDetailUser\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\x12\n\nuserAvatar\x18\x03 \x01(\t\x12!\n\x03sex\x18\x04 \x01(\x0e\x32\x14.com.xiang.proto.Sex\x12\x0c\n\x04sign\x18\x05 \x01(\t\x12&\n\x06trends\x18\x06 \x03(\x0b\x32\x16.com.xiang.proto.Trend\x12\x12\n\nisFollowed\x18\x07 \x01(\x08\x12\x14\n\x0cguanzhuCount\x18\x08 \x01(\x05\x12\x12\n\nfensiCount\x18\t \x01(\x05\x12\x12\n\ntrendCount\x18\n \x01(\x05\x12\x1c\n\x14trendMaxCountPerPage\x18\x0b \x01(\x05\"b\n\x0cSearchedUser\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\x12\n\nuserAvatar\x18\x03 \x01(\t\x12\x0c\n\x04sign\x18\x04 \x01(\t\x12\x0e\n\x06images\x18\x05 \x03(\t*,\n\x08\x43\x61rdType\x12\x08\n\x04Once\x10\x00\x12\t\n\x05Month\x10\x01\x12\x0b\n\x07Quarter\x10\x02*/\n\rEquipmentType\x12\r\n\tPAO_BU_JI\x10\x00\x12\x0f\n\x0bLIN_YU_FANG\x10\x01*\x1b\n\x03Sex\x12\x08\n\x04MALE\x10\x00\x12\n\n\x06\x46\x45MALE\x10\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x63ommon.proto\x12\x0f\x63om.xiang.proto\"u\n\rRequestCommon\x12\x0e\n\x06userid\x18\x01 \x01(\x05\x12\x0f\n\x07userkey\x18\x02 \x01(\t\x12\r\n\x05\x63mdid\x18\x03 \x01(\x05\x12\x11\n\ttimestamp\x18\x04 \x01(\x03\x12\x0f\n\x07version\x18\x05 \x01(\t\x12\x10\n\x08platform\x18\x06 \x01(\x05\"a\n\x0eResponseCommon\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\r\n\x05\x63mdid\x18\x03 \x01(\x05\x12\x11\n\ttimestamp\x18\x04 \x01(\x03\x12\x0e\n\x06userid\x18\x05 \x01(\x05\"\xcf\x01\n\x05Trend\x12\n\n\x02id\x18\x01 \x01(\x05\x12-\n\tbriefUser\x18\x02 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUser\x12\x12\n\ncreateTime\x18\x03 \x01(\x03\x12\r\n\x05gymId\x18\x04 \x01(\x05\x12\x0f\n\x07gymName\x18\x05 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x0c\n\x04imgs\x18\x07 \x03(\t\x12\x11\n\tlikeCount\x18\x08 \x01(\x05\x12\x14\n\x0c\x63ommentCount\x18\t \x01(\x05\x12\x0f\n\x07isLiked\x18\n \x01(\x08\"\xb5\x01\n\x06\x42\x61nner\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08\x63overUrl\x18\x02 \x01(\t\x12\x30\n\x04type\x18\x03 \x01(\x0e\x32\".com.xiang.proto.Banner.BannerType\x12\x0e\n\x06webUrl\x18\x04 \x01(\t\x12\x0f\n\x07trendId\x18\x05 \x01(\x05\x12\x0e\n\x06userId\x18\x06 \x01(\x05\"*\n\nBannerType\x12\x07\n\x03URL\x10\x00\x12\t\n\x05TREND\x10\x01\x12\x08\n\x04USER\x10\x02\"A\n\tBriefUser\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\x12\n\nuserAvatar\x18\x03 \x01(\t\"\x80\x01\n\x08\x42riefGym\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07gymName\x18\x02 \x01(\t\x12\r\n\x05place\x18\x04 \x01(\t\x12\x11\n\tgymAvatar\x18\x08 \x01(\t\x12\x10\n\x08latitude\x18\x05 \x01(\x02\x12\x11\n\tlongitude\x18\x06 \x01(\x02\x12\x10\n\x08gymIntro\x18\x07 \x01(\t\"h\n\tDetailGym\x12+\n\x08\x62riefGym\x18\x01 \x01(\x0b\x32\x19.com.xiang.proto.BriefGym\x12\x0b\n\x03\x65qm\x18\x02 \x01(\t\x12\x0f\n\x07\x63ourses\x18\x03 \x01(\t\x12\x10\n\x08gymCards\x18\x04 \x01(\t\"_\n\tEquipment\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x12\x35\n\requipmentType\x18\x03 \x01(\x0e\x32\x1e.com.xiang.proto.EquipmentType\"U\n\x06\x43ourse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04week\x18\x02 \x01(\x05\x12/\n\ncourseTime\x18\x03 \x01(\x0b\x32\x1b.com.xiang.proto.CourseTime\"T\n\nCourseTime\x12\x10\n\x08\x66romHour\x18\x01 \x01(\x05\x12\x12\n\nfromMinite\x18\x02 \x01(\x05\x12\x0e\n\x06toHour\x18\x03 \x01(\x05\x12\x10\n\x08toMinite\x18\x04 \x01(\x05\"E\n\x07GymCard\x12+\n\x08\x63\x61rdType\x18\x01 \x01(\x0e\x32\x19.com.xiang.proto.CardType\x12\r\n\x05price\x18\x02 \x01(\x02\"p\n\x0e\x43ommentMessage\x12\x11\n\tmessageId\x18\x01 \x01(\x05\x12\x16\n\x0emessageContent\x18\x02 \x01(\t\x12\x0e\n\x06\x61vatar\x18\x03 \x01(\t\x12\x12\n\ncreateTime\x18\x04 \x01(\x03\x12\x0f\n\x07trendId\x18\x05 \x01(\x05\"\xbf\x01\n\x07\x43omment\x12-\n\tbriefUser\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUser\x12\x11\n\tcommentId\x18\x02 \x01(\x05\x12\x16\n\x0e\x63ommentContent\x18\x03 \x01(\t\x12\x0f\n\x07trendId\x18\x04 \x01(\x05\x12\x10\n\x08toUserid\x18\x05 \x01(\x05\x12\x12\n\ntoUserName\x18\x06 \x01(\t\x12\x12\n\ncreateTime\x18\x07 \x01(\x03\x12\x0f\n\x07gymName\x18\x08 \x01(\t\"6\n\x11TrendBriefMessage\x12\x12\n\nlastAvatar\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\x8b\x02\n\nDetailUser\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\x12\n\nuserAvatar\x18\x03 \x01(\t\x12!\n\x03sex\x18\x04 \x01(\x0e\x32\x14.com.xiang.proto.Sex\x12\x0c\n\x04sign\x18\x05 \x01(\t\x12&\n\x06trends\x18\x06 \x03(\x0b\x32\x16.com.xiang.proto.Trend\x12\x12\n\nisFollowed\x18\x07 \x01(\x08\x12\x14\n\x0cguanzhuCount\x18\x08 \x01(\x05\x12\x12\n\nfensiCount\x18\t \x01(\x05\x12\x12\n\ntrendCount\x18\n \x01(\x05\x12\x1c\n\x14trendMaxCountPerPage\x18\x0b \x01(\x05\"b\n\x0cSearchedUser\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\x12\n\nuserAvatar\x18\x03 \x01(\t\x12\x0c\n\x04sign\x18\x04 \x01(\t\x12\x0e\n\x06images\x18\x05 \x03(\t*,\n\x08\x43\x61rdType\x12\x08\n\x04Once\x10\x00\x12\t\n\x05Month\x10\x01\x12\x0b\n\x07Quarter\x10\x02*/\n\rEquipmentType\x12\r\n\tPAO_BU_JI\x10\x00\x12\x0f\n\x0bLIN_YU_FANG\x10\x01*\x1b\n\x03Sex\x12\x08\n\x04MALE\x10\x00\x12\n\n\x06\x46\x45MALE\x10\x01\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -45,8 +45,8 @@ _CARDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2127,
-  serialized_end=2171,
+  serialized_start=2024,
+  serialized_end=2068,
 )
 _sym_db.RegisterEnumDescriptor(_CARDTYPE)
 
@@ -68,8 +68,8 @@ _EQUIPMENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2173,
-  serialized_end=2220,
+  serialized_start=2070,
+  serialized_end=2117,
 )
 _sym_db.RegisterEnumDescriptor(_EQUIPMENTTYPE)
 
@@ -91,8 +91,8 @@ _SEX = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2222,
-  serialized_end=2249,
+  serialized_start=2119,
+  serialized_end=2146,
 )
 _sym_db.RegisterEnumDescriptor(_SEX)
 
@@ -486,51 +486,37 @@ _BRIEFGYM = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gymCover', full_name='com.xiang.proto.BriefGym.gymCover', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='place', full_name='com.xiang.proto.BriefGym.place', index=3,
+      name='place', full_name='com.xiang.proto.BriefGym.place', index=2,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gymAvatar', full_name='com.xiang.proto.BriefGym.gymAvatar', index=4,
+      name='gymAvatar', full_name='com.xiang.proto.BriefGym.gymAvatar', index=3,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='latitude', full_name='com.xiang.proto.BriefGym.latitude', index=5,
+      name='latitude', full_name='com.xiang.proto.BriefGym.latitude', index=4,
       number=5, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='longitude', full_name='com.xiang.proto.BriefGym.longitude', index=6,
+      name='longitude', full_name='com.xiang.proto.BriefGym.longitude', index=5,
       number=6, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='isCoop', full_name='com.xiang.proto.BriefGym.isCoop', index=7,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='equipments', full_name='com.xiang.proto.BriefGym.equipments', index=8,
-      number=9, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='gymIntro', full_name='com.xiang.proto.BriefGym.gymIntro', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -547,7 +533,7 @@ _BRIEFGYM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=713,
-  serialized_end=905,
+  serialized_end=841,
 )
 
 
@@ -566,16 +552,23 @@ _DETAILGYM = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='courses', full_name='com.xiang.proto.DetailGym.courses', index=1,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='eqm', full_name='com.xiang.proto.DetailGym.eqm', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gymCards', full_name='com.xiang.proto.DetailGym.gymCards', index=2,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='courses', full_name='com.xiang.proto.DetailGym.courses', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='gymCards', full_name='com.xiang.proto.DetailGym.gymCards', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -591,8 +584,8 @@ _DETAILGYM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=908,
-  serialized_end=1050,
+  serialized_start=843,
+  serialized_end=947,
 )
 
 
@@ -636,8 +629,8 @@ _EQUIPMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1052,
-  serialized_end=1147,
+  serialized_start=949,
+  serialized_end=1044,
 )
 
 
@@ -681,8 +674,8 @@ _COURSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1149,
-  serialized_end=1234,
+  serialized_start=1046,
+  serialized_end=1131,
 )
 
 
@@ -733,8 +726,8 @@ _COURSETIME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1236,
-  serialized_end=1320,
+  serialized_start=1133,
+  serialized_end=1217,
 )
 
 
@@ -771,8 +764,8 @@ _GYMCARD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1322,
-  serialized_end=1391,
+  serialized_start=1219,
+  serialized_end=1288,
 )
 
 
@@ -830,8 +823,8 @@ _COMMENTMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1393,
-  serialized_end=1505,
+  serialized_start=1290,
+  serialized_end=1402,
 )
 
 
@@ -910,8 +903,8 @@ _COMMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1508,
-  serialized_end=1699,
+  serialized_start=1405,
+  serialized_end=1596,
 )
 
 
@@ -948,8 +941,8 @@ _TRENDBRIEFMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1701,
-  serialized_end=1755,
+  serialized_start=1598,
+  serialized_end=1652,
 )
 
 
@@ -1049,8 +1042,8 @@ _DETAILUSER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1758,
-  serialized_end=2025,
+  serialized_start=1655,
+  serialized_end=1922,
 )
 
 
@@ -1108,17 +1101,14 @@ _SEARCHEDUSER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2027,
-  serialized_end=2125,
+  serialized_start=1924,
+  serialized_end=2022,
 )
 
 _TREND.fields_by_name['briefUser'].message_type = _BRIEFUSER
 _BANNER.fields_by_name['type'].enum_type = _BANNER_BANNERTYPE
 _BANNER_BANNERTYPE.containing_type = _BANNER
-_BRIEFGYM.fields_by_name['equipments'].message_type = _EQUIPMENT
 _DETAILGYM.fields_by_name['briefGym'].message_type = _BRIEFGYM
-_DETAILGYM.fields_by_name['courses'].message_type = _COURSE
-_DETAILGYM.fields_by_name['gymCards'].message_type = _GYMCARD
 _EQUIPMENT.fields_by_name['equipmentType'].enum_type = _EQUIPMENTTYPE
 _COURSE.fields_by_name['courseTime'].message_type = _COURSETIME
 _GYMCARD.fields_by_name['cardType'].enum_type = _CARDTYPE
