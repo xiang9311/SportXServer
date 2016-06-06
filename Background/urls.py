@@ -1,6 +1,6 @@
 __author__ = '祥祥'
 from django.conf.urls import url
-from . import views, viewTrend
+from . import views, viewTrend, viewGym
 
 urlpatterns = [
     # url(r'^createGym/$', views.createGyms),
@@ -36,6 +36,14 @@ urlpatterns = [
     url(r'^trend/commentTrend$',viewTrend.commentTrend),
     url(r'^trend/likeTrend$',viewTrend.likeTrend),
     url(r'^trend/getTrendById$',viewTrend.getTrendById),
+
+
+    #gym
+    url(r'^gym/getGymList$',viewGym.getGymList),
+    url(r'^gym/getGymDetail$',viewGym.getGymList),
+    url(r'^gym/getRecommendGym$',viewGym.getGymList),
+    url(r'^gym/getGymTrend$',viewGym.getGymList),
+
 
 
 ]
