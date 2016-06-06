@@ -11,6 +11,7 @@ def createTrend(content , userId ,gymId, bucketName , imageKeys):
     tblTrend.commentCount = 0
     if gymId:
         tblTrend.gym = TblBriefGym.objects.get(id = gymId)
+        tblTrend.createUser.lastShow = tblTrend.gym
     tblTrend.createTime = timeUtil.getDatabaseTimeNow()
     try:
         tblTrend.save()
