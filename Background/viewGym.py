@@ -25,6 +25,7 @@ def getGymList(request):
         return HttpResponse(response_pro.SerializeToString())
     request_common = request_pro.common
     request_params = request_pro.params
+    log.info("request params is : %s" % str(request_params))
     try:
         response_common = response_pro.common
         response_data = response_pro.data

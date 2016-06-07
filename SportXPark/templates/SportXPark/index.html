@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'SportXPark/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'SportXPark/css/index.css' %}">
+	<script src="{% static 'SportXPark/js/jquery-1.12.4.js' %}"></script>
+</head>
+<body>
+	<div class="index-box">
+
+		<!-- 头部选项卡 -->
+		<div class="head-box">
+			<ul class="head-ul">				
+				<li class="on">
+					<p class="head-bg1"></p>
+					<p class="head-text">这是一张图</p>
+				</li>
+				<li>
+					<p class="head-bg2"></p>
+					<p class="head-text">这是二张图</p>
+				</li>
+				<li>
+					<p class="head-bg3"></p>
+					<p class="head-text">这是三张图</p>
+				</li>
+			</ul>
+
+			<ol class="head-ol">
+				<li>sportX</li>
+				<li>健身会所服务</li>
+				<li>关于我们</li>
+			</ol>
+
+		</div>
+
+
+		<!-- 简介 -->
+
+		<div class="brief-box">
+
+			<div class="brief-div">
+				
+				<div class="brief-t">
+					头像
+				</div>
+
+				<div class="brief-text">
+
+					<p class="brief-t1">昵称</p>
+					<p class="brief-t2">个性签名个性签名个性签名</p>
+					<p class="brief-t3">介绍</p>
+					
+				</div>
+
+				<div class="brief-img">
+					<img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
+					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
+					<img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
+					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
+                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
+					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
+                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
+					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
+                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
+
+					<!-- <img src="images/1.jpg" alt="" class="brief-b"> -->
+				</div>
+
+			</div>
+			
+		</div>
+
+		<!-- 尾部 -->
+
+		<div class="foot-box">
+			
+			<div class="foot-div">
+
+				<div class="foot-l">
+					<p>12313212312</p>
+					<p>21212312123</p>
+					<p>31212312123</p>
+					<p>41212312123</p>
+				</div>
+
+				<div class="foot-r">
+					<div class="foot-img"></div>
+					<p>32132131321</p>
+				</div>
+
+			</div>
+			<p class="foot-h">这是备案号</p>
+
+		</div>
+
+		<!-- 二维码 -->
+		<div class="code-box">这是二维码</div>
+	
+	</div>
+
+
+	<script>
+		// 获取可视区的高度
+		var dHeight = document.documentElement.clientHeight;
+		var hH = dHeight/3*2;
+		$("div.head-box").css("height",hH);
+
+		var hT = hH+22;
+		$("div.code-box").css("top",hT);
+
+		// 二维码
+		$(function (){
+			var oDiv1=$('div.code-box');
+			
+			var h=oDiv1.offset().top;
+			
+			$(window).scroll(function (){
+				var scrollTop=$(window).scrollTop();
+				
+				if (scrollTop >= h)
+				{
+					oDiv1.css('position', 'fixed');
+					oDiv1.css('top','0');
+				}
+				else
+				{
+					oDiv1.css('position', 'absolute');
+					oDiv1.css('top',hT);
+				}
+			});
+		});
+		</script>
+	<script>
+		// 头部选项卡
+		$(function() {
+
+			_tab($("ol.head-ol li"),$("ul.head-ul li"));
+
+		    function _tab(obj,name){
+		    	obj.on('click',function(){
+		            obj.eq($(this).index()).addClass("on").siblings().removeClass('on');
+		            name.hide().eq($(this).index()).show();
+		        });
+		    }
+		 });
+	</script>
+	<script>
+		// 图片判断
+
+	</script>
+</body>
+</html>

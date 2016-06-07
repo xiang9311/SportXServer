@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Background',
+    'SportXPark',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,6 +105,8 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/path/to/SportXServer/static'
+
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),

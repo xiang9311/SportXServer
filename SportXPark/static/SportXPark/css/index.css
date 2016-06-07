@@ -1,0 +1,204 @@
+
+
+div.index-box{
+	width: 980px;
+	margin: 0 auto;
+	position: relative;
+}
+
+/*头部选项卡*/
+div.head-box{
+	margin-top: 20px;
+	width: 100%;
+	height: 66.6vh;
+	border: 1px solid #CCC;
+	position: relative;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+
+ul.head-ul{
+	width: 100%;
+	height: 100%;
+}
+
+ul.head-ul li{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	display: none;
+}
+
+ul.head-ul li.on{
+	display: block;
+}
+
+ul.head-ul li p.head-text{
+	width: 300px;
+	position: absolute;
+	top: 85%;
+	left: 10%;
+	border: 1px solid #CCC;
+	line-height: 30px;
+	text-align: center;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+ul.head-ul li p.head-bg1{
+	width: 100%;
+	height: 100%;
+	background: #FCF;
+}
+
+ul.head-ul li p.head-bg2{
+	width: 100%;
+	height: 100%;
+	background: #CFC;
+}
+
+ul.head-ul li p.head-bg3{
+	width: 100%;
+	height: 100%;
+	background: #CCC;
+}
+
+ol.head-ol{
+	position: absolute;
+	top: 10%;
+	right: 5%;
+}
+
+ol.head-ol li{
+	float: left;
+	width: 100px;
+	border: 1px solid #CCC;
+	margin-left: 20px;
+	text-align: center;
+	line-height: 30px;
+	cursor:pointer;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+
+/*简介*/
+
+div.brief-box{
+	width: 750px;
+	background: red;
+	border: 1px solid #CCC;
+	margin-top: 20px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+div.brief-div{
+	width: 710px;
+	margin: 20px auto;
+	position: relative;
+}
+
+div.brief-t{
+	width: 100px;
+	height: 100px;
+	background: #CCC;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+div.brief-text{
+	line-height: 30px;
+	margin-left: 120px;
+	width: 590px;
+}
+
+div.brief-img{
+	width: 590px;
+	background: blue;
+	margin-left: 110px;
+}
+
+div.brief-img img.brief-a{
+	width: 170px;
+	height: 170px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+div.brief-img img.brief-b{
+	min-width: 300px;
+	max-width: 550px;
+	height: 100%;
+}
+
+
+
+/*尾部*/
+
+div.foot-box{
+	width: 750px;
+	border: 1px solid #CCC;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+div.foot-div{
+	width: 710px;
+	margin: 20px auto;
+	background: #FCF;
+	position: relative;
+}
+
+div.foot-div p{
+	line-height: 35px;
+}
+
+div.foot-l{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+div.foot-r{
+	margin-left: 560px;
+}
+
+div.foot-r div.foot-img{
+	width: 150px;
+	height: 150px;
+	border: 1px solid red;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+div.foot-r p{
+	margin-left: 20px;
+}
+
+p.foot-h{
+	margin: 0 0 20px 20px;
+}
+
+/*二维码*/
+
+div.code-box{
+	width: 200px;
+	height: 200px;
+	border: 1px solid #CCC;
+	position: absolute;
+	right: 0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
