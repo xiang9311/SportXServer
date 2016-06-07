@@ -103,9 +103,14 @@ def getRecommendGym(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         longitude = request_params.longitude
         latitude = request_params.latitude
-        if gymService.getRecommendGym(request_common.userid,longitude , latitude , response_data):
-            return HttpResponse(response_pro.SerializeToString())
-        else:
+        gymId = request_params.gymId
+        userId = request_common.userid
+        if gymId:
+            if  gymService.getRecommendGym(userId, gymId , longitude , latitude  , response_data):
+                return HttpResponse(response_pro.SerializeToString())
+        elif gymService.getRecommendGym(userId, gymId , longitude , latitude  , response_data):
+                return HttpResponse(response_pro.SerializeToString())
+        else :
             initCommonErrorResponse(cmdId, 1, response_common)
             return HttpResponse(response_pro.SerializeToString())
 

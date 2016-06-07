@@ -1,6 +1,6 @@
 from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCourse ,TblGymCard ,TblTrend ,TblTrendImage ,TblBriefUser
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
-
+from Background.dependency.geohash import encode, decode, neighbors
 
 def getGymList(longitude , latitude ,pageIndex , responseData):
     maxCountPerPage = 10
@@ -72,7 +72,7 @@ def getGymDetail(gymId,responseData):
 
 
 
-def getRecommendGym(userId , longitude , latitude  , responseData):
+def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
     """
     没有合作标记位置，先用userId获取上次去过的体育馆
     :param longitude:
@@ -80,10 +80,20 @@ def getRecommendGym(userId , longitude , latitude  , responseData):
     :param responseData:
     :return:
     """
+    if gymId:
+        TblBriefUser.objects.get(id=userId).lastShow = gymId#还没加字段
+    else :
+        #todo:附近的体育馆id
+        # geoh = encode(latitude,longitude)
+        # i=8;
+        # result = TblBriefGym.objects.filter(geohash__c=geoh[0:i])
+        # while not result:
+        #     i=i-1
+        #     result = TblBriefGym.objects.filter(geohash__c=geoh[0:i])
+        #     #result deal
+        gymId = 4
     try:
-        briefGym = TblBriefUser.objects.get(id = userId).lastShow
-        if briefGym == None:
-            return False
+        briefGym = TblBriefGym.objects.get(id = gymId)
         response_gym = responseData.briefGym
         response_gym.id = briefGym.id
         response_gym.gymName = briefGym.gymName
