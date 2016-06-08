@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='gym.proto',
   package='com.xiang.proto.gym',
   syntax='proto3',
-  serialized_pb=_b('\n\tgym.proto\x12\x13\x63om.xiang.proto.gym\x1a\x0c\x63ommon.proto\"\xba\x01\n\x0cRequest13001\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13001.Params\x1a@\n\x06Params\x12\x11\n\tlongitude\x18\x01 \x01(\x02\x12\x10\n\x08latitude\x18\x02 \x01(\x02\x12\x11\n\tpageIndex\x18\x03 \x01(\x05\"\xc6\x01\n\rResponse13001\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13001.Data\x1aM\n\x04\x44\x61ta\x12,\n\tbriefGyms\x18\x01 \x03(\x0b\x32\x19.com.xiang.proto.BriefGym\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\x91\x01\n\x0cRequest13002\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13002.Params\x1a\x17\n\x06Params\x12\r\n\x05gymId\x18\x01 \x01(\x05\"\xde\x01\n\rResponse13002\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13002.Data\x1a\x65\n\x04\x44\x61ta\x12-\n\tdetailGym\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.DetailGym\x12.\n\nbriefUsers\x18\x02 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\xba\x01\n\x0cRequest13003\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13003.Params\x1a@\n\x06Params\x12\x11\n\tlongitude\x18\x01 \x01(\x02\x12\x10\n\x08latitude\x18\x02 \x01(\x02\x12\x11\n\twantGymId\x18\x03 \x01(\x05\"\x80\x02\n\rResponse13003\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13003.Data\x1a\x86\x01\n\x04\x44\x61ta\x12+\n\x08\x62riefGym\x18\x01 \x01(\x0b\x32\x19.com.xiang.proto.BriefGym\x12\x0f\n\x07userNum\x18\x02 \x01(\x05\x12\x10\n\x08trendNum\x18\x03 \x01(\x05\x12.\n\nbriefUsers\x18\x04 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\xa4\x01\n\x0cRequest13004\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13004.Params\x1a*\n\x06Params\x12\r\n\x05gymId\x18\x01 \x01(\x05\x12\x11\n\tpageIndex\x18\x02 \x01(\x05\"\xc0\x01\n\rResponse13004\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13004.Data\x1aG\n\x04\x44\x61ta\x12&\n\x06trends\x18\x01 \x03(\x0b\x32\x16.com.xiang.proto.Trend\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\x62\x06proto3')
+  serialized_pb=_b('\n\tgym.proto\x12\x13\x63om.xiang.proto.gym\x1a\x0c\x63ommon.proto\"\xba\x01\n\x0cRequest13001\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13001.Params\x1a@\n\x06Params\x12\x11\n\tlongitude\x18\x01 \x01(\x02\x12\x10\n\x08latitude\x18\x02 \x01(\x02\x12\x11\n\tpageIndex\x18\x03 \x01(\x05\"\xc6\x01\n\rResponse13001\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13001.Data\x1aM\n\x04\x44\x61ta\x12,\n\tbriefGyms\x18\x01 \x03(\x0b\x32\x19.com.xiang.proto.BriefGym\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\x91\x01\n\x0cRequest13002\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13002.Params\x1a\x17\n\x06Params\x12\r\n\x05gymId\x18\x01 \x01(\x05\"\xde\x01\n\rResponse13002\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13002.Data\x1a\x65\n\x04\x44\x61ta\x12-\n\tdetailGym\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.DetailGym\x12.\n\nbriefUsers\x18\x02 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\xc9\x01\n\x0cRequest13003\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13003.Params\x1aO\n\x06Params\x12\r\n\x05gymId\x18\x03 \x01(\x05\x12\x11\n\tlongitude\x18\x01 \x01(\x02\x12\x10\n\x08latitude\x18\x02 \x01(\x02\x12\x11\n\twantGymId\x18\x04 \x01(\x05\"\x80\x02\n\rResponse13003\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13003.Data\x1a\x86\x01\n\x04\x44\x61ta\x12+\n\x08\x62riefGym\x18\x01 \x01(\x0b\x32\x19.com.xiang.proto.BriefGym\x12\x0f\n\x07userNum\x18\x02 \x01(\x05\x12\x10\n\x08trendNum\x18\x03 \x01(\x05\x12.\n\nbriefUsers\x18\x04 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\xa4\x01\n\x0cRequest13004\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12\x38\n\x06params\x18\x02 \x01(\x0b\x32(.com.xiang.proto.gym.Request13004.Params\x1a*\n\x06Params\x12\r\n\x05gymId\x18\x01 \x01(\x05\x12\x11\n\tpageIndex\x18\x02 \x01(\x05\"\xc0\x01\n\rResponse13004\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x35\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\'.com.xiang.proto.gym.Response13004.Data\x1aG\n\x04\x44\x61ta\x12&\n\x06trends\x18\x01 \x03(\x0b\x32\x16.com.xiang.proto.Trend\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\x62\x06proto3')
   ,
   dependencies=[common__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -336,22 +336,29 @@ _REQUEST13003_PARAMS = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='longitude', full_name='com.xiang.proto.gym.Request13003.Params.longitude', index=0,
+      name='gymId', full_name='com.xiang.proto.gym.Request13003.Params.gymId', index=0,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='longitude', full_name='com.xiang.proto.gym.Request13003.Params.longitude', index=1,
       number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='latitude', full_name='com.xiang.proto.gym.Request13003.Params.latitude', index=1,
+      name='latitude', full_name='com.xiang.proto.gym.Request13003.Params.latitude', index=2,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='wantGymId', full_name='com.xiang.proto.gym.Request13003.Params.wantGymId', index=2,
-      number=3, type=5, cpp_type=1, label=1,
+      name='wantGymId', full_name='com.xiang.proto.gym.Request13003.Params.wantGymId', index=3,
+      number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -369,7 +376,7 @@ _REQUEST13003_PARAMS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=934,
-  serialized_end=998,
+  serialized_end=1013,
 )
 
 _REQUEST13003 = _descriptor.Descriptor(
@@ -406,7 +413,7 @@ _REQUEST13003 = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=812,
-  serialized_end=998,
+  serialized_end=1013,
 )
 
 
@@ -457,8 +464,8 @@ _RESPONSE13003_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1123,
-  serialized_end=1257,
+  serialized_start=1138,
+  serialized_end=1272,
 )
 
 _RESPONSE13003 = _descriptor.Descriptor(
@@ -494,8 +501,8 @@ _RESPONSE13003 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1001,
-  serialized_end=1257,
+  serialized_start=1016,
+  serialized_end=1272,
 )
 
 
@@ -532,8 +539,8 @@ _REQUEST13004_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1382,
-  serialized_end=1424,
+  serialized_start=1397,
+  serialized_end=1439,
 )
 
 _REQUEST13004 = _descriptor.Descriptor(
@@ -569,8 +576,8 @@ _REQUEST13004 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1260,
-  serialized_end=1424,
+  serialized_start=1275,
+  serialized_end=1439,
 )
 
 
@@ -607,8 +614,8 @@ _RESPONSE13004_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1548,
-  serialized_end=1619,
+  serialized_start=1563,
+  serialized_end=1634,
 )
 
 _RESPONSE13004 = _descriptor.Descriptor(
@@ -644,8 +651,8 @@ _RESPONSE13004 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1427,
-  serialized_end=1619,
+  serialized_start=1442,
+  serialized_end=1634,
 )
 
 _REQUEST13001_PARAMS.containing_type = _REQUEST13001
