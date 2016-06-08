@@ -144,8 +144,6 @@ def getGymTrend(request):
         response_common = response_pro.common
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        longitude = request_params.longitude
-        latitude = request_params.latitude
         if gymService.getGymTrend(request_params.gymId, request_params.pageIndex , response_data):
             return HttpResponse(response_pro.SerializeToString())
         else:

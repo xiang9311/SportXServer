@@ -126,7 +126,6 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
             response_user.userAvatar = user.userAvatar
 
     except Exception as e:
-        print(e)
         return False
     return True
 
@@ -140,21 +139,26 @@ def getGymTrend(gymId, pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     trends = responseData.trends
-    tblTrends  = TblTrend.objects.filter(gym_id = gymId)
-    for tblTrend in tblTrends:
-        response_trend = trends.add()
-        response_trend.id = tblTrend.id
-        briefUser = response_trend.briefUser
-        response_trend.createTime = tblTrend.createTime
-        response_trend.gymId = gymId
-        response_trend.gymName = tblTrend.gym.gymName
-        response_trend.content = tblTrend.content
-        images = response_trend.imgs
-        tblImages = TblTrendImage.objects.filter(trend=tblTrend.id).order_by('priority')
-        for tblImage in tblImages:
-            images.append(tblImage.url)
-
+    try:
+        tblTrends  = TblTrend.objects.filter(gym_id = gymId)
+        for tblTrend in tblTrends:
+            response_trend = trends.add()
+            response_trend.id = tblTrend.id
+            briefUser = response_trend.briefUser
+            response_trend.createTime = timeUtil.dataBaseTime_toTimestemp(tblTrend.createTime)
+            response_trend.gymId = gymId
+            response_trend.gymName = tblTrend.gym.gymName
+            response_trend.content = tblTrend.content
+            images = response_trend.imgs
+            tblImages = TblTrendImage.objects.filter(trend=tblTrend).order_by('priority')
+            for tblImage in tblImages:
+                images.append(tblImage.url)
             #createUser
-        briefUser.userId = tblTrend.createUser.id
-        briefUser.userName = tblTrend.createUser.userName
-        briefUser.userAvatar = tblTrend.createUser.userAvatar
+            briefUser.userId = tblTrend.createUser.id
+            briefUser.userName = tblTrend.createUser.userName
+            briefUser.userAvatar = tblTrend.createUser.userAvatar
+
+    except Exception as e:
+        return False
+    return True
+
