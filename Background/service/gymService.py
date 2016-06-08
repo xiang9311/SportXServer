@@ -101,7 +101,6 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
             if ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) ) < distance:
                 distance = ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) )
                 gymId = gyms.id
-    print(gymId)
     try:
         briefGym = TblBriefGym.objects.get(id = gymId)
         response_gym = responseData.briefGym
@@ -109,7 +108,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
         response_gym.gymName = briefGym.gymName
         response_gym.place = briefGym.place
         response_gym.gymAvatar = briefGym.gymAvatar
-        response_gym.gymCover = TblGyminfo.objects.get(gym_id=gymId,imageOrder=1).image
+        response_gym.gymCover = TblGyminfo.objects.get(gym_id=gymId,imageOrder__exact=1).image
         response_gym.latitude = briefGym.latitude
         response_gym.longitude = briefGym.longitude
         response_gym.eqm = briefGym.equipmentBrief
