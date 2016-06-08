@@ -6,11 +6,13 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_gyms = responseData.briefGyms
-    sql = "SELECT * FROM Background_tblbriefgym " \
-          "WHERE ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " \
-          "ORDER BY (-(latitude -"+str(latitude)+")^2 -(longitude - "+str(longitude)+")^2)"
+    #todo:hashgeo
+    sql = "SELECT * FROM Building " \
+          "WHERE ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " #\
+          #"ORDER BY (-(latitude -"+str(latitude)+")^2 -(longitude - "+str(longitude)+")^2)"
     try:
         briefGyms = TblBriefGym.objects.raw(sql)[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
+        #todo:排序
         for briefGym in briefGyms:
             response_gym = response_gyms.add()
             response_gym.id = briefGym.id
@@ -88,14 +90,19 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
         TblBriefUser.objects.get(id=userId).lastShow = gymId#还没加字段
     else :
         #todo:附近的体育馆id
-        # geoh = encode(latitude,longitude)
-        # i=8;
-        # result = TblBriefGym.objects.filter(geohash__c=geoh[0:i])
-        # while not result:
-        #     i=i-1
-        #     result = TblBriefGym.objects.filter(geohash__c=geoh[0:i])
-        #     #result deal
+        geoh = encode(latitude,longitude)
+        i=8
+        result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
+        while not result:
+            i=i-1
+            result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
+        #result deal
         gymId = 4
+        distance = 100000
+        for gyms in result:
+            if ((gyms.latitude-latitude)^2+(gyms.longitude - longitude)^2 ) < distance:
+                distance = ((gyms.latitude-latitude)^2+(gyms.longitude - longitude)^2 )
+                gymId = gyms.id
     try:
         briefGym = TblBriefGym.objects.get(id = gymId)
         response_gym = responseData.briefGym
