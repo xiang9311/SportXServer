@@ -7,7 +7,7 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_gyms = responseData.briefGyms
     #todo:hashgeo
-    sql = "SELECT * FROM Building " \
+    sql = "SELECT * FROM Background_tblbriefgym " \
           "WHERE ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " \
           "ORDER BY (-(latitude -"+str(latitude)+")^2 -(longitude - "+str(longitude)+")^2)"
     try:
@@ -44,10 +44,11 @@ def getGymDetail(gymId,responseData):
     response_gym.gymName = briefGym.gymName
     response_gym.place = briefGym.place
     response_gym.gymAvatar = briefGym.gymAvatar
-    response_gym.gymCover = TblGyminfo.objects.get(gym=briefGym,imageOrder__exact=1)
+    response_gym.gymCover = TblGyminfo.objects.get(gym=briefGym,imageOrder__exact=1).image
     response_gym.latitude = briefGym.latitude
     response_gym.longitude = briefGym.longitude
     response_gym.eqm = briefGym.equipmentBrief
+    responseData.detailGym.gymIntro = briefGym.gymIntro
     try:
         responseData.detailGym.courses = briefGym.courseBrief
     except:
@@ -57,7 +58,7 @@ def getGymDetail(gymId,responseData):
     #cover
     imgs = TblGyminfo.objects.filter(gym_id = briefGym.id)
     for img in imgs:
-        response_cover.append(img)
+        response_cover.append(img.image)
 
     #briefUsers
 
