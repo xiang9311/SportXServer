@@ -8,8 +8,10 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
     response_gyms = responseData.briefGyms
     #todo:hashgeo
     sql = "SELECT * FROM Background_tblbriefgym " \
-          "WHERE ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " \
-          "ORDER BY (-(latitude -"+str(latitude)+")^2 -(longitude - "+str(longitude)+")^2)"
+          "WHERE   ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " \
+          "order by ACOS(SIN(('"+str(latitude)+"' * 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) " \
+          "+COS(('"+str(latitude)+"' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(('"+str(longitude)+"'* 3.1415) / 180 " \
+          "- (longitude * 3.1415) / 180 ) ) * 6380 asc limit 10"
     try:
         briefGyms = TblBriefGym.objects.raw(sql)[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         #todo:排序
