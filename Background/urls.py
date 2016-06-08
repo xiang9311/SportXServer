@@ -40,9 +40,9 @@ urlpatterns = [
 
     #gym
     url(r'^gym/getGymList$',viewGym.getGymList),
-    url(r'^gym/getGymDetail$',viewGym.getGymList),
-    url(r'^gym/getRecommendGym$',viewGym.getGymList),
-    url(r'^gym/getGymTrend$',viewGym.getGymList),
+    url(r'^gym/getGymDetail$',viewGym.getGymDetail),
+    url(r'^gym/getRecommendGym$',viewGym.getRecommendGym),
+    url(r'^gym/getGymTrend$',viewGym.getGymTrend),
 
 
 
