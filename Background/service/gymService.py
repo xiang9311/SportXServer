@@ -97,9 +97,10 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
         gymId = 4
         distance = 100000
         for gyms in result:
-            if ((gyms.latitude-latitude)^2+(gyms.longitude - longitude)^2 ) < distance:
-                distance = ((gyms.latitude-latitude)^2+(gyms.longitude - longitude)^2 )
+            if ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) ) < distance:
+                distance = ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) )
                 gymId = gyms.id
+    print(gymId)
     try:
         briefGym = TblBriefGym.objects.get(id = gymId)
         response_gym = responseData.briefGym
@@ -107,10 +108,11 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
         response_gym.gymName = briefGym.gymName
         response_gym.place = briefGym.place
         response_gym.gymAvatar = briefGym.gymAvatar
-        response_gym.gymCover = TblGyminfo.objects.get(gym=briefGym,imageOrder__exact=1)
+        response_gym.gymCover = TblGyminfo.objects.get(gym_id=gymId,imageOrder=1).image
         response_gym.latitude = briefGym.latitude
         response_gym.longitude = briefGym.longitude
         response_gym.eqm = briefGym.equipmentBrief
+
         users = TblBriefUser.objects.filter(lastShow_id = briefGym.id)
         responseData.userNum = users.count()
         responseData.trendNum = TblTrend.objects.filter(gym_id = briefGym.id).count()
@@ -122,6 +124,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
             response_user.userAvatar = user.userAvatar
 
     except Exception as e:
+        print(e)
         return False
     return True
 
