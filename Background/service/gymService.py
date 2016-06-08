@@ -48,6 +48,7 @@ def getGymDetail(gymId,responseData):
     response_gym.latitude = briefGym.latitude
     response_gym.longitude = briefGym.longitude
     response_gym.eqm = briefGym.equipmentBrief
+    response_gym.gymIntro = briefGym.gymIntro
     try:
         responseData.detailGym.courses = briefGym.courseBrief
     except:
