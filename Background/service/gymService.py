@@ -7,7 +7,7 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
     responseData.maxCountPerPage = maxCountPerPage
     response_gyms = responseData.briefGyms
     #todo:hashgeo
-    sql = "SELECT * FROM Building " \
+    sql = "SELECT * FROM Background_tblbriefgym " \
           "WHERE ABS(latitude - "+str(latitude)+")<50/111 AND ABS(longitude - "+str(longitude)+")<50/111 " \
           "ORDER BY (-(latitude -"+str(latitude)+")^2 -(longitude - "+str(longitude)+")^2)"
     try:
