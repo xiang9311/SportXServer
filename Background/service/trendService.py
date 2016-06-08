@@ -148,6 +148,10 @@ def getTrendComment(trendId , pageIndex , responseData):
                 response_comment.gymName = comment.gym.gymName
             except Exception as e:
                 pass
+            try:
+                response_comment.gymId = comment.gym.id
+            except Exception as e:
+                pass
             #createUser
             briefUser.userId = comment.createUser.id
             briefUser.userName = comment.createUser.userName
@@ -204,6 +208,7 @@ def createComment(trendId,createUser,toComment,toUser,content,gymId):
         tblTrendComment.toCommentId = toComment
     if gymId:
         tblTrendComment.gym = TblBriefGym.objects.get(id = gymId)
+        TblBriefUser.objects.get(id = createUser).lastShow = tblTrendComment.gym
     tblTrendComment.commentTime = timeUtil.getDatabaseTimeNow()
     #消息表
     tblTrendCommentMassage = TblCommentMessage()
