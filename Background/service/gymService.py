@@ -36,7 +36,7 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
 
 def getGymDetail(gymId,responseData):
     response_gym = responseData.detailGym.briefGym
-    response_cover = responseData.detailGym.gymCover
+    response_cover = responseData.detailGym.gymCovers
     response_users = responseData.briefUsers
     #gym
     briefGym = TblBriefGym.objects.get(id = gymId)
