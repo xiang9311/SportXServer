@@ -146,6 +146,7 @@ def getTrendComment(trendId , pageIndex , responseData):
                 pass
             try:
                 response_comment.gymName = comment.gym.gymName
+                response_comment.gymId = comment.gym_id
             except Exception as e:
                 pass
             try:

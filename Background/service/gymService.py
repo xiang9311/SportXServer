@@ -36,9 +36,7 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
 
 def getGymDetail(gymId,responseData):
     response_gym = responseData.detailGym.briefGym
-    response_courses = responseData.detailGym.courses
-    response_gymCards = responseData.detailGym.gymCards
-    response_cover = responseData.detailGym.gymCover
+    response_cover = responseData.detailGym.gymCovers
     response_users = responseData.briefUsers
     #gym
     briefGym = TblBriefGym.objects.get(id = gymId)
@@ -51,11 +49,11 @@ def getGymDetail(gymId,responseData):
     response_gym.longitude = briefGym.longitude
     response_gym.eqm = briefGym.equipmentBrief
     try:
-        response_courses = briefGym.courseBrief
+        responseData.detailGym.courses = briefGym.courseBrief
     except:
         pass
     #todo 卡没存，先用美团价格，需要改协议
-    response_gymCards = "价格："+str(briefGym.price) +" ,某团价："+str(briefGym.meituan_price)
+    responseData.detailGym.gymCards = "价格："+str(briefGym.price) +" ,某团价："+str(briefGym.meituan_price)
     #cover
     imgs = TblGyminfo.objects.filter(gym_id = briefGym.id)
     for img in imgs:
@@ -66,7 +64,6 @@ def getGymDetail(gymId,responseData):
     #使用位置查询usql =（用raw，自己写sql）
     try:
         users = TblBriefUser.objects.filter(lastShow_id = gymId)
-        response_user = responseData.briefUsers
         for user in users:
             response_user = response_users.add()
             response_user.userId = user.id
