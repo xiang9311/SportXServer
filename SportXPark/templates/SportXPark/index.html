@@ -4,8 +4,11 @@
     {% load staticfiles %}
 	<meta charset="UTF-8">
 	<title>Document</title>
+    <link rel="Shortcut Icon" href="{% static 'SportXPark/images/favicon.ico' %}"/>
 	<link rel="stylesheet" href="{% static 'SportXPark/css/style.css' %}">
-	<link rel="stylesheet" href="{% static 'SportXPark/css/index.css' %}">
+	<!-- <link rel="stylesheet" href="css/index2.css"> -->
+	<link rel="stylesheet" href="{% static 'SportXPark/css/index.css' %}" media="(max-width:1400px)">
+	<link rel="stylesheet" href="{% static 'SportXPark/css/index2.css' %}"  media="(min-width:1400px)">
 	<script src="{% static 'SportXPark/js/jquery-1.12.4.js' %}"></script>
 </head>
 <body>
@@ -58,7 +61,7 @@
 				<div class="brief-img">
 					<img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
 					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
-					<img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
+                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
 					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
                     <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
 					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
@@ -106,10 +109,10 @@
 		// 获取可视区的高度
 		var dHeight = document.documentElement.clientHeight;
 		var hH = dHeight/3*2;
-		$("div.head-box").css("height",hH);
+		// $("div.head-box").css("height",hH);
 
 		var hT = hH+22;
-		$("div.code-box").css("top",hT);
+		$("div.code-box").css("top","66.6vh");
 
 		// 二维码
 		$(function (){
@@ -118,7 +121,7 @@
 			var h=oDiv1.offset().top;
 			
 			$(window).scroll(function (){
-				var scrollTop=$(window).scrollTop();
+				var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
 				
 				if (scrollTop >= h)
 				{
@@ -128,10 +131,21 @@
 				else
 				{
 					oDiv1.css('position', 'absolute');
-					oDiv1.css('top',hT);
+					oDiv1.css('top','66.6vh');
 				}
 			});
 		});
+
+		// // 改变是否居中
+		// var dW = document.documentElement.clientWidth;
+		// if (dW < 1762) {
+		// 	$("div.brief-box").css("margin","20px 0");
+		// 	$("div.foot-box").css("margin","0 0 20px 0");
+		// }
+		// else{
+		// 	$("div.brief-box").css("margin","20px auto");
+		// 	$("div.foot-box").css("margin","0 auto 20px");
+		// }
 		</script>
 	<script>
 		// 头部选项卡
