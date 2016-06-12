@@ -1,5 +1,6 @@
 __author__ = '祥祥'
-from Background.models import TblBriefUser, TblUserKey ,TblRongyunToken, TblTrendImage, TblTrend ,TblLikeTrend ,TblCommentMessage
+from Background.models import TblBriefGym,TblGyminfo,\
+    TblBriefUser, TblUserKey ,TblRongyunToken, TblTrendImage, TblTrend ,TblLikeTrend ,TblCommentMessage
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
 def phoneExist(phone):
@@ -107,6 +108,30 @@ def searchUser(keyword, pageIndex, responseData):
         for tblImage in tblImages:
             images.append(tblImage.url)
     return True
+
+
+def searchGym(keyword, pageIndex, responseData):
+    maxCountPerPage = 10
+    briefGyms = responseData.briefGyms
+    responseData.maxCountPerPage = maxCountPerPage
+    try:
+        tblBriefGyms = TblBriefGym.objects.filter(gymName__contains=keyword)[pageIndex*10:(pageIndex+1)*10]
+        for tblBriefGym in tblBriefGyms:
+            response_gym = briefGyms.add()
+            response_gym.id = tblBriefGym.id
+            response_gym.gymName = tblBriefGym.gymName
+            response_gym.place = tblBriefGym.place
+            response_gym.gymAvatar = tblBriefGym.gymAvatar
+            response_gym.gymCover = TblGyminfo.objects.get(gym_id=tblBriefGym.id,imageOrder__exact=1).image
+            response_gym.latitude = tblBriefGym.latitude
+            response_gym.longitude = tblBriefGym.longitude
+            response_gym.eqm = tblBriefGym.equipmentBrief
+    except Exception as error:
+        log.info(str(error))
+        return False
+    return True
+
+
 
 def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, response_data):
     tblBriefUser = TblBriefUser.objects.get(id=userId)

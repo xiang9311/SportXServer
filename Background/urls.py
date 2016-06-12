@@ -28,6 +28,7 @@ urlpatterns = [
 
     # search
     url(r'^pilot/searchUser$',views.searchUser),
+    url(r'^pilot/searchGym$',views.searchGym),
 
     # trend
     url(r'^trend/createTrend$',viewTrend.createTrend),
