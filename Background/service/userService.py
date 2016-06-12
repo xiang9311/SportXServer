@@ -173,7 +173,7 @@ def searchGym(keyword, pageIndex, responseData):
 def getSearchKeys(response_data):
     kws = response_data.keys
     try :
-        keywords = TblSearchKeywords.objects.all().order_by('usedTimes')[0:10]
+        keywords = TblSearchKeywords.objects.all().order_by('-usedTimes')[0:10]
         for key in keywords:
             kws.append(key.keyword)
     except Exception as error:

@@ -773,7 +773,6 @@ def getSearchKeys(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if  userService.getSearchKeys(response_data):
-            log.info("搜索成功")
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
