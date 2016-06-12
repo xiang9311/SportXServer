@@ -102,6 +102,7 @@ def searchUser(keyword, pageIndex, responseData):
             kw = TblSearchKeywords.objects.get(keyword = keyword)
             if kw:
                 kw.usedTimes = kw.usedTimes + 1
+                kw.save()
             else:
                 kw = TblSearchKeywords()
                 kw.usedTimes = 1
@@ -139,6 +140,7 @@ def searchGym(keyword, pageIndex, responseData):
             kw = TblSearchKeywords.objects.get(keyword = keyword)
             if kw:
                 kw.usedTimes = kw.usedTimes + 1
+                kw.save()
             else:
                 kw = TblSearchKeywords()
                 kw.usedTimes = 1
