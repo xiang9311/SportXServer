@@ -174,10 +174,8 @@ def getSearchKeys(response_data):
     kws = response_data.keys
     try :
         keywords = TblSearchKeywords.objects.all().order_by('usedTimes')[0:10]
-        for Key in keywords:
-            kw = kws.add()
-            kw.keys = Key.keyword
-
+        for key in keywords:
+            kws.append(key.keyword)
     except Exception as error:
         log.info(str(error))
         return False
