@@ -183,14 +183,14 @@ def getSearchKeys(response_data):
 
 
 
-def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, response_data):
+def updateUser(userId, userName, avatarKey, bucketName, sex, sexChanged, sign, phone, response_data):
     tblBriefUser = TblBriefUser.objects.get(id=userId)
     if userName:
         tblBriefUser.userName = userName
     if avatarKey:
         response_data.avatarUrl = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
         tblBriefUser.userAvatar = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
-    if sex:
+    if sexChanged:
         tblBriefUser.userSex = sex
     else:
         tblBriefUser.userSex = 0

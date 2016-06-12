@@ -316,6 +316,7 @@ def updateMyInfo(request):
                 , request_params.avatarKey
                 , request_params.bucketName
                 , request_params.sex
+                , request_params.sexChanged
                 , request_params.sign
                 , request_params.phone
                 , response_data):
