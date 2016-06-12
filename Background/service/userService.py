@@ -1,5 +1,5 @@
 __author__ = '祥祥'
-from Background.models import TblBriefGym,TblGyminfo,\
+from Background.models import TblBriefGym,TblGyminfo, TblSearchKeywords,\
     TblBriefUser, TblUserKey ,TblRongyunToken, TblTrendImage, TblTrend ,TblLikeTrend ,TblCommentMessage
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 
@@ -96,17 +96,30 @@ def searchUser(keyword, pageIndex, responseData):
     maxCountPerPage = 10
     searchedUsers = responseData.searchedUsers
     responseData.maxCountPerPage = maxCountPerPage
-    tblBriefUsers = TblBriefUser.objects.filter(userName__contains=keyword)[pageIndex*10:(pageIndex+1)*10]
-    for tblBriefUser in tblBriefUsers:
-        searchedUser = searchedUsers.add()
-        searchedUser.userId = tblBriefUser.id
-        searchedUser.userName = tblBriefUser.userName
-        searchedUser.userAvatar = tblBriefUser.userAvatar
-        searchedUser.sign = tblBriefUser.userSign
-        tblImages = TblTrendImage.objects.filter(createUser=tblBriefUser).order_by('-createTime', 'priority')[0:3]
-        images = searchedUser.images
-        for tblImage in tblImages:
-            images.append(tblImage.url)
+    #关键词加入
+    try:
+        kw = TblSearchKeywords.objects.get(keyword = keyword)
+        if kw:
+            kw.usedTimes = kw.usedTimes + 1
+        else:
+            kw = TblBriefGym()
+            kw.usedTimes = 1
+            kw.keyword = keyword
+            kw.save()
+        tblBriefUsers = TblBriefUser.objects.filter(userName__contains=keyword)[pageIndex*10:(pageIndex+1)*10]
+        for tblBriefUser in tblBriefUsers:
+            searchedUser = searchedUsers.add()
+            searchedUser.userId = tblBriefUser.id
+            searchedUser.userName = tblBriefUser.userName
+            searchedUser.userAvatar = tblBriefUser.userAvatar
+            searchedUser.sign = tblBriefUser.userSign
+            tblImages = TblTrendImage.objects.filter(createUser=tblBriefUser).order_by('-createTime', 'priority')[0:3]
+            images = searchedUser.images
+            for tblImage in tblImages:
+                images.append(tblImage.url)
+    except Exception as error:
+        log.info(str(error))
+        return False
     return True
 
 
@@ -115,6 +128,14 @@ def searchGym(keyword, pageIndex, responseData):
     briefGyms = responseData.briefGyms
     responseData.maxCountPerPage = maxCountPerPage
     try:
+        kw = TblSearchKeywords.objects.get(keyword = keyword)
+        if kw:
+            kw.usedTimes = kw.usedTimes + 1
+        else:
+            kw = TblBriefGym()
+            kw.usedTimes = 1
+            kw.keyword = keyword
+            kw.save()
         tblBriefGyms = TblBriefGym.objects.filter(gymName__contains=keyword)[pageIndex*10:(pageIndex+1)*10]
         for tblBriefGym in tblBriefGyms:
             response_gym = briefGyms.add()
@@ -126,6 +147,20 @@ def searchGym(keyword, pageIndex, responseData):
             response_gym.latitude = tblBriefGym.latitude
             response_gym.longitude = tblBriefGym.longitude
             response_gym.eqm = tblBriefGym.equipmentBrief
+    except Exception as error:
+        log.info(str(error))
+        return False
+    return True
+
+
+def getSearchKeys(response_data):
+    kws = response_data.keys
+    try :
+        keywords = TblSearchKeywords.objects.all().order_by('usedTimes')[0:10]
+        for Key in keywords:
+            kw = kws.add()
+            kw.keys = Key.keyword
+
     except Exception as error:
         log.info(str(error))
         return False

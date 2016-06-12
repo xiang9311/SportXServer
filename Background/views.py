@@ -729,6 +729,61 @@ def searchGym(request):
         return HttpResponse(response_pro.SerializeToString())
     pass
 
+#10015
+"""
+message Request10015 {
+	RequestCommon common = 1;
+	Params params = 2;
+	message Params {
+	}
+}
+
+message Response10015 {
+	ResponseCommon common = 1;
+	Data data = 2;
+	message Data {
+		repeated string keys = 1;     // 注意，如果该数组为空，则data会是null，客户端做好判空准备
+	}
+}
+"""
+@csrf_exempt
+def getSearchKeys(request):
+    cmdId = 10015
+    request_pro = pilot_pb2.Request10015()
+    response_pro = pilot_pb2.Response10015()
+    try:
+        request_pro.MergeFromString(request.read())
+    except Exception as error:
+        #如果读取异常直接返回一个error
+        log.error('comunications failed')
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 101, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+    log.info("搜索:数据解析成功" + str(request_params))
+
+    #构造返回
+
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+
+        if  userService.getSearchKeys(response_data):
+            log.info("搜索成功")
+            return HttpResponse(response_pro.SerializeToString())
+        else :
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 103, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+    pass
+
 
 @csrf_exempt
 def getTrendBriefMessage(request):
