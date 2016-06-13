@@ -97,7 +97,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
             i=i-1
             result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
         #result deal
-        gymId = 4
+        gymId = 4 #防止出错给了个4
         distance = 100000
         for gyms in result:
             if ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) ) < distance:
