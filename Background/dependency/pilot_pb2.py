@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='pilot.proto',
   package='com.xiang.proto.pilot',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bpilot.proto\x12\x15\x63om.xiang.proto.pilot\x1a\x0c\x63ommon.proto\"\x82\x02\n\x0cRequest10001\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10001.Params\x1a\x85\x01\n\x06Params\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x11\n\tavatarKey\x18\x03 \x01(\t\x12\x12\n\nbucketName\x18\x04 \x01(\t\x12\x10\n\x08password\x18\x05 \x01(\t\x12!\n\x03sex\x18\x06 \x01(\x0e\x32\x14.com.xiang.proto.Sex\"\xa2\x01\n\rResponse10001\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10001.Data\x1a\'\n\x04\x44\x61ta\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x0f\n\x07userKey\x18\x02 \x01(\t\"\xa5\x01\n\x0cRequest10002\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10002.Params\x1a)\n\x06Params\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x98\x02\n\rResponse10002\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10002.Data\x1a\x9c\x01\n\x04\x44\x61ta\x12-\n\tbriefUser\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUser\x12\x0f\n\x07userKey\x18\x02 \x01(\t\x12\x14\n\x0crongyunToken\x18\x03 \x01(\t\x12!\n\x03sex\x18\x04 \x01(\x0e\x32\x14.com.xiang.proto.Sex\x12\x0c\n\x04sign\x18\x05 \x01(\t\x12\r\n\x05phone\x18\x06 \x01(\t\"\xfe\x01\n\x0cRequest10004\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10004.Params\x1a\x81\x01\n\x06Params\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x11\n\tavatarKey\x18\x02 \x01(\t\x12\x12\n\nbucketName\x18\x03 \x01(\t\x12!\n\x03sex\x18\x04 \x01(\x0e\x32\x14.com.xiang.proto.Sex\x12\x0c\n\x04sign\x18\x05 \x01(\t\x12\r\n\x05phone\x18\x06 \x01(\t\"\x94\x01\n\rResponse10004\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10004.Data\x1a\x19\n\x04\x44\x61ta\x12\x11\n\tavatarUrl\x18\x01 \x01(\t\"\xa7\x01\n\x0cRequest10005\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10005.Params\x1a+\n\x06Params\x12\x11\n\tpageIndex\x18\x01 \x01(\x05\x12\x0e\n\x06userId\x18\x02 \x01(\x05\"\xc2\x01\n\rResponse10005\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10005.Data\x1aG\n\x04\x44\x61ta\x12&\n\x06trends\x18\x01 \x03(\x0b\x32\x16.com.xiang.proto.Trend\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\x97\x01\n\x0cRequest10006\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10006.Params\x1a\x1b\n\x06Params\x12\x11\n\tpageIndex\x18\x01 \x01(\x05\"\xd4\x01\n\rResponse10006\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10006.Data\x1aY\n\x04\x44\x61ta\x12\x38\n\x0f\x63ommentMessages\x18\x01 \x03(\x0b\x32\x1f.com.xiang.proto.CommentMessage\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\xaa\x01\n\x0cRequest10007\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10007.Params\x1a.\n\x06Params\x12\x10\n\x08\x63learAll\x18\x01 \x01(\x08\x12\x12\n\nmessageIds\x18\x02 \x03(\x05\"\x81\x01\n\rResponse10007\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10007.Data\x1a\x06\n\x04\x44\x61ta\"\x84\x01\n\x0cRequest10008\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10008.Params\x1a\x08\n\x06Params\"\x90\x01\n\rResponse10008\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10008.Data\x1a\x15\n\x04\x44\x61ta\x12\r\n\x05\x63ount\x18\x01 \x01(\x05\"\x94\x01\n\x0cRequest10009\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10009.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb1\x01\n\rResponse10009\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10009.Data\x1a\x36\n\x04\x44\x61ta\x12.\n\nbriefUsers\x18\x01 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\x94\x01\n\x0cRequest10010\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10010.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb1\x01\n\rResponse10010\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10010.Data\x1a\x36\n\x04\x44\x61ta\x12.\n\nbriefUsers\x18\x01 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\xa8\x01\n\x0cRequest10011\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10011.Params\x1a,\n\x06Params\x12\x10\n\x08toUserId\x18\x01 \x01(\x05\x12\x10\n\x08isFollow\x18\x02 \x01(\x08\"\x81\x01\n\rResponse10011\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10011.Data\x1a\x06\n\x04\x44\x61ta\"\x94\x01\n\x0cRequest10012\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10012.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb2\x01\n\rResponse10012\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10012.Data\x1a\x37\n\x04\x44\x61ta\x12/\n\ndetailUser\x18\x01 \x01(\x0b\x32\x1b.com.xiang.proto.DetailUser\"\xa8\x01\n\x0cRequest10013\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10013.Params\x1a,\n\x06Params\x12\x0f\n\x07keyword\x18\x01 \x01(\t\x12\x11\n\tpageIndex\x18\x02 \x01(\x05\"\xd0\x01\n\rResponse10013\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10013.Data\x1aU\n\x04\x44\x61ta\x12\x34\n\rsearchedUsers\x18\x01 \x03(\x0b\x32\x1d.com.xiang.proto.SearchedUser\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\xa8\x01\n\x0cRequest10014\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10014.Params\x1a,\n\x06Params\x12\x0f\n\x07keyword\x18\x01 \x01(\t\x12\x11\n\tpageIndex\x18\x02 \x01(\x05\"\xc8\x01\n\rResponse10014\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10014.Data\x1aM\n\x04\x44\x61ta\x12,\n\tbriefGyms\x18\x01 \x03(\x0b\x32\x19.com.xiang.proto.BriefGym\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\x84\x01\n\x0cRequest10015\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10015.Params\x1a\x08\n\x06Params\"\x8f\x01\n\rResponse10015\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10015.Data\x1a\x14\n\x04\x44\x61ta\x12\x0c\n\x04keys\x18\x01 \x03(\t\"\x93\x01\n\x0cRequest10016\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10016.Params\x1a\x17\n\x06Params\x12\r\n\x05phone\x18\x01 \x01(\t\"\x92\x01\n\rResponse10016\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10016.Data\x1a\x17\n\x04\x44\x61ta\x12\x0f\n\x07\x63\x61nUser\x18\x01 \x01(\x08\"\x84\x01\n\x0cRequest10017\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10017.Params\x1a\x08\n\x06Params\"\xc0\x01\n\rResponse10017\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10017.Data\x1a\x45\n\x04\x44\x61ta\x12=\n\x11trendBriefMessage\x18\x01 \x01(\x0b\x32\".com.xiang.proto.TrendBriefMessage\"\x94\x01\n\x0cRequest10018\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10018.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb0\x01\n\rResponse10018\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10018.Data\x1a\x35\n\x04\x44\x61ta\x12-\n\tbriefUser\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUserb\x06proto3')
+  serialized_pb=_b('\n\x0bpilot.proto\x12\x15\x63om.xiang.proto.pilot\x1a\x0c\x63ommon.proto\"\x82\x02\n\x0cRequest10001\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10001.Params\x1a\x85\x01\n\x06Params\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x11\n\tavatarKey\x18\x03 \x01(\t\x12\x12\n\nbucketName\x18\x04 \x01(\t\x12\x10\n\x08password\x18\x05 \x01(\t\x12!\n\x03sex\x18\x06 \x01(\x0e\x32\x14.com.xiang.proto.Sex\"\xa2\x01\n\rResponse10001\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10001.Data\x1a\'\n\x04\x44\x61ta\x12\x0e\n\x06userId\x18\x01 \x01(\x05\x12\x0f\n\x07userKey\x18\x02 \x01(\t\"\xa5\x01\n\x0cRequest10002\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10002.Params\x1a)\n\x06Params\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x98\x02\n\rResponse10002\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10002.Data\x1a\x9c\x01\n\x04\x44\x61ta\x12-\n\tbriefUser\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUser\x12\x0f\n\x07userKey\x18\x02 \x01(\t\x12\x14\n\x0crongyunToken\x18\x03 \x01(\t\x12!\n\x03sex\x18\x04 \x01(\x0e\x32\x14.com.xiang.proto.Sex\x12\x0c\n\x04sign\x18\x05 \x01(\t\x12\r\n\x05phone\x18\x06 \x01(\t\"\x92\x02\n\x0cRequest10004\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10004.Params\x1a\x95\x01\n\x06Params\x12\x10\n\x08userName\x18\x01 \x01(\t\x12\x11\n\tavatarKey\x18\x02 \x01(\t\x12\x12\n\nbucketName\x18\x03 \x01(\t\x12!\n\x03sex\x18\x04 \x01(\x0e\x32\x14.com.xiang.proto.Sex\x12\x0c\n\x04sign\x18\x05 \x01(\t\x12\r\n\x05phone\x18\x06 \x01(\t\x12\x12\n\nsexChanged\x18\x07 \x01(\x08\"\x94\x01\n\rResponse10004\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10004.Data\x1a\x19\n\x04\x44\x61ta\x12\x11\n\tavatarUrl\x18\x01 \x01(\t\"\xa7\x01\n\x0cRequest10005\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10005.Params\x1a+\n\x06Params\x12\x11\n\tpageIndex\x18\x01 \x01(\x05\x12\x0e\n\x06userId\x18\x02 \x01(\x05\"\xc2\x01\n\rResponse10005\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10005.Data\x1aG\n\x04\x44\x61ta\x12&\n\x06trends\x18\x01 \x03(\x0b\x32\x16.com.xiang.proto.Trend\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\x97\x01\n\x0cRequest10006\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10006.Params\x1a\x1b\n\x06Params\x12\x11\n\tpageIndex\x18\x01 \x01(\x05\"\xd4\x01\n\rResponse10006\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10006.Data\x1aY\n\x04\x44\x61ta\x12\x38\n\x0f\x63ommentMessages\x18\x01 \x03(\x0b\x32\x1f.com.xiang.proto.CommentMessage\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\xaa\x01\n\x0cRequest10007\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10007.Params\x1a.\n\x06Params\x12\x10\n\x08\x63learAll\x18\x01 \x01(\x08\x12\x12\n\nmessageIds\x18\x02 \x03(\x05\"\x81\x01\n\rResponse10007\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10007.Data\x1a\x06\n\x04\x44\x61ta\"\x84\x01\n\x0cRequest10008\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10008.Params\x1a\x08\n\x06Params\"\x90\x01\n\rResponse10008\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10008.Data\x1a\x15\n\x04\x44\x61ta\x12\r\n\x05\x63ount\x18\x01 \x01(\x05\"\x94\x01\n\x0cRequest10009\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10009.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb1\x01\n\rResponse10009\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10009.Data\x1a\x36\n\x04\x44\x61ta\x12.\n\nbriefUsers\x18\x01 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\x94\x01\n\x0cRequest10010\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10010.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb1\x01\n\rResponse10010\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10010.Data\x1a\x36\n\x04\x44\x61ta\x12.\n\nbriefUsers\x18\x01 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\xa8\x01\n\x0cRequest10011\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10011.Params\x1a,\n\x06Params\x12\x10\n\x08toUserId\x18\x01 \x01(\x05\x12\x10\n\x08isFollow\x18\x02 \x01(\x08\"\x81\x01\n\rResponse10011\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10011.Data\x1a\x06\n\x04\x44\x61ta\"\x94\x01\n\x0cRequest10012\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10012.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb2\x01\n\rResponse10012\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10012.Data\x1a\x37\n\x04\x44\x61ta\x12/\n\ndetailUser\x18\x01 \x01(\x0b\x32\x1b.com.xiang.proto.DetailUser\"\xa8\x01\n\x0cRequest10013\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10013.Params\x1a,\n\x06Params\x12\x0f\n\x07keyword\x18\x01 \x01(\t\x12\x11\n\tpageIndex\x18\x02 \x01(\x05\"\xd0\x01\n\rResponse10013\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10013.Data\x1aU\n\x04\x44\x61ta\x12\x34\n\rsearchedUsers\x18\x01 \x03(\x0b\x32\x1d.com.xiang.proto.SearchedUser\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\xa8\x01\n\x0cRequest10014\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10014.Params\x1a,\n\x06Params\x12\x0f\n\x07keyword\x18\x01 \x01(\t\x12\x11\n\tpageIndex\x18\x02 \x01(\x05\"\xc8\x01\n\rResponse10014\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10014.Data\x1aM\n\x04\x44\x61ta\x12,\n\tbriefGyms\x18\x01 \x03(\x0b\x32\x19.com.xiang.proto.BriefGym\x12\x17\n\x0fmaxCountPerPage\x18\x02 \x01(\x05\"\x84\x01\n\x0cRequest10015\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10015.Params\x1a\x08\n\x06Params\"\x8f\x01\n\rResponse10015\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10015.Data\x1a\x14\n\x04\x44\x61ta\x12\x0c\n\x04keys\x18\x01 \x03(\t\"\x93\x01\n\x0cRequest10016\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10016.Params\x1a\x17\n\x06Params\x12\r\n\x05phone\x18\x01 \x01(\t\"\x92\x01\n\rResponse10016\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10016.Data\x1a\x17\n\x04\x44\x61ta\x12\x0f\n\x07\x63\x61nUser\x18\x01 \x01(\x08\"\x84\x01\n\x0cRequest10017\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10017.Params\x1a\x08\n\x06Params\"\xc0\x01\n\rResponse10017\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10017.Data\x1a\x45\n\x04\x44\x61ta\x12=\n\x11trendBriefMessage\x18\x01 \x01(\x0b\x32\".com.xiang.proto.TrendBriefMessage\"\x94\x01\n\x0cRequest10018\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10018.Params\x1a\x18\n\x06Params\x12\x0e\n\x06userId\x18\x01 \x01(\x05\"\xb0\x01\n\rResponse10018\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10018.Data\x1a\x35\n\x04\x44\x61ta\x12-\n\tbriefUser\x18\x01 \x01(\x0b\x32\x1a.com.xiang.proto.BriefUser\"\xa9\x01\n\x0cRequest10019\x12.\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1e.com.xiang.proto.RequestCommon\x12:\n\x06params\x18\x02 \x01(\x0b\x32*.com.xiang.proto.pilot.Request10019.Params\x1a-\n\x06Params\x12\x11\n\tlongitude\x18\x01 \x01(\x02\x12\x10\n\x08latitude\x18\x02 \x01(\x02\"\xb0\x01\n\rResponse10019\x12/\n\x06\x63ommon\x18\x01 \x01(\x0b\x32\x1f.com.xiang.proto.ResponseCommon\x12\x37\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32).com.xiang.proto.pilot.Response10019.Data\x1a\x35\n\x04\x44\x61ta\x12-\n\tbriefUser\x18\x01 \x03(\x0b\x32\x1a.com.xiang.proto.BriefUserb\x06proto3')
   ,
   dependencies=[common__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -433,6 +433,13 @@ _REQUEST10004_PARAMS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='sexChanged', full_name='com.xiang.proto.pilot.Request10004.Params.sexChanged', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -446,7 +453,7 @@ _REQUEST10004_PARAMS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1055,
-  serialized_end=1184,
+  serialized_end=1204,
 )
 
 _REQUEST10004 = _descriptor.Descriptor(
@@ -483,7 +490,7 @@ _REQUEST10004 = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=930,
-  serialized_end=1184,
+  serialized_end=1204,
 )
 
 
@@ -513,8 +520,8 @@ _RESPONSE10004_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1310,
-  serialized_end=1335,
+  serialized_start=1330,
+  serialized_end=1355,
 )
 
 _RESPONSE10004 = _descriptor.Descriptor(
@@ -550,8 +557,8 @@ _RESPONSE10004 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1187,
-  serialized_end=1335,
+  serialized_start=1207,
+  serialized_end=1355,
 )
 
 
@@ -588,8 +595,8 @@ _REQUEST10005_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1462,
-  serialized_end=1505,
+  serialized_start=1482,
+  serialized_end=1525,
 )
 
 _REQUEST10005 = _descriptor.Descriptor(
@@ -625,8 +632,8 @@ _REQUEST10005 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1338,
-  serialized_end=1505,
+  serialized_start=1358,
+  serialized_end=1525,
 )
 
 
@@ -663,8 +670,8 @@ _RESPONSE10005_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1631,
-  serialized_end=1702,
+  serialized_start=1651,
+  serialized_end=1722,
 )
 
 _RESPONSE10005 = _descriptor.Descriptor(
@@ -700,8 +707,8 @@ _RESPONSE10005 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1508,
-  serialized_end=1702,
+  serialized_start=1528,
+  serialized_end=1722,
 )
 
 
@@ -731,8 +738,8 @@ _REQUEST10006_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1462,
-  serialized_end=1489,
+  serialized_start=1482,
+  serialized_end=1509,
 )
 
 _REQUEST10006 = _descriptor.Descriptor(
@@ -768,8 +775,8 @@ _REQUEST10006 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1705,
-  serialized_end=1856,
+  serialized_start=1725,
+  serialized_end=1876,
 )
 
 
@@ -806,8 +813,8 @@ _RESPONSE10006_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1982,
-  serialized_end=2071,
+  serialized_start=2002,
+  serialized_end=2091,
 )
 
 _RESPONSE10006 = _descriptor.Descriptor(
@@ -843,8 +850,8 @@ _RESPONSE10006 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1859,
-  serialized_end=2071,
+  serialized_start=1879,
+  serialized_end=2091,
 )
 
 
@@ -881,8 +888,8 @@ _REQUEST10007_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2198,
-  serialized_end=2244,
+  serialized_start=2218,
+  serialized_end=2264,
 )
 
 _REQUEST10007 = _descriptor.Descriptor(
@@ -918,8 +925,8 @@ _REQUEST10007 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2074,
-  serialized_end=2244,
+  serialized_start=2094,
+  serialized_end=2264,
 )
 
 
@@ -979,8 +986,8 @@ _RESPONSE10007 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2247,
-  serialized_end=2376,
+  serialized_start=2267,
+  serialized_end=2396,
 )
 
 
@@ -1040,8 +1047,8 @@ _REQUEST10008 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2379,
-  serialized_end=2511,
+  serialized_start=2399,
+  serialized_end=2531,
 )
 
 
@@ -1071,8 +1078,8 @@ _RESPONSE10008_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2637,
-  serialized_end=2658,
+  serialized_start=2657,
+  serialized_end=2678,
 )
 
 _RESPONSE10008 = _descriptor.Descriptor(
@@ -1108,8 +1115,8 @@ _RESPONSE10008 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2514,
-  serialized_end=2658,
+  serialized_start=2534,
+  serialized_end=2678,
 )
 
 
@@ -1139,8 +1146,8 @@ _REQUEST10009_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2785,
-  serialized_end=2809,
+  serialized_start=2805,
+  serialized_end=2829,
 )
 
 _REQUEST10009 = _descriptor.Descriptor(
@@ -1176,8 +1183,8 @@ _REQUEST10009 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2661,
-  serialized_end=2809,
+  serialized_start=2681,
+  serialized_end=2829,
 )
 
 
@@ -1207,8 +1214,8 @@ _RESPONSE10009_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2935,
-  serialized_end=2989,
+  serialized_start=2955,
+  serialized_end=3009,
 )
 
 _RESPONSE10009 = _descriptor.Descriptor(
@@ -1244,8 +1251,8 @@ _RESPONSE10009 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2812,
-  serialized_end=2989,
+  serialized_start=2832,
+  serialized_end=3009,
 )
 
 
@@ -1275,8 +1282,8 @@ _REQUEST10010_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2785,
-  serialized_end=2809,
+  serialized_start=2805,
+  serialized_end=2829,
 )
 
 _REQUEST10010 = _descriptor.Descriptor(
@@ -1312,8 +1319,8 @@ _REQUEST10010 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2992,
-  serialized_end=3140,
+  serialized_start=3012,
+  serialized_end=3160,
 )
 
 
@@ -1343,8 +1350,8 @@ _RESPONSE10010_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2935,
-  serialized_end=2989,
+  serialized_start=2955,
+  serialized_end=3009,
 )
 
 _RESPONSE10010 = _descriptor.Descriptor(
@@ -1380,8 +1387,8 @@ _RESPONSE10010 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3143,
-  serialized_end=3320,
+  serialized_start=3163,
+  serialized_end=3340,
 )
 
 
@@ -1418,8 +1425,8 @@ _REQUEST10011_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3447,
-  serialized_end=3491,
+  serialized_start=3467,
+  serialized_end=3511,
 )
 
 _REQUEST10011 = _descriptor.Descriptor(
@@ -1455,8 +1462,8 @@ _REQUEST10011 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3323,
-  serialized_end=3491,
+  serialized_start=3343,
+  serialized_end=3511,
 )
 
 
@@ -1516,8 +1523,8 @@ _RESPONSE10011 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3494,
-  serialized_end=3623,
+  serialized_start=3514,
+  serialized_end=3643,
 )
 
 
@@ -1547,8 +1554,8 @@ _REQUEST10012_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2785,
-  serialized_end=2809,
+  serialized_start=2805,
+  serialized_end=2829,
 )
 
 _REQUEST10012 = _descriptor.Descriptor(
@@ -1584,8 +1591,8 @@ _REQUEST10012 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3626,
-  serialized_end=3774,
+  serialized_start=3646,
+  serialized_end=3794,
 )
 
 
@@ -1615,8 +1622,8 @@ _RESPONSE10012_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3900,
-  serialized_end=3955,
+  serialized_start=3920,
+  serialized_end=3975,
 )
 
 _RESPONSE10012 = _descriptor.Descriptor(
@@ -1652,8 +1659,8 @@ _RESPONSE10012 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3777,
-  serialized_end=3955,
+  serialized_start=3797,
+  serialized_end=3975,
 )
 
 
@@ -1690,8 +1697,8 @@ _REQUEST10013_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4082,
-  serialized_end=4126,
+  serialized_start=4102,
+  serialized_end=4146,
 )
 
 _REQUEST10013 = _descriptor.Descriptor(
@@ -1727,8 +1734,8 @@ _REQUEST10013 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3958,
-  serialized_end=4126,
+  serialized_start=3978,
+  serialized_end=4146,
 )
 
 
@@ -1765,8 +1772,8 @@ _RESPONSE10013_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4252,
-  serialized_end=4337,
+  serialized_start=4272,
+  serialized_end=4357,
 )
 
 _RESPONSE10013 = _descriptor.Descriptor(
@@ -1802,8 +1809,8 @@ _RESPONSE10013 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4129,
-  serialized_end=4337,
+  serialized_start=4149,
+  serialized_end=4357,
 )
 
 
@@ -1840,8 +1847,8 @@ _REQUEST10014_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4082,
-  serialized_end=4126,
+  serialized_start=4102,
+  serialized_end=4146,
 )
 
 _REQUEST10014 = _descriptor.Descriptor(
@@ -1877,8 +1884,8 @@ _REQUEST10014 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4340,
-  serialized_end=4508,
+  serialized_start=4360,
+  serialized_end=4528,
 )
 
 
@@ -1915,8 +1922,8 @@ _RESPONSE10014_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4634,
-  serialized_end=4711,
+  serialized_start=4654,
+  serialized_end=4731,
 )
 
 _RESPONSE10014 = _descriptor.Descriptor(
@@ -1952,8 +1959,8 @@ _RESPONSE10014 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4511,
-  serialized_end=4711,
+  serialized_start=4531,
+  serialized_end=4731,
 )
 
 
@@ -2013,8 +2020,8 @@ _REQUEST10015 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4714,
-  serialized_end=4846,
+  serialized_start=4734,
+  serialized_end=4866,
 )
 
 
@@ -2044,8 +2051,8 @@ _RESPONSE10015_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4972,
-  serialized_end=4992,
+  serialized_start=4992,
+  serialized_end=5012,
 )
 
 _RESPONSE10015 = _descriptor.Descriptor(
@@ -2081,8 +2088,8 @@ _RESPONSE10015 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4849,
-  serialized_end=4992,
+  serialized_start=4869,
+  serialized_end=5012,
 )
 
 
@@ -2149,8 +2156,8 @@ _REQUEST10016 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4995,
-  serialized_end=5142,
+  serialized_start=5015,
+  serialized_end=5162,
 )
 
 
@@ -2180,8 +2187,8 @@ _RESPONSE10016_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5268,
-  serialized_end=5291,
+  serialized_start=5288,
+  serialized_end=5311,
 )
 
 _RESPONSE10016 = _descriptor.Descriptor(
@@ -2217,8 +2224,8 @@ _RESPONSE10016 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5145,
-  serialized_end=5291,
+  serialized_start=5165,
+  serialized_end=5311,
 )
 
 
@@ -2278,8 +2285,8 @@ _REQUEST10017 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5294,
-  serialized_end=5426,
+  serialized_start=5314,
+  serialized_end=5446,
 )
 
 
@@ -2309,8 +2316,8 @@ _RESPONSE10017_DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5552,
-  serialized_end=5621,
+  serialized_start=5572,
+  serialized_end=5641,
 )
 
 _RESPONSE10017 = _descriptor.Descriptor(
@@ -2346,8 +2353,8 @@ _RESPONSE10017 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5429,
-  serialized_end=5621,
+  serialized_start=5449,
+  serialized_end=5641,
 )
 
 
@@ -2377,8 +2384,8 @@ _REQUEST10018_PARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2785,
-  serialized_end=2809,
+  serialized_start=2805,
+  serialized_end=2829,
 )
 
 _REQUEST10018 = _descriptor.Descriptor(
@@ -2414,8 +2421,8 @@ _REQUEST10018 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5624,
-  serialized_end=5772,
+  serialized_start=5644,
+  serialized_end=5792,
 )
 
 
@@ -2482,8 +2489,151 @@ _RESPONSE10018 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5775,
-  serialized_end=5951,
+  serialized_start=5795,
+  serialized_end=5971,
+)
+
+
+_REQUEST10019_PARAMS = _descriptor.Descriptor(
+  name='Params',
+  full_name='com.xiang.proto.pilot.Request10019.Params',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='longitude', full_name='com.xiang.proto.pilot.Request10019.Params.longitude', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='latitude', full_name='com.xiang.proto.pilot.Request10019.Params.latitude', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6098,
+  serialized_end=6143,
+)
+
+_REQUEST10019 = _descriptor.Descriptor(
+  name='Request10019',
+  full_name='com.xiang.proto.pilot.Request10019',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='common', full_name='com.xiang.proto.pilot.Request10019.common', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='params', full_name='com.xiang.proto.pilot.Request10019.params', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_REQUEST10019_PARAMS, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5974,
+  serialized_end=6143,
+)
+
+
+_RESPONSE10019_DATA = _descriptor.Descriptor(
+  name='Data',
+  full_name='com.xiang.proto.pilot.Response10019.Data',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='briefUser', full_name='com.xiang.proto.pilot.Response10019.Data.briefUser', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6269,
+  serialized_end=6322,
+)
+
+_RESPONSE10019 = _descriptor.Descriptor(
+  name='Response10019',
+  full_name='com.xiang.proto.pilot.Response10019',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='common', full_name='com.xiang.proto.pilot.Response10019.common', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='com.xiang.proto.pilot.Response10019.data', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_RESPONSE10019_DATA, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6146,
+  serialized_end=6322,
 )
 
 _REQUEST10001_PARAMS.fields_by_name['sex'].enum_type = common__pb2._SEX
@@ -2601,6 +2751,13 @@ _RESPONSE10018_DATA.fields_by_name['briefUser'].message_type = common__pb2._BRIE
 _RESPONSE10018_DATA.containing_type = _RESPONSE10018
 _RESPONSE10018.fields_by_name['common'].message_type = common__pb2._RESPONSECOMMON
 _RESPONSE10018.fields_by_name['data'].message_type = _RESPONSE10018_DATA
+_REQUEST10019_PARAMS.containing_type = _REQUEST10019
+_REQUEST10019.fields_by_name['common'].message_type = common__pb2._REQUESTCOMMON
+_REQUEST10019.fields_by_name['params'].message_type = _REQUEST10019_PARAMS
+_RESPONSE10019_DATA.fields_by_name['briefUser'].message_type = common__pb2._BRIEFUSER
+_RESPONSE10019_DATA.containing_type = _RESPONSE10019
+_RESPONSE10019.fields_by_name['common'].message_type = common__pb2._RESPONSECOMMON
+_RESPONSE10019.fields_by_name['data'].message_type = _RESPONSE10019_DATA
 DESCRIPTOR.message_types_by_name['Request10001'] = _REQUEST10001
 DESCRIPTOR.message_types_by_name['Response10001'] = _RESPONSE10001
 DESCRIPTOR.message_types_by_name['Request10002'] = _REQUEST10002
@@ -2635,6 +2792,8 @@ DESCRIPTOR.message_types_by_name['Request10017'] = _REQUEST10017
 DESCRIPTOR.message_types_by_name['Response10017'] = _RESPONSE10017
 DESCRIPTOR.message_types_by_name['Request10018'] = _REQUEST10018
 DESCRIPTOR.message_types_by_name['Response10018'] = _RESPONSE10018
+DESCRIPTOR.message_types_by_name['Request10019'] = _REQUEST10019
+DESCRIPTOR.message_types_by_name['Response10019'] = _RESPONSE10019
 
 Request10001 = _reflection.GeneratedProtocolMessageType('Request10001', (_message.Message,), dict(
 
@@ -3145,6 +3304,36 @@ Response10018 = _reflection.GeneratedProtocolMessageType('Response10018', (_mess
   ))
 _sym_db.RegisterMessage(Response10018)
 _sym_db.RegisterMessage(Response10018.Data)
+
+Request10019 = _reflection.GeneratedProtocolMessageType('Request10019', (_message.Message,), dict(
+
+  Params = _reflection.GeneratedProtocolMessageType('Params', (_message.Message,), dict(
+    DESCRIPTOR = _REQUEST10019_PARAMS,
+    __module__ = 'pilot_pb2'
+    # @@protoc_insertion_point(class_scope:com.xiang.proto.pilot.Request10019.Params)
+    ))
+  ,
+  DESCRIPTOR = _REQUEST10019,
+  __module__ = 'pilot_pb2'
+  # @@protoc_insertion_point(class_scope:com.xiang.proto.pilot.Request10019)
+  ))
+_sym_db.RegisterMessage(Request10019)
+_sym_db.RegisterMessage(Request10019.Params)
+
+Response10019 = _reflection.GeneratedProtocolMessageType('Response10019', (_message.Message,), dict(
+
+  Data = _reflection.GeneratedProtocolMessageType('Data', (_message.Message,), dict(
+    DESCRIPTOR = _RESPONSE10019_DATA,
+    __module__ = 'pilot_pb2'
+    # @@protoc_insertion_point(class_scope:com.xiang.proto.pilot.Response10019.Data)
+    ))
+  ,
+  DESCRIPTOR = _RESPONSE10019,
+  __module__ = 'pilot_pb2'
+  # @@protoc_insertion_point(class_scope:com.xiang.proto.pilot.Response10019)
+  ))
+_sym_db.RegisterMessage(Response10019)
+_sym_db.RegisterMessage(Response10019.Data)
 
 
 # @@protoc_insertion_point(module_scope)
