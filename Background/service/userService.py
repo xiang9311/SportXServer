@@ -99,14 +99,22 @@ def searchUser(keyword, pageIndex, responseData):
     responseData.maxCountPerPage = maxCountPerPage
     #关键词加入
     try:
-        kw = TblSearchKeywords.objects.get(keyword = keyword)
-        if kw:
-            kw.usedTimes = kw.usedTimes + 1
-        else:
-            kw = TblBriefGym()
+        try:
+            kw = TblSearchKeywords.objects.get(keyword = keyword)
+            if kw:
+                kw.usedTimes = kw.usedTimes + 1
+                kw.save()
+            else:
+                kw = TblSearchKeywords()
+                kw.usedTimes = 1
+                kw.keyword = keyword
+                kw.save()
+        except Exception as error:
+            kw = TblSearchKeywords()
             kw.usedTimes = 1
             kw.keyword = keyword
             kw.save()
+            log.info(str(error))
         tblBriefUsers = TblBriefUser.objects.filter(userName__contains=keyword)[pageIndex*10:(pageIndex+1)*10]
         for tblBriefUser in tblBriefUsers:
             searchedUser = searchedUsers.add()
@@ -129,14 +137,23 @@ def searchGym(keyword, pageIndex, responseData):
     briefGyms = responseData.briefGyms
     responseData.maxCountPerPage = maxCountPerPage
     try:
-        kw = TblSearchKeywords.objects.get(keyword = keyword)
-        if kw:
-            kw.usedTimes = kw.usedTimes + 1
-        else:
-            kw = TblBriefGym()
+        try:
+            kw = TblSearchKeywords.objects.get(keyword = keyword)
+            if kw:
+                kw.usedTimes = kw.usedTimes + 1
+                kw.save()
+            else:
+                kw = TblSearchKeywords()
+                kw.usedTimes = 1
+                kw.keyword = keyword
+                kw.save()
+        except Exception as error:
+            kw = TblSearchKeywords()
             kw.usedTimes = 1
             kw.keyword = keyword
             kw.save()
+            log.info(str(error))
+
         tblBriefGyms = TblBriefGym.objects.filter(gymName__contains=keyword)[pageIndex*10:(pageIndex+1)*10]
         for tblBriefGym in tblBriefGyms:
             response_gym = briefGyms.add()
@@ -157,11 +174,9 @@ def searchGym(keyword, pageIndex, responseData):
 def getSearchKeys(response_data):
     kws = response_data.keys
     try :
-        keywords = TblSearchKeywords.objects.all().order_by('usedTimes')[0:10]
-        for Key in keywords:
-            kw = kws.add()
-            kw.keys = Key.keyword
-
+        keywords = TblSearchKeywords.objects.all().order_by('-usedTimes')[0:10]
+        for key in keywords:
+            kws.append(key.keyword)
     except Exception as error:
         log.info(str(error))
         return False
@@ -169,17 +184,15 @@ def getSearchKeys(response_data):
 
 
 
-def updateUser(userId, userName, avatarKey, bucketName, sex, sign, phone, response_data):
+def updateUser(userId, userName, avatarKey, bucketName, sex, sexChanged, sign, phone, response_data):
     tblBriefUser = TblBriefUser.objects.get(id=userId)
     if userName:
         tblBriefUser.userName = userName
     if avatarKey:
         response_data.avatarUrl = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
         tblBriefUser.userAvatar = qiniuUtil.getBaseUrlByBucketName(bucketName) + avatarKey
-    if sex:
+    if sexChanged:
         tblBriefUser.userSex = sex
-    else:
-        tblBriefUser.userSex = 0
     if sign:
         tblBriefUser.userSign = sign
     if phone:

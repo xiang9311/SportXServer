@@ -316,6 +316,7 @@ def updateMyInfo(request):
                 , request_params.avatarKey
                 , request_params.bucketName
                 , request_params.sex
+                , request_params.sexChanged
                 , request_params.sign
                 , request_params.phone
                 , response_data):
@@ -773,7 +774,6 @@ def getSearchKeys(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
 
         if  userService.getSearchKeys(response_data):
-            log.info("搜索成功")
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)

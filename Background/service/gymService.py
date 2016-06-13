@@ -87,7 +87,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
     :return:
     """
     if gymId:
-        TblBriefUser.objects.get(id=userId).lastShow = gymId#还没加字段
+        TblBriefUser.objects.get(id=userId).lastShow_id = gymId#还没加字段
     else :
         #todo:附近的体育馆id
         geoh = encode(latitude,longitude)
