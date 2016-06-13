@@ -819,6 +819,7 @@ def getTrendBriefMessage(request):
         initCommonErrorResponse(cmdId, 103, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
+
 @csrf_exempt
 def getBriefUser(request):
     cmdId = 10018
@@ -851,6 +852,46 @@ def getBriefUser(request):
                 return HttpResponse(response_pro.SerializeToString())
         elif userService.getBriefUser(request_common.userid,request_common.userid, response_data):
                 return HttpResponse(response_pro.SerializeToString())
+        else :
+            initCommonErrorResponse(cmdId, 1, response_common)
+            return HttpResponse(response_pro.SerializeToString())
+    except Exception as error:
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 103, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+
+
+@csrf_exempt
+def getRecommendUser(request):
+    cmdId = 10019
+    request_pro = pilot_pb2.Request10019()
+    response_pro = pilot_pb2.Response10019()
+    try:
+        protodata = request.read()
+        log.info(protodata)
+        request_pro.MergeFromString(protodata)
+    except Exception as error:
+        #如果读取异常直接返回一个error
+        log.error('comunications failed')
+        log.error(str(error))
+        initCommonErrorResponse(cmdId, 0, response_pro.common)
+        return HttpResponse(response_pro.SerializeToString())
+
+    request_common = request_pro.common
+    request_params = request_pro.params
+
+    log.info("搜索:数据解析成功" + str(request_params))
+    longitude = request_params.longitude
+    latitude = request_params.latitude
+
+    #构造返回
+    try:
+        response_common = response_pro.common
+        response_data = response_pro.data
+        initCommonResponse(0, 'success', cmdId, 0, response_common)
+        if  userService.getRecommendUser(longitude , latitude  , response_data):
+            return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)
             return HttpResponse(response_pro.SerializeToString())

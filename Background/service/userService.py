@@ -2,6 +2,7 @@ __author__ = '祥祥'
 from Background.models import TblBriefGym,TblGyminfo, TblSearchKeywords,\
     TblBriefUser, TblUserKey ,TblRongyunToken, TblTrendImage, TblTrend ,TblLikeTrend ,TblCommentMessage
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
+from Background.dependency.geohash import encode, decode, neighbors
 
 def phoneExist(phone):
     users = TblBriefUser.objects.filter(userPhone=phone)
@@ -422,3 +423,23 @@ def getBriefUser(userId , operateUser, responseData):
     return True
 
 
+#10018
+def getRecommendUser(longitude , latitude  , responseData):
+    briefUsers = responseData.briefUser
+    geoh = encode(latitude,longitude)
+    i=6
+    try:
+        result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
+        while not result:
+            i=i-1
+            result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
+        #没排序
+        for user  in result[0:10]:
+            briefUser = briefUsers.add()
+            briefUser.userId = user.userId
+            briefUser.userName = user.userName
+            briefUser.userAvatar = user.userAvatar
+
+    except Exception as e:
+        return False
+    return True

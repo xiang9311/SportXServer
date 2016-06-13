@@ -41,6 +41,7 @@ class TblBriefUser(models.Model):
     signTime = models.DateTimeField()
     hadReadMessage = models.IntegerField()
     lastShow = models.ForeignKey(TblBriefGym,null=True) #最后一次出现的体育馆
+    geohash = models.CharField(max_length=13,null=True)
 
 class TblUserKey(models.Model):
     user = models.ForeignKey(TblBriefUser)
