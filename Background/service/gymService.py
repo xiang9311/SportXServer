@@ -2,7 +2,7 @@ from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCours
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 from Background.dependency.geohash import encode, decode, neighbors
 
-def getGymList(longitude , latitude ,pageIndex , responseData):
+def getGymList(useId ,longitude , latitude ,pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_gyms = responseData.briefGyms
@@ -13,6 +13,10 @@ def getGymList(longitude , latitude ,pageIndex , responseData):
           "+COS(('"+str(latitude)+"' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(('"+str(longitude)+"'* 3.1415) / 180 " \
           "- (longitude * 3.1415) / 180 ) ) * 6380 asc limit 10"
     try:
+        user = TblBriefUser.objects.get(id = useId)
+        user.geohash = encode(latitude,longitude)
+        user.save()
+        
         briefGyms = TblBriefGym.objects.raw(sql)[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         #todo:排序
         for briefGym in briefGyms:
@@ -128,11 +132,6 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
     except Exception as e:
         return False
     return True
-
-
-
-
-
 
 
 def getGymTrend(gymId, pageIndex , responseData):

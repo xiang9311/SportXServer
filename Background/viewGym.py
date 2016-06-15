@@ -32,7 +32,8 @@ def getGymList(request):
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         longitude = request_params.longitude
         latitude = request_params.latitude
-        if gymService.getGymList(longitude , latitude , request_params.pageIndex , response_data):
+        userId = request_common.userid
+        if gymService.getGymList(userId,longitude , latitude , request_params.pageIndex , response_data):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
