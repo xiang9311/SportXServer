@@ -879,7 +879,7 @@ def getRecommendUser(request):
         response_common = response_pro.common
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        if  userService.getRecommendUser(longitude , latitude  , response_data):
+        if  userService.getRecommendUser(userId,longitude , latitude  , response_data):
             return HttpResponse(response_pro.SerializeToString())
         else :
             initCommonErrorResponse(cmdId, 1, response_common)

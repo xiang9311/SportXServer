@@ -302,7 +302,6 @@ def getMyCommentMessage(pageIndex , userId ,  responseData):
             try :
                 response_comment.messageContent = comment.content #消息的内容
             except:
-
                 pass
             #这句话不懂啊
             if comment.createUser.userAvatar != "sportx": ## 消息所使用的头像 如果是"sportx"则是官方头像
@@ -437,11 +436,15 @@ def getBriefUser(userId , operateUser, responseData):
 
 
 #10018
-def getRecommendUser(longitude , latitude  , responseData):
+def getRecommendUser(userId,longitude , latitude  , responseData):
     briefUsers = responseData.briefUser
     geoh = encode(latitude,longitude)
     i=6
     try:
+        if longitude and latitude:
+            user = TblBriefUser.objects.get(id = userId)
+            user.geohash = encode(latitude,longitude)
+            user.save()
         result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
         while not result:
             i=i-1

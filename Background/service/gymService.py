@@ -2,7 +2,7 @@ from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCours
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 from Background.dependency.geohash import encode, decode, neighbors
 
-def getGymList(useId ,longitude , latitude ,pageIndex , responseData):
+def getGymList(userId ,longitude , latitude ,pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     response_gyms = responseData.briefGyms
@@ -13,9 +13,10 @@ def getGymList(useId ,longitude , latitude ,pageIndex , responseData):
           "+COS(('"+str(latitude)+"' * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(('"+str(longitude)+"'* 3.1415) / 180 " \
           "- (longitude * 3.1415) / 180 ) ) * 6380 asc limit 10"
     try:
-        user = TblBriefUser.objects.get(id = useId)
-        user.geohash = encode(latitude,longitude)
-        user.save()
+        if longitude and latitude:
+            user = TblBriefUser.objects.get(id = userId)
+            user.geohash = encode(latitude,longitude)
+            user.save()
         
         briefGyms = TblBriefGym.objects.raw(sql)[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         #todo:排序
@@ -90,24 +91,30 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
     :param responseData:
     :return:
     """
-    if gymId:
-        TblBriefUser.objects.get(id=userId).lastShow_id = gymId#还没加字段
-    else :
-        #todo:附近的体育馆id
-        geoh = encode(latitude,longitude)
-        i=8
-        result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
-        while not result:
-            i=i-1
-            result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
-        #result deal
-        gymId = 4 #防止出错给了个4
-        distance = 100000
-        for gyms in result:
-            if ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) ) < distance:
-                distance = ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) )
-                gymId = gyms.id
     try:
+        if gymId:
+            TblBriefUser.objects.get(id=userId).lastShow_id = gymId#还没加字段
+        else :
+            if longitude and latitude:
+                user = TblBriefUser.objects.get(id = userId)
+                user.geohash = encode(latitude,longitude)
+                user.save()
+            #todo:附近的体育馆id
+            geoh = encode(latitude,longitude)
+            i=8
+            result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
+            while not result:
+                i=i-1
+                result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
+            #result deal
+            gymId = 4 #防止出错给了个4
+            distance = 100000
+            for gyms in result:
+                if ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) ) < distance:
+                    distance = ((gyms.latitude-latitude)*(gyms.latitude-latitude)+(gyms.longitude - longitude)*(gyms.longitude - longitude) )
+                    gymId = gyms.id
+
+
         briefGym = TblBriefGym.objects.get(id = gymId)
         response_gym = responseData.briefGym
         response_gym.id = briefGym.id
