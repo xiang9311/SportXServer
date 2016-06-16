@@ -214,7 +214,8 @@ def register(request):
 
     request_common = request_pro.common       #注册不用检查requestcommon
     request_params = request_pro.params
-
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
 
     try:
         response_common = response_pro.common
@@ -255,11 +256,12 @@ def login(request):
         log.debug('comunications failed')
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
-
-
     request_common = request_pro.common
     request_params = request_pro.params
-
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #构造返回
 
     try:
@@ -296,6 +298,8 @@ def updateMyInfo(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -345,6 +349,8 @@ def guanzhuUser(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
      #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -390,7 +396,8 @@ def getOneTrend(request):
     request_common = request_pro.common
     request_params = request_pro.params
 
-    log.info("搜索:数据解析成功" + str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
 
     #构造返回
     try:
@@ -427,7 +434,8 @@ def getMyCommentMessage(request):
     request_common = request_pro.common
     request_params = request_pro.params
 
-    log.info("搜索:数据解析成功" + str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -463,11 +471,10 @@ def deleteCommentMassage(request):
         log.error(str(error))
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
-
     request_common = request_pro.common
     request_params = request_pro.params
-
-    log.info("搜索:数据解析成功" + str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -507,6 +514,8 @@ def getMyXMoney(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -514,10 +523,9 @@ def getMyXMoney(request):
         #未注册用户
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
-    log.info("搜索:数据解析成功" + str(request_params))
-
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #构造返回
-
     try:
         response_common = response_pro.common
         response_data = response_pro.data
@@ -549,8 +557,8 @@ def getOnesUserFollow(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
-    log.info("搜索:数据解析成功" + str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
 
     #构造返回
 
@@ -585,14 +593,11 @@ def getOnesUserFollowers(request):
         log.error(str(error))
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
-
     request_common = request_pro.common
     request_params = request_pro.params
-
-    log.info("搜索:数据解析成功" + str(request_params))
-
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #构造返回
-
     try:
         response_common = response_pro.common
         response_data = response_pro.data
@@ -629,7 +634,8 @@ def getUserDetail(request):
     request_params = request_pro.params
 
     #构造返回
-    log.info(str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
 
     try:
         response_common = response_pro.common
@@ -669,8 +675,8 @@ def searchUser(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
-    log.info("搜索:数据解析成功" + str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
 
     #构造返回
 
@@ -708,8 +714,8 @@ def searchGym(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
-    log.info("搜索:数据解析成功" + str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
 
     #构造返回
 
@@ -731,22 +737,6 @@ def searchGym(request):
     pass
 
 #10015
-"""
-message Request10015 {
-	RequestCommon common = 1;
-	Params params = 2;
-	message Params {
-	}
-}
-
-message Response10015 {
-	ResponseCommon common = 1;
-	Data data = 2;
-	message Data {
-		repeated string keys = 1;     // 注意，如果该数组为空，则data会是null，客户端做好判空准备
-	}
-}
-"""
 @csrf_exempt
 def getSearchKeys(request):
     cmdId = 10015
@@ -802,8 +792,8 @@ def getTrendBriefMessage(request):
     request_common = request_pro.common
     request_params = request_pro.params
 
-    log.info("搜索:数据解析成功" + str(request_params))
-
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #构造返回
     try:
         response_common = response_pro.common
@@ -838,9 +828,8 @@ def getBriefUser(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
-    log.info("搜索:数据解析成功" + str(request_params))
-
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #构造返回
     try:
         response_common = response_pro.common
@@ -880,8 +869,8 @@ def getRecommendUser(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
-    log.info("搜索:数据解析成功" + str(request_params))
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     longitude = request_params.longitude
     latitude = request_params.latitude
 

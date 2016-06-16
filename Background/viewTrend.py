@@ -30,6 +30,8 @@ def createTrend(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -64,7 +66,6 @@ def getMyFollowTrends(request):
     :param request:
     :return:
     """
-    #TODO
     cmdId = 12002
     request_pro = trend_pb2.Request12002()
     response_pro = trend_pb2.Response12002()
@@ -80,6 +81,8 @@ def getMyFollowTrends(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -106,18 +109,6 @@ def getMyFollowTrends(request):
 
 @csrf_exempt
 def getTrendById(request):
-    """
-    创建动态12003
-    message Response12003 {
-	ResponseCommon common = 1;
-	Data data = 2;
-	message Data {
-		Trend trends = 1;
-	}
-    }
-    :param request:
-    :return:
-    """
     cmdId = 12003
     request_pro = trend_pb2.Request12003()
     response_pro = trend_pb2.Response12003()
@@ -132,7 +123,8 @@ def getTrendById(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
 
     try:
         response_common = response_pro.common
@@ -169,6 +161,8 @@ def getTrendComment(request):
         return HttpResponse(response_pro.SerializeToString())
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     try:
         response_common = response_pro.common
         response_data = response_pro.data
@@ -202,10 +196,10 @@ def likeTrend(request):
         log.debug('comunications failed')
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
-
-
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -252,6 +246,8 @@ def commentTrend(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -301,6 +297,8 @@ def deleteComment(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -346,6 +344,8 @@ def deleteTrend(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
+    userId = request_common.userid
+    log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     #用户检验
     try:
         userService.userExist(request_common.userid,request_common.userkey)
