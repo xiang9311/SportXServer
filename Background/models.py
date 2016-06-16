@@ -36,8 +36,6 @@ class TblBriefUser(models.Model):
     userSign = models.CharField(max_length = 50)
     xMoney = models.IntegerField()
     follow = models.ManyToManyField("self", symmetrical=False)        # 这里存的是我关注的人
-    latitude = models.FloatField(null=True)
-    longitude = models.FloatField(null=True)
     signTime = models.DateTimeField()
     hadReadMessage = models.IntegerField()
     lastShow = models.ForeignKey(TblBriefGym,null=True) #最后一次出现的体育馆
