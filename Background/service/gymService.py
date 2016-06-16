@@ -103,7 +103,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
             geoh = encode(latitude,longitude)
             i=8
             result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
-            while not result:
+            while result == None:
                 i=i-1
                 result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
             #result deal

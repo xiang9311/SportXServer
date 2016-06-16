@@ -446,16 +446,17 @@ def getRecommendUser(userId,longitude , latitude  , responseData):
             user.geohash = encode(latitude,longitude)
             user.save()
         result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
-        while not result:
+        while result == None:
             i=i-1
-            result = TblBriefGym.objects.filter(geohash__contains=geoh[0:i])
+            result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
         #没排序
         for user  in result[0:10]:
             briefUser = briefUsers.add()
-            briefUser.userId = user.userId
+            briefUser.userId = user.id
             briefUser.userName = user.userName
             briefUser.userAvatar = user.userAvatar
 
     except Exception as e:
+        print(e)
         return False
     return True

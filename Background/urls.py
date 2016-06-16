@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^pilot/getUserDetail$',views.getUserDetail),
     url(r'^pilot/getTrendBriefMessage$',views.getTrendBriefMessage),
     url(r'^pilot/getBriefUser$',views.getBriefUser),
-    url(r'^pilot//getRecommendUser$' , views.getRecommendUser),
+    url(r'^pilot/getRecommendUser$' , views.getRecommendUser),
 
     # search
     url(r'^pilot/searchUser$',views.searchUser),

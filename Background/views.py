@@ -873,7 +873,6 @@ def getRecommendUser(request):
     log.info("%d:%d,%s" % (cmdId,userId,str(request_params)))
     longitude = request_params.longitude
     latitude = request_params.latitude
-
     #构造返回
     try:
         response_common = response_pro.common
