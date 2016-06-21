@@ -67,7 +67,7 @@ def getRongToken(userid):
     userinfo = TblBriefUser.objects.get(id = userid)
     token = rongcloud.get_token(userid, userinfo.userName, userinfo.userAvatar)
     #tokensave
-    Rong = TblRongyunToken.objects.get(userid = userid)
+    Rong = TblRongyunToken.objects.get(user = userinfo)
     Rong.token = token
     Rong.save()
     return token

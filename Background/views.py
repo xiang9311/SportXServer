@@ -115,10 +115,10 @@ def getRongToken(request):
     request_pro = token_pb2.Request11002()
     response_pro = token_pb2.Response11002()
     try:
-        log.debug("read success")
+        log.info("read success")
         request_pro.MergeFromString(request.read())
     except:
-        log.debug("read failed")
+        log.info("read failed")
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
@@ -129,20 +129,19 @@ def getRongToken(request):
         userService.userExist(request_common.userid,request_common.userkey)
     except:
         #未注册用户
+        log.info("unregister")
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
     #response
     try:
-
         response_common = response_pro.common
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
         response_data.rongyunToken = userService.getRongToken(request_common.userid)
         return HttpResponse(response_pro.SerializeToString())
-        
-    except:
-        log.debug("rongyunToken failed")
+    except Exception as e:
+        log.info("rongyunToken failed:" + str(e))
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
 
