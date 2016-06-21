@@ -92,8 +92,12 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
     :return:
     """
     try:
+
         if gymId:
-            TblBriefUser.objects.get(id=userId).lastShow_id = gymId#还没加字段
+            try:
+                TblBriefUser.objects.get(id=userId).lastShow_id = gymId#还没加字段
+            except Exception as e:
+                pass
         else :
             if longitude and latitude:
                 user = TblBriefUser.objects.get(id = userId)
