@@ -8,8 +8,8 @@ import logging
 
 from Background.dependency.rong import ApiClient
 
-__APP_KEY__ = '25wehl3uwchew'
-__APP_SECRET__ = 'qZohwuSOsxNsu'
+__APP_KEY__ = 'qd46yzrf48y6f'
+__APP_SECRET__ = '9I77BwAYh2u'
 
 os.environ.setdefault('rongcloud_app_key', __APP_KEY__)
 os.environ.setdefault('rongcloud_app_secret', __APP_SECRET__)
