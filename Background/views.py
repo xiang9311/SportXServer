@@ -124,7 +124,6 @@ def getRongToken(request):
 
     request_common = request_pro.common
     request_params = request_pro.params
-        #检查common(userid userkey else)
 
     try:
         userService.userExist(request_common.userid,request_common.userkey)
@@ -132,7 +131,6 @@ def getRongToken(request):
         #未注册用户
         initCommonErrorResponse(cmdId, 101, response_pro.common)
         return HttpResponse(response_pro.SerializeToString())
-
 
     #response
     try:

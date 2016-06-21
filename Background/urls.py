@@ -8,7 +8,7 @@ urlpatterns = [
 
     # token
     url(r'^token/getQiniuToken$', views.getQiniuToken),
-    url(r'^token/getRongToken$', views.getRongToken),
+    url(r'^token/getRongyunToken$', views.getRongToken),
 
     # pilot
     url(r'^pilot/verifyPhoneCanUse$', views.verifyPhoneCanUse),
