@@ -441,17 +441,21 @@ def getRecommendUser(userId, longitude , latitude  , responseData):
     geoh = encode(latitude,longitude)
     i=6
     try:
-        if longitude and latitude:
-            try:
+        try:
+            if longitude and latitude:
                 user = TblBriefUser.objects.get(id = userId)
                 user.geohash = encode(latitude,longitude)
                 user.save()
-            except Exception as e:
-                pass
+        except Exception as e:
+            pass
+
         result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
         while result == None:
             i=i-1
+            if i < 3:
+                break
             result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
+
         #没排序
         length = len(result)
         if length > 10:
