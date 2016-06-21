@@ -436,27 +436,38 @@ def getBriefUser(userId , operateUser, responseData):
 
 
 #10018
-def getRecommendUser(userId,longitude , latitude  , responseData):
-    briefUsers = responseData.briefUser
+def getRecommendUser(userId, longitude , latitude  , responseData):
+    searchedUsers = responseData.searchedUser
     geoh = encode(latitude,longitude)
     i=6
     try:
         if longitude and latitude:
-            user = TblBriefUser.objects.get(id = userId)
-            user.geohash = encode(latitude,longitude)
-            user.save()
+            try:
+                user = TblBriefUser.objects.get(id = userId)
+                user.geohash = encode(latitude,longitude)
+                user.save()
+            except Exception as e:
+                pass
         result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
         while result == None:
             i=i-1
             result = TblBriefUser.objects.filter(geohash__contains=geoh[0:i])
         #没排序
-        for user  in result[0:10]:
-            briefUser = briefUsers.add()
-            briefUser.userId = user.id
-            briefUser.userName = user.userName
-            briefUser.userAvatar = user.userAvatar
+        length = len(result)
+        if length > 10:
+            length = 10
+        for tblBriefUser in result[0:length]:
+            searchedUser = searchedUsers.add()
+            searchedUser.userId = tblBriefUser.id
+            searchedUser.userName = tblBriefUser.userName
+            searchedUser.userAvatar = tblBriefUser.userAvatar
+            searchedUser.sign = tblBriefUser.userSign
+            tblImages = TblTrendImage.objects.filter(createUser=tblBriefUser).order_by('-createTime', 'priority')[0:3]
+            images = searchedUser.images
+            for tblImage in tblImages:
+                images.append(tblImage.url)
 
     except Exception as e:
-        print(e)
+        log.info(str(e))
         return False
     return True
