@@ -100,9 +100,12 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
                 pass
         else :
             if longitude and latitude:
-                user = TblBriefUser.objects.get(id = userId)
-                user.geohash = encode(latitude,longitude)
-                user.save()
+                try:
+                    user = TblBriefUser.objects.get(id = userId)
+                    user.geohash = encode(latitude,longitude)
+                    user.save()
+                except Exception as e:
+                    pass
             #todo:附近的体育馆id
             geoh = encode(latitude,longitude)
             i=8
@@ -141,7 +144,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
                 response_user.userName = user.userName
                 response_user.userAvatar = user.userAvatar
         except Exception as e:
-            log.info('error : %s' % str(e))
+            log.info('info : %s' % str(e))
             pass
 
     except Exception as e:
