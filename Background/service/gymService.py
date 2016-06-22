@@ -1,4 +1,4 @@
-from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCourse ,TblGymCard ,TblTrend ,TblTrendImage ,TblBriefUser
+from Background.models import TblBriefGym ,TblGyminfo ,TblGymEquipment ,TblCourse ,TblGymCard ,TblTrend ,TblTrendImage ,TblBriefUser, TblLikeTrend
 from SportXServer import qiniuUtil, timeUtil, userKeyUtil ,rongcloud, log
 from Background.dependency.geohash import encode, decode, neighbors
 
@@ -109,6 +109,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
                     user.save()
                 except Exception as e:
                     pass
+
             #todo:附近的体育馆id
             geoh = encode(latitude,longitude)
             i=8
@@ -147,7 +148,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
                 response_user.userName = user.userName
                 response_user.userAvatar = user.userAvatar
         except Exception as e:
-            log.info('info : %s' % str(e))
+            log.info('users in recommend gym . info : %s' % str(e))
             pass
 
     except Exception as e:
@@ -156,7 +157,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
     return True
 
 
-def getGymTrend(gymId, pageIndex , responseData):
+def getGymTrend(userId, gymId, pageIndex , responseData):
     maxCountPerPage = 10
     responseData.maxCountPerPage = maxCountPerPage
     trends = responseData.trends
@@ -170,6 +171,8 @@ def getGymTrend(gymId, pageIndex , responseData):
             response_trend.gymId = gymId
             response_trend.gymName = tblTrend.gym.gymName
             response_trend.content = tblTrend.content
+            response_trend.likeCount = tblTrend.likeCount
+            response_trend.commentCount = tblTrend.commentCount
             images = response_trend.imgs
             tblImages = TblTrendImage.objects.filter(trend=tblTrend).order_by('priority')
             for tblImage in tblImages:
@@ -178,6 +181,15 @@ def getGymTrend(gymId, pageIndex , responseData):
             briefUser.userId = tblTrend.createUser.id
             briefUser.userName = tblTrend.createUser.userName
             briefUser.userAvatar = tblTrend.createUser.userAvatar
+
+            try:
+                if TblLikeTrend.objects.filter(trend=tblTrend, likeUser_id=userId):
+                    response_trend.isLiked = True
+                else:
+                    response_trend.isLiked = False
+            except Exception as e:
+                response_trend.isLiked = False
+                pass
 
     except Exception as e:
         return False

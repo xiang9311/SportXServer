@@ -152,7 +152,7 @@ def getGymTrend(request):
         response_common = response_pro.common
         response_data = response_pro.data
         initCommonResponse(0, 'success', cmdId, 0, response_common)
-        if gymService.getGymTrend(request_params.gymId, request_params.pageIndex , response_data):
+        if gymService.getGymTrend(userId, request_params.gymId, request_params.pageIndex , response_data):
             return HttpResponse(response_pro.SerializeToString())
         else:
             initCommonErrorResponse(cmdId, 1, response_common)
