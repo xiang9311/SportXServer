@@ -141,6 +141,7 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
             response_user.userAvatar = user.userAvatar
 
     except Exception as e:
+        log.info('error : %s' % str(e))
         return False
     return True
 

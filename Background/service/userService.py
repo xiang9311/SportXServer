@@ -439,7 +439,7 @@ def getBriefUser(userId , operateUser, responseData):
 def getRecommendUser(userId, longitude , latitude  , responseData):
     searchedUsers = responseData.searchedUser
     geoh = encode(latitude,longitude)
-    i=6
+    i=4 # 目前先使用4
     try:
         try:
             if longitude and latitude:
