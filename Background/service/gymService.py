@@ -14,9 +14,12 @@ def getGymList(userId ,longitude , latitude ,pageIndex , responseData):
           "- (longitude * 3.1415) / 180 ) ) * 6380 asc limit 10"
     try:
         if longitude and latitude:
-            user = TblBriefUser.objects.get(id = userId)
-            user.geohash = encode(latitude,longitude)
-            user.save()
+            try:
+                user = TblBriefUser.objects.get(id = userId)
+                user.geohash = encode(latitude,longitude)
+                user.save()
+            except Exception as e:
+                pass
         
         briefGyms = TblBriefGym.objects.raw(sql)[pageIndex*maxCountPerPage:(pageIndex+1)*maxCountPerPage]
         #todo:排序
