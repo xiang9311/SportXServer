@@ -1,4 +1,7 @@
-
+body{
+    font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, "WenQuanYi Micro Hei", Verdana, sans-serif, "\5B8B\4F53";
+    color: #49495f;
+}
 
 div.index-box{
 	width: 100vw-1px;
@@ -90,12 +93,17 @@ ol.head-ol li{
 
 div.brief-box{
 	width: 85vw;
-	background: red;
-	border: 1px solid #CCC;
+	border: 1px solid #ddd;
 	box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	margin: 20px 0;
+	margin: 20px auto;
+}
+
+div.brief-box:hover {
+    background-color: #f8f8f8;
 }
 
 div.brief-div{
@@ -121,8 +129,12 @@ div.brief-text{
 
 div.brief-img{
 	width: 60.2vw;
-	background: blue;
 	margin-left: 110px;
+}
+
+img.avatar {
+    width: 100px;
+    height: 100px;
 }
 
 div.brief-img img.brief-a{
@@ -145,8 +157,10 @@ div.brief-img img.brief-b{
 div.foot-box{
 	width: 85vw;
 	border: 1px solid #CCC;
-	margin: 0 0 20px;
+	margin: 20px auto 20px;
 	box-sizing: border-box;
+    background: #4e4e5f;
+    color: #eee;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
@@ -154,13 +168,14 @@ div.foot-box{
 div.foot-div{
 	width: 72.4vw;
 	margin: 20px auto;
-	background: #FCF;
 	position: relative;
 }
 
 div.foot-div p{
 	line-height: 35px;
+    color: #eee;
 }
+
 
 div.foot-l{
 	position: absolute;

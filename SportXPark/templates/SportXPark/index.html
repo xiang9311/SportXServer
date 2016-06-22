@@ -39,42 +39,57 @@
 
 		</div>
 
+        <h3 style="margin-top: 10px; text-align: center">Trends</h3>
 
 		<!-- 简介 -->
-
+        {% for trend in trends %}
 		<div class="brief-box">
 
 			<div class="brief-div">
 				
 				<div class="brief-t">
-					头像
+					<img src="{{ trend.user.userAvatar}}" alt="" class="avatar">
 				</div>
 
 				<div class="brief-text">
 
-					<p class="brief-t1">昵称</p>
-					<p class="brief-t2">个性签名个性签名个性签名</p>
-					<p class="brief-t3">介绍</p>
+					<p class="brief-t1" style="color: #0f81aa;">{{ trend.user.userName }}</p>
+					<p class="brief-t2">{{ trend.user.sign }}</p>
+					<p class="brief-t3">{{ trend.content }}</p>
 					
 				</div>
 
 				<div class="brief-img">
-					<img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
-					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
-                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
-					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
-                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
-					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
-                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
-					<img src="{% static 'SportXPark/images/2.jpg' %}" alt="" class="brief-a">
-                    <img src="{% static 'SportXPark/images/1.jpg' %}" alt="" class="brief-a">
-
-					<!-- <img src="images/1.jpg" alt="" class="brief-b"> -->
+					{% for image in trend.images %}
+					<img src="{{ image }}" alt="" class="brief-a">
+                    {% endfor %}
 				</div>
+
+                <div style="margin-top: 20px">
+                    <img src="{% static 'SportXPark/images/like.png' %}" alt="like" style="width: 20px; height: 20px; margin-left: 120px">
+                    <span style="margin-left: 5px">{{ trend.likeCount }}</span>
+                    <img src="{% static 'SportXPark/images/comment.png' %}" alt="comment" style="width: 20px; height: 20px; margin-left: 5px">
+                    <span style="margin-left: 5px">{{ trend.commentCount }}</span>
+                    <span style="margin-left: 10px; margin-top: 20px">{{ trend.createTime }}</span>
+                </div>
+
+                <p style="margin-left: 120px; margin-top: 20px">评论</p>
+
+                {% for comment in trend.comments %}
+                    <div style="margin-left: 120px; margin-top: 5px">
+                        <span style="color: #0f81aa">{{ comment.userName }}</span>
+                        <span> ： </span>
+                        <span>{{ comment.content }}</span>
+                    </div>
+                {% endfor %}
+                <div style="margin-left: 120px; margin-top: 5px">...</div>
 
 			</div>
 			
 		</div>
+        {% endfor %}
+
+
 
 		<!-- 尾部 -->
 
@@ -83,24 +98,23 @@
 			<div class="foot-div">
 
 				<div class="foot-l">
-					<p>12313212312</p>
-					<p>21212312123</p>
-					<p>31212312123</p>
-					<p>41212312123</p>
+					<a href="#"><p>推广合作</p></a>
+					<a href="#"><p>联系我们</p></a>
+					<a href="http://www.sportx-park.com/media/download/sportx.apk" target="_blank"><p>应用下载</p></a>
 				</div>
 
 				<div class="foot-r">
 					<div class="foot-img"></div>
-					<p>32132131321</p>
+					<p>扫一扫 下载</p>
 				</div>
 
 			</div>
-			<p class="foot-h">这是备案号</p>
+			<p class="foot-h">©京ICP备16023606号</p>
 
 		</div>
 
 		<!-- 二维码 -->
-		<div class="code-box">这是二维码</div>
+{#		<div class="code-box">这是二维码</div>#}
 	
 	</div>
 
