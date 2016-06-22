@@ -130,15 +130,19 @@ def getRecommendGym(userId, gymId, longitude , latitude  , responseData):
         response_gym.longitude = briefGym.longitude
         response_gym.eqm = briefGym.equipmentBrief
 
-        users = TblBriefUser.objects.filter(lastShow_id = briefGym.id)
-        responseData.userNum = users.count()
-        responseData.trendNum = TblTrend.objects.filter(gym_id = briefGym.id).count()
-        response_users = responseData.briefUsers
-        for user in users:
-            response_user = response_users.add()
-            response_user.userId = user.id
-            response_user.userName = user.userName
-            response_user.userAvatar = user.userAvatar
+        try:
+            users = TblBriefUser.objects.filter(lastShow_id = briefGym.id)
+            responseData.userNum = users.count()
+            responseData.trendNum = TblTrend.objects.filter(gym_id = briefGym.id).count()
+            response_users = responseData.briefUsers
+            for user in users:
+                response_user = response_users.add()
+                response_user.userId = user.id
+                response_user.userName = user.userName
+                response_user.userAvatar = user.userAvatar
+        except Exception as e:
+            log.info('error : %s' % str(e))
+            pass
 
     except Exception as e:
         log.info('error : %s' % str(e))
