@@ -18,24 +18,33 @@
 		<div class="head-box">
 			<ul class="head-ul">				
 				<li class="on">
-					<p class="head-bg1"></p>
-					<p class="head-text">这是一张图</p>
+					<p class="head-bg1"><img src="{% static 'SportXPark/images/sportx.jpg' %}"></p>
+					<p class="head-text text-light">SportX是一款以健身房为地理基础的健身社交APP<br>下载
+                        <a href="http://app.mi.com/detail/420798" style="color: #00FF00" target="_blank">点我</a>
+                    </p>
 				</li>
 				<li>
-					<p class="head-bg2"></p>
-					<p class="head-text">这是二张图</p>
+					<p class="head-bg2"><img src="{% static 'SportXPark/images/gym.jpg' %}"></p>
+					<p class="head-text text-light">马上开通接入健身房功能</p>
 				</li>
 				<li>
-					<p class="head-bg3"></p>
-					<p class="head-text">这是三张图</p>
+					<p class="head-bg3"><img src="{% static 'SportXPark/images/us.png' %}"></p>
+					<p class="head-text text-light">
+                        <span>一只干瘦的码农</span><br>
+                        <span>一个浑身是腹肌的天然呆</span><br>
+                        <span>一只萌萌的胖子</span><br>
+                        <span>邮箱：xiang160501@163.com</span>
+                    </p>
 				</li>
 			</ul>
 
 			<ol class="head-ol">
-				<li>sportX</li>
-				<li>健身会所服务</li>
-				<li>关于我们</li>
+				<li class="text-light">SportX</li>
+				<li class="text-light">健身会所服务</li>
+				<li class="text-light">关于我们</li>
 			</ol>
+            
+            <img style="position: absolute;top:10%;left: 5%;" src="{% static 'SportXPark/images/icon90.png' %}">
 
 		</div>
 
@@ -54,7 +63,7 @@
 				<div class="brief-text">
 
 					<p class="brief-t1" style="color: #0f81aa;">{{ trend.user.userName }}</p>
-					<p class="brief-t2">{{ trend.user.sign }}</p>
+					<p class="brief-t2" style="font-size: 18px">{{ trend.user.sign }}</p>
 					<p class="brief-t3">{{ trend.content }}</p>
 					
 				</div>
@@ -104,7 +113,7 @@
 				</div>
 
 				<div class="foot-r">
-					<div class="foot-img"></div>
+					<div class="foot-img"><img src="{% static 'SportXPark/images/qr.png' %}"></div>
 					<p>扫一扫 下载</p>
 				</div>
 
@@ -129,26 +138,26 @@
 		$("div.code-box").css("top","66.6vh");
 
 		// 二维码
-		$(function (){
-			var oDiv1=$('div.code-box');
-			
-			var h=oDiv1.offset().top;
-			
-			$(window).scroll(function (){
-				var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
-				
-				if (scrollTop >= h)
-				{
-					oDiv1.css('position', 'fixed');
-					oDiv1.css('top','0');
-				}
-				else
-				{
-					oDiv1.css('position', 'absolute');
-					oDiv1.css('top','66.6vh');
-				}
-			});
-		});
+{#		$(function (){#}
+{#			var oDiv1=$('div.code-box');#}
+{#			#}
+{#			var h=oDiv1.offset().top;#}
+{#			#}
+{#			$(window).scroll(function (){#}
+{#				var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;#}
+{#				#}
+{#				if (scrollTop >= h)#}
+{#				{#}
+{#					oDiv1.css('position', 'fixed');#}
+{#					oDiv1.css('top','0');#}
+{#				}#}
+{#				else#}
+{#				{#}
+{#					oDiv1.css('position', 'absolute');#}
+{#					oDiv1.css('top','66.6vh');#}
+{#				}#}
+{#			});#}
+{#		});#}
 
 		// // 改变是否居中
 		// var dW = document.documentElement.clientWidth;

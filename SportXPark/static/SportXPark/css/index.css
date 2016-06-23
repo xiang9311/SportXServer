@@ -3,6 +3,14 @@ body{
     color: #49495f;
 }
 
+.text-light {
+    color: #eee;
+}
+
+.text-dark {
+    color: #4e4e5f;
+}
+
 div.index-box{
 	width: 980px;
 	margin: 0 auto;
@@ -32,6 +40,7 @@ ul.head-ul li{
 	height: 100%;
 	position: relative;
 	display: none;
+    overflow: hidden;
 }
 
 ul.head-ul li.on{
@@ -41,11 +50,12 @@ ul.head-ul li.on{
 ul.head-ul li p.head-text{
 	width: 300px;
 	position: absolute;
-	top: 85%;
-	left: 10%;
-	border: 1px solid #CCC;
+	top: 50%;
+	left: 5%;
+	border-radius: 2px;
+    background-color: rgba(78,78,95,0.5);
 	line-height: 30px;
-	text-align: center;
+    padding: 5px;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -77,12 +87,13 @@ ol.head-ol{
 
 ol.head-ol li{
 	float: left;
-	width: 100px;
-	border: 1px solid #CCC;
+	width: 130px;
+    border-radius: 2px;
 	margin-left: 20px;
 	text-align: center;
 	line-height: 30px;
 	cursor:pointer;
+    background-color: rgba(78,78,95,0.5);
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -155,7 +166,7 @@ div.brief-img img.brief-b{
 /*尾部*/
 
 div.foot-box{
-	width: 750px;
+	width: 980px;
 	border: 1px solid #CCC;
 	margin: 20px auto 20px;
 	box-sizing: border-box;
@@ -167,7 +178,7 @@ div.foot-box{
 
 div.foot-div{
 	width: 710px;
-	margin: 20px auto;
+	margin: 20px;
 	position: relative;
 }
 
@@ -187,10 +198,8 @@ div.foot-r{
 }
 
 div.foot-r div.foot-img{
-	width: 150px;
-	height: 150px;
-	border: 1px solid red;
-	box-sizing: border-box;
+	width: 132px;
+	height: 132px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
